@@ -11,110 +11,94 @@ interface ContactSectionProps {
 
 export const ContactSection: React.FC<ContactSectionProps> = ({ lang, onOpenDesk }) => {
   return (
-    <section id="contact" className="py-16 md:py-24 bg-[#faf8f5] border-b border-civic-200/80 font-sans">
+    <section id="contact" className="py-16 md:py-24 bg-[#faf8f5] border-b border-[#e2dcd0] font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Clean Editorial Section Header */}
         <ScrollReveal>
           <div className="max-w-3xl mb-12 md:mb-16">
-            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold text-civic-950 tracking-tight leading-[1.3] ${lang === 'en' ? 'font-serif' : 'font-nepali'}`}>
+            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f172a] tracking-tight leading-[1.3] ${lang === 'en' ? 'font-serif' : 'font-nepali'}`}>
               {lang === 'ne' ? 'प्रत्यक्ष संवाद तथा नागरिक सहायता' : 'Direct Constituent Dialogue & Ward Desk'}
             </h2>
-            <p className="mt-3 text-base text-civic-600 leading-relaxed font-sans">
+            <p className="mt-3 text-base text-[#475569] leading-relaxed font-sans">
               {lang === 'ne'
                 ? 'वडा कार्यालयको कार्यतालिका, सिफारिस प्रक्रिया, नागरिक गुनासो सुनुवाइ वा प्रत्यक्ष संवादका लागि सम्पर्क गर्नुहोस्।'
                 : 'Official municipal schedule, civic recommendation processing, grievance redressal, and direct constituent support.'}
             </p>
-            <div className="w-12 h-0.5 bg-crimson-800 mt-4" />
+            <div className="w-12 h-0.5 bg-[#801426] mt-4" />
           </div>
         </ScrollReveal>
 
         {/* 2 Balanced, Equal-Height Grid Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          
+
           {/* Card 1: Official Ward Office & Verification (7 cols) */}
           <div className="lg:col-span-7">
             <ScrollReveal delay={100} className="h-full">
-              <div className="bg-white rounded-2xl p-6 sm:p-8 border border-civic-200/90 shadow-sm flex flex-col justify-between space-y-6 h-full">
-                
+              <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#e2dcd0] shadow-sm flex flex-col justify-between space-y-6 h-full">
+
                 <div className="space-y-6">
                   {/* Header */}
-                  <div className="flex items-center gap-4 pb-4 border-b border-civic-100">
-                    <div className="w-12 h-12 rounded-xl bg-crimson-50 text-crimson-800 flex items-center justify-center shrink-0 border border-crimson-100">
+                  <div className="flex items-center gap-4 pb-4 border-b border-[#f1f5f9]">
+                    <div className="w-12 h-12 rounded-xl bg-[#fbf2f4] text-[#801426] flex items-center justify-center shrink-0 border border-[#f5d0d6]">
                       <Building2 className="w-6 h-6" />
                     </div>
                     <div>
-                      <h3 className={`font-bold text-lg sm:text-xl text-civic-950 ${lang === 'en' ? 'font-serif' : 'font-nepali'}`}>
+                      <h3 className={`font-bold text-lg sm:text-xl text-[#0f172a] ${lang === 'en' ? 'font-serif' : 'font-nepali'}`}>
                         {lang === 'ne' ? 'वडा कार्यालय, बिर्तामोड–५' : 'Ward No. 5 Office, Birtamod'}
                       </h3>
-                      <p className="text-xs text-civic-500 mt-0.5">
+                      <p className="text-xs text-[#64748b] mt-0.5">
                         {lang === 'ne' ? 'बिर्तामोड नगरपालिका, झापा जिल्ला, कोशी प्रदेश' : 'Birtamod Municipality, Jhapa, Koshi Province'}
                       </p>
                     </div>
                   </div>
 
-                  {/* Contact Detail Rows */}
+                  {/* Schedule & Direct Contact Info Grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    
-                    {/* Office Location */}
-                    <div className="p-4 rounded-xl bg-[#faf8f5] border border-civic-200/60 flex items-start gap-3">
-                      <MapPin className="w-5 h-5 text-crimson-800 shrink-0 mt-0.5" />
-                      <div>
-                        <div className="text-xs font-bold text-civic-900 uppercase tracking-wider">
-                          {lang === 'ne' ? 'कार्यालय ठेगाना' : 'Office Address'}
-                        </div>
-                        <div className="text-xs text-civic-700 mt-1 font-medium leading-snug">
-                          {lang === 'ne' ? civicProfile.officeLocationNe : civicProfile.officeLocationEn}
+
+                    <div className="p-4 rounded-xl bg-[#faf8f5] border border-[#e2dcd0] space-y-1">
+                      <div className="flex items-center gap-2 text-xs font-bold text-[#0f172a]">
+                        <MapPin className="w-4 h-4 text-[#801426]" />
+                        <span>{lang === 'ne' ? 'कार्यालय ठेगाना' : 'Office Location'}</span>
+                      </div>
+                      <div className="text-xs text-[#475569] pl-6">
+                        {lang === 'ne' ? civicProfile.officeLocationNe : civicProfile.officeLocationEn}
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-[#faf8f5] border border-[#e2dcd0] space-y-1">
+                      <div className="flex items-center gap-2 text-xs font-bold text-[#0f172a]">
+                        <Clock className="w-4 h-4 text-[#801426]" />
+                        <span>{lang === 'ne' ? 'कार्यालय समय' : 'Office Hours'}</span>
+                      </div>
+                      <div className="text-xs text-[#475569] pl-6 leading-relaxed">
+                        {lang === 'ne' ? civicProfile.officeHoursNe : civicProfile.officeHoursEn}
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-[#faf8f5] border border-[#e2dcd0] space-y-1">
+                      <div className="flex items-center gap-2 text-xs font-bold text-[#0f172a]">
+                        <Phone className="w-4 h-4 text-[#801426]" />
+                        <span>{lang === 'ne' ? 'वडा फोन नम्बर' : 'Ward Phone'}</span>
+                      </div>
+                      <div className="text-xs text-[#475569] pl-6">
+                        <span className="font-mono font-bold text-sm text-[#0f172a]">{civicProfile.phone}</span>
+                        <div className="text-[11px] text-[#64748b] mt-0.5">
+                          {lang === 'ne' ? 'कार्यालय समयमा प्रत्यक्ष सम्पर्क' : 'Direct line during office hours'}
                         </div>
                       </div>
                     </div>
 
-                    {/* Operating Hours */}
-                    <div className="p-4 rounded-xl bg-[#faf8f5] border border-civic-200/60 flex items-start gap-3">
-                      <Clock className="w-5 h-5 text-crimson-800 shrink-0 mt-0.5" />
-                      <div>
-                        <div className="text-xs font-bold text-civic-900 uppercase tracking-wider">
-                          {lang === 'ne' ? 'कार्यालय समय' : 'Office Hours'}
-                        </div>
-                        <div className="text-xs text-civic-700 mt-1 leading-snug">
-                          {lang === 'ne' ? civicProfile.officeHoursNe : civicProfile.officeHoursEn}
-                        </div>
+                    <div className="p-4 rounded-xl bg-[#faf8f5] border border-[#e2dcd0] space-y-1">
+                      <div className="flex items-center gap-2 text-xs font-bold text-[#0f172a]">
+                        <Mail className="w-4 h-4 text-[#801426]" />
+                        <span>{lang === 'ne' ? 'इमेल सम्पर्क' : 'Official Email'}</span>
                       </div>
-                    </div>
-
-                    {/* Hotline */}
-                    <div className="p-4 rounded-xl bg-[#faf8f5] border border-civic-200/60 flex items-start gap-3">
-                      <Phone className="w-5 h-5 text-emerald-700 shrink-0 mt-0.5" />
-                      <div>
-                        <div className="text-xs font-bold text-civic-900 uppercase tracking-wider">
-                          {lang === 'ne' ? 'वडा फोन नम्बर' : 'Ward Hotline'}
-                        </div>
-                        <a
-                          href={`tel:${civicProfile.phone}`}
-                          className="text-sm font-mono font-bold text-civic-900 hover:text-crimson-800 transition-colors block mt-1"
-                        >
-                          {civicProfile.phone}
-                        </a>
-                        <div className="text-[11px] text-civic-500 mt-0.5">
-                          {lang === 'ne' ? 'कार्यालय समयमा प्रत्यक्ष सम्पर्क' : 'Available during office hours'}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Constituent Email */}
-                    <div className="p-4 rounded-xl bg-[#faf8f5] border border-civic-200/60 flex items-start gap-3">
-                      <Mail className="w-5 h-5 text-blue-700 shrink-0 mt-0.5" />
-                      <div>
-                        <div className="text-xs font-bold text-civic-900 uppercase tracking-wider">
-                          {lang === 'ne' ? 'इमेल सम्पर्क' : 'Constituent Email'}
-                        </div>
-                        <a
-                          href={`mailto:${civicProfile.email}`}
-                          className="text-xs font-mono font-medium text-civic-900 hover:text-crimson-800 transition-colors block mt-1 break-all"
-                        >
+                      <div className="text-xs text-[#475569] pl-6">
+                        <a href={`mailto:${civicProfile.email}`} className="font-mono text-xs text-[#801426] hover:underline font-semibold">
                           {civicProfile.email}
                         </a>
-                        <div className="text-[11px] text-civic-500 mt-0.5">
+                        <div className="text-[11px] text-[#64748b] mt-0.5">
                           {lang === 'ne' ? 'नागरिक सोधपुछ तथा पत्राचार' : 'Citizen inquiries and correspondence'}
                         </div>
                       </div>
@@ -124,30 +108,30 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ lang, onOpenDesk
 
                   {/* Verified Constituent Credentials / Background Badges */}
                   <div className="pt-2">
-                    <div className="text-[11px] font-bold uppercase tracking-wider text-civic-400 mb-2">
+                    <div className="text-[11px] font-bold uppercase tracking-wider text-[#64748b] mb-2">
                       {lang === 'ne' ? 'प्रतिनिधिको परिचय तथा व्यावसायिक विवरण' : 'Representative Credentials & Enterprise'}
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-civic-700">
-                      <div className="px-3 py-2 rounded-lg bg-sand-100/80 border border-civic-200/70 flex items-center gap-2">
-                        <Briefcase className="w-4 h-4 text-crimson-800 shrink-0" />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#334155]">
+                      <a href="#education" className="px-3 py-2 rounded-lg bg-[#faf8f5] border border-[#e2dcd0] flex items-center gap-2 hover:border-[#801426]/50 transition-colors">
+                        <Briefcase className="w-4 h-4 text-[#801426] shrink-0" />
                         <span>{lang === 'ne' ? civicProfile.businessNe : civicProfile.businessEn}</span>
-                      </div>
-                      <div className="px-3 py-2 rounded-lg bg-sand-100/80 border border-civic-200/70 flex items-center gap-2">
-                        <GraduationCap className="w-4 h-4 text-crimson-800 shrink-0" />
+                      </a>
+                      <a href="#education" className="px-3 py-2 rounded-lg bg-[#faf8f5] border border-[#e2dcd0] flex items-center gap-2 hover:border-[#801426]/50 transition-colors">
+                        <GraduationCap className="w-4 h-4 text-[#801426] shrink-0" />
                         <span>{lang === 'ne' ? civicProfile.educationNe : civicProfile.educationEn}</span>
-                      </div>
+                      </a>
                     </div>
                   </div>
 
                 </div>
 
                 {/* Bottom Status Banner */}
-                <div className="pt-4 border-t border-civic-100 flex items-center justify-between text-xs text-civic-500">
-                  <span className="flex items-center gap-1.5 text-emerald-800 font-medium">
+                <div className="pt-4 border-t border-[#f1f5f9] flex items-center justify-between text-xs text-[#64748b]">
+                  <span className="flex items-center gap-1.5 text-emerald-700 font-semibold">
                     <CheckCircle2 className="w-4 h-4" />
                     <span>{lang === 'ne' ? 'नागरिक सेवामा शून्य ढिलाइ' : 'Zero administrative delay'}</span>
                   </span>
-                  <span className="font-mono text-[11px]">Birtamod-5, Jhapa</span>
+                  <span className="font-mono text-[11px] text-[#94a3b8]">Birtamod-5, Jhapa</span>
                 </div>
 
               </div>
@@ -157,36 +141,36 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ lang, onOpenDesk
           {/* Card 2: Interactive Citizen Desk & Grievance Registration (5 cols) */}
           <div className="lg:col-span-5">
             <ScrollReveal delay={200} className="h-full">
-              <div className="bg-white rounded-2xl p-6 sm:p-8 border border-civic-200/90 shadow-sm flex flex-col justify-between space-y-6 h-full">
-                
+              <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#e2dcd0] shadow-sm flex flex-col justify-between space-y-6 h-full">
+
                 <div className="space-y-5">
-                  
-                  <div className="flex items-center gap-3.5 pb-4 border-b border-civic-100">
-                    <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 border border-emerald-100">
+
+                  <div className="flex items-center gap-3.5 pb-4 border-b border-[#f1f5f9]">
+                    <div className="w-12 h-12 rounded-xl bg-[#fbf2f4] text-[#801426] flex items-center justify-center shrink-0 border border-[#f5d0d6]">
                       <MessageSquare className="w-6 h-6" />
                     </div>
                     <div>
-                      <h3 className={`font-bold text-lg sm:text-xl text-civic-950 ${lang === 'en' ? 'font-serif' : 'font-nepali'}`}>
+                      <h3 className={`font-bold text-lg sm:text-xl text-[#0f172a] ${lang === 'en' ? 'font-serif' : 'font-nepali'}`}>
                         {lang === 'ne' ? 'नागरिक सेवा तथा गुनासो दर्ता' : 'Citizen Service & Grievance Desk'}
                       </h3>
-                      <p className="text-xs text-civic-500 mt-0.5">
+                      <p className="text-xs text-[#64748b] mt-0.5">
                         {lang === 'ne' ? 'प्रत्यक्ष डिजिटल सुनुवाइ तथा सुझाव फारम' : 'Direct Digital Redressal & Consultation'}
                       </p>
                     </div>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-civic-600 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#334155] leading-relaxed">
                     {lang === 'ne'
                       ? 'सडक, ढल, सिफारिस वा वडाभित्रका कुनै पनि समस्याबारे वडाध्यक्ष रोहित प्रसाईंलाई सिधै डिजिटल जानकारी गराउनुहोस्।'
                       : 'Submit municipal inquiries, road repair requests, or constituent feedback directly to the Ward Chairperson.'}
                   </p>
 
                   {/* Service Commitments Box */}
-                  <div className="p-4 rounded-xl bg-[#f8f6f0] border border-amber-200/70 space-y-3">
-                    <div className="text-xs font-bold text-civic-900 uppercase tracking-wider font-sans">
+                  <div className="p-4 rounded-xl bg-[#faf8f5] border border-[#e2dcd0] space-y-3">
+                    <div className="text-xs font-bold text-[#0f172a] uppercase tracking-wider font-sans">
                       {lang === 'ne' ? 'नागरिक सेवामा हाम्रो प्रतिबद्धता' : 'Our Service Commitments'}
                     </div>
-                    <div className="space-y-2 text-xs text-civic-700">
+                    <div className="space-y-2 text-xs text-[#475569]">
                       <div className="flex items-start gap-2">
                         <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                         <span>{lang === 'ne' ? 'कागजात सिफारिस सोही कार्यदिनमै प्रमाणीकरण' : 'Same-day verification for standard documents'}</span>
@@ -205,15 +189,15 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ lang, onOpenDesk
                 </div>
 
                 {/* Action Button */}
-                <div className="pt-4 border-t border-civic-100 space-y-3">
+                <div className="pt-4 border-t border-[#f1f5f9] space-y-3">
                   <button
                     onClick={onOpenDesk}
-                    className="taste-btn w-full py-3.5 px-5 rounded-xl bg-crimson-800 hover:bg-crimson-900 text-white font-bold text-sm shadow-md flex items-center justify-center gap-2 transition-all active:scale-[0.99]"
+                    className="taste-btn w-full py-3.5 px-5 rounded-xl bg-[#801426] hover:bg-[#680f1e] text-white font-bold text-sm shadow-md shadow-[#801426]/20 flex items-center justify-center gap-2 transition-all active:scale-[0.99]"
                   >
-                    <MessageSquare className="w-4 h-4" />
+                    <MessageSquare className="w-4 h-4 text-white" />
                     <span>{lang === 'ne' ? 'नागरिक सेवा फारम खोल्नुहोस्' : 'Open Citizen Assistance Form'}</span>
                   </button>
-                  <div className="text-center text-[11px] text-civic-400">
+                  <div className="text-center text-[11px] text-[#64748b]">
                     {lang === 'ne' ? 'वडा कार्यालय समय: आइतबार–शुक्रबार' : 'Ward Office Hours: Sun – Fri'}
                   </div>
                 </div>

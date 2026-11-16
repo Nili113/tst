@@ -88,9 +88,9 @@ export const ScrollProgressBar: React.FC = () => {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 right-0 h-[2.5px] bg-civic-200/30 z-[60] pointer-events-none">
+    <div className="fixed top-0 left-0 right-0 h-[2.5px] bg-[#e2dcd0]/50 z-[60] pointer-events-none">
       <div
-        className="h-full bg-gradient-to-r from-crimson-800 via-amber-500 to-crimson-800 transition-all duration-75 ease-out origin-left"
+        className="h-full bg-gradient-to-r from-[#801426] via-[#d97706] to-[#801426] transition-all duration-75 ease-out origin-left"
         style={{ transform: `scaleX(${progress})`, transformOrigin: '0% 50%' }}
       />
     </div>

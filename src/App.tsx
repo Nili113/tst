@@ -3,6 +3,7 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Biography } from './components/Biography';
 import { Achievements } from './components/Achievements';
+import { EducationSection } from './components/EducationSection';
 import { Timeline } from './components/Timeline';
 import { NewsScrollSection } from './components/NewsScrollSection';
 import { VideoScrollSection } from './components/VideoScrollSection';
@@ -21,19 +22,20 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-sand-50 font-sans text-civic-900 selection:bg-crimson-800 selection:text-white">
+    <div className="min-h-screen bg-[#faf8f5] font-sans text-[#0f172a] selection:bg-[#801426] selection:text-white">
       {/* Subtle Top Scroll Reading Progress Indicator */}
       <ScrollProgressBar />
 
-      {/* Navigation Bar */}
+      {/* Symmetrical Floating Dock in Ivory Cream */}
       <Navbar
         lang={lang}
         onToggleLang={toggleLanguage}
         onOpenDesk={() => setIsDeskOpen(true)}
       />
 
-      {/* Hero Entrance (Screen 1) */}
+      {/* Main Narrative Sequence */}
       <main>
+        {/* Hero Entrance (Screen 1) */}
         <Hero
           lang={lang}
           onOpenDesk={() => setIsDeskOpen(true)}
@@ -45,13 +47,16 @@ export function App() {
         {/* Key Achievements & Impact Pillars */}
         <Achievements lang={lang} />
 
+        {/* Dedicated Education & Enterprise Section */}
+        <EducationSection lang={lang} />
+
         {/* Mandate & Leadership Timeline */}
         <Timeline lang={lang} />
 
-        {/* Horizontal Scroll Pane 1: Featured News & Jhapa Gold Cup */}
+        {/* Horizontal Scroll Pane 1: Featured News & Jhapa Gold Cup (Manual scroll on buttons only) */}
         <NewsScrollSection lang={lang} />
 
-        {/* Horizontal Scroll Pane 2: Video Dispatches & Social Redirects */}
+        {/* Horizontal Scroll Pane 2: Video Dispatches & Social Redirects (Manual scroll on buttons only) */}
         <VideoScrollSection lang={lang} />
 
         {/* Ward Office Contact & Inquiry Desk */}
@@ -61,7 +66,7 @@ export function App() {
         />
       </main>
 
-      {/* Civic Footer with Mandatory License Line */}
+      {/* Civic Footer (Media Credits Removed) */}
       <Footer
         lang={lang}
       />

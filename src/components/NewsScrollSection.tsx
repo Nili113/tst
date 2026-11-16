@@ -28,6 +28,7 @@ export const NewsScrollSection: React.FC<NewsScrollSectionProps> = ({ lang }) =>
     return () => window.removeEventListener('resize', checkScroll);
   }, []);
 
+  // ONLY manual scrolling upon clicking button: NO automatic scrolling
   const handleScroll = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
       const cardWidth = 350;
@@ -37,21 +38,22 @@ export const NewsScrollSection: React.FC<NewsScrollSectionProps> = ({ lang }) =>
   };
 
   return (
-    <section id="news" className="py-16 md:py-24 bg-[#faf8f5] border-b border-civic-200/80 overflow-hidden font-sans">
+    <section id="news" className="py-16 md:py-24 bg-[#faf8f5] border-b border-[#e2dcd0] overflow-hidden font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header with Navigation Controls */}
         <ScrollReveal>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 md:mb-12">
             <div>
-              <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold text-civic-950 tracking-tight leading-[1.3] ${lang === 'en' ? 'font-serif' : 'font-nepali'}`}>
+              <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f172a] tracking-tight leading-[1.3] ${lang === 'en' ? 'font-serif' : 'font-nepali'}`}>
                 {lang === 'ne' ? 'झापा गोल्डकप तथा जनसरोकारका समाचार' : 'Jhapa Gold Cup & Civic News'}
               </h2>
-              <p className="mt-3 text-sm sm:text-base text-civic-600 max-w-xl leading-relaxed font-sans">
+              <p className="mt-3 text-sm sm:text-base text-[#475569] max-w-xl leading-relaxed font-sans">
                 {lang === 'ne'
                   ? 'डोमालाल रंगशालामा सञ्चालित झापा गोल्डकप तथा बिर्तामोडको स्थानीय सेवा प्रवाहका प्रमाणित समाचारहरू'
                   : 'Verified coverage on Jhapa Gold Cup at Domalal Stadium and local municipal progress.'}
               </p>
+              <div className="w-12 h-0.5 bg-[#801426] mt-4" />
             </div>
 
             {/* Clean Navigation Chevrons */}
@@ -61,8 +63,8 @@ export const NewsScrollSection: React.FC<NewsScrollSectionProps> = ({ lang }) =>
                 disabled={!canScrollLeft}
                 className={`p-3 rounded-full border transition-all ${
                   canScrollLeft
-                    ? 'bg-white border-civic-300 text-civic-800 hover:bg-sand-100 shadow-sm active:scale-95'
-                    : 'bg-civic-100/50 border-civic-200 text-civic-300 cursor-not-allowed'
+                    ? 'bg-white border-[#d6cec0] text-[#0f172a] hover:bg-[#faf8f5] shadow-sm active:scale-95'
+                    : 'bg-[#f1f5f9] border-[#e2e8f0] text-[#94a3b8] cursor-not-allowed'
                 }`}
                 aria-label="Previous News"
               >
@@ -73,8 +75,8 @@ export const NewsScrollSection: React.FC<NewsScrollSectionProps> = ({ lang }) =>
                 disabled={!canScrollRight}
                 className={`p-3 rounded-full border transition-all ${
                   canScrollRight
-                    ? 'bg-white border-civic-300 text-civic-800 hover:bg-sand-100 shadow-sm active:scale-95'
-                    : 'bg-civic-100/50 border-civic-200 text-civic-300 cursor-not-allowed'
+                    ? 'bg-white border-[#d6cec0] text-[#0f172a] hover:bg-[#faf8f5] shadow-sm active:scale-95'
+                    : 'bg-[#f1f5f9] border-[#e2e8f0] text-[#94a3b8] cursor-not-allowed'
                 }`}
                 aria-label="Next News"
               >
@@ -84,7 +86,7 @@ export const NewsScrollSection: React.FC<NewsScrollSectionProps> = ({ lang }) =>
           </div>
         </ScrollReveal>
 
-        {/* Horizontal Scroll Pane (Matching Reference Style: Clean & Prestigious) */}
+        {/* Horizontal Scroll Pane (No automatic sliding, purely user controlled) */}
         <div
           ref={scrollContainerRef}
           onScroll={checkScroll}
@@ -94,56 +96,45 @@ export const NewsScrollSection: React.FC<NewsScrollSectionProps> = ({ lang }) =>
             <article
               key={article.id}
               onClick={() => setSelectedArticle(article)}
-              className="taste-card min-w-[275px] sm:min-w-[340px] max-w-[340px] bg-white rounded-xl overflow-hidden border border-civic-200/90 shadow-sm flex flex-col justify-between shrink-0 snap-start cursor-pointer group hover:border-crimson-800/40"
+              className="taste-card min-w-[275px] sm:min-w-[340px] max-w-[340px] bg-white rounded-xl overflow-hidden border border-[#e2dcd0] shadow-sm flex flex-col justify-between shrink-0 snap-start cursor-pointer group hover:border-[#801426]/40 transition-all"
             >
               <div>
                 {/* Media Image Frame */}
-                <div className="relative h-48 overflow-hidden bg-civic-900 taste-image-frame">
+                <div className="relative aspect-[16/10] overflow-hidden bg-[#e2dcd0] taste-image-frame">
                   <img
                     src={article.imageUrl}
-                    alt={article.titleEn}
-                    className="w-full h-full object-cover"
+                    alt={lang === 'ne' ? article.titleNe : article.titleEn}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     loading="lazy"
                   />
-                  {/* Category Chip */}
-                  <div className="absolute top-3 left-3">
-                    <span className="px-2.5 py-1 text-[11px] font-bold rounded-md bg-civic-900/90 text-white backdrop-blur-sm shadow-sm">
-                      {lang === 'ne' ? article.categoryNe : article.categoryEn}
-                    </span>
+                  <div className="absolute top-3 left-3 bg-[#0f172a]/85 backdrop-blur-md px-2.5 py-1 rounded-full text-[11px] font-semibold text-white border border-white/10">
+                    {article.source}
                   </div>
                 </div>
 
-                {/* Body Content */}
-                <div className="p-5 space-y-2.5">
-                  <div className="flex items-center gap-2 text-xs text-civic-500">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5" />
-                      {lang === 'ne' ? article.dateNe : article.dateEn}
-                    </span>
-                    <span>•</span>
-                    <span className="font-semibold text-crimson-800">{article.source}</span>
+                {/* Content */}
+                <div className="p-5">
+                  <div className="flex items-center gap-1.5 text-xs text-[#64748b] mb-2 font-mono">
+                    <Calendar className="w-3.5 h-3.5 text-[#801426]" />
+                    <span>{lang === 'ne' ? article.dateNe : article.dateEn}</span>
                   </div>
 
-                  <h3 className="font-bold text-base sm:text-lg text-civic-950 leading-snug group-hover:text-crimson-900 transition-colors line-clamp-2 font-nepali">
+                  <h3 className={`font-bold text-base sm:text-lg text-[#0f172a] group-hover:text-[#801426] transition-colors leading-snug line-clamp-2 ${lang === 'en' ? 'font-serif' : 'font-nepali'}`}>
                     {lang === 'ne' ? article.titleNe : article.titleEn}
                   </h3>
 
-                  <p className="text-xs text-civic-600 line-clamp-3 leading-relaxed">
+                  <p className="mt-2 text-xs sm:text-sm text-[#475569] line-clamp-3 leading-relaxed">
                     {lang === 'ne' ? article.summaryNe : article.summaryEn}
                   </p>
                 </div>
               </div>
 
-              {/* Card Footer */}
-              <div className="p-5 pt-0 border-t border-civic-100 flex items-center justify-between mt-3 text-xs">
-                <span className="flex items-center gap-1 text-civic-400 text-[11px]">
-                  <Clock className="w-3 h-3" />
-                  {article.readTime}
-                </span>
-                <span className="font-bold text-crimson-800 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-                  <span>{lang === 'ne' ? 'विस्तृत पढ्नुहोस्' : 'Read Story'}</span>
-                  <span>→</span>
-                </span>
+              {/* Card Footer Link */}
+              <div className="px-5 pb-5 pt-2">
+                <div className="pt-3 border-t border-[#f1f5f9] flex items-center justify-between text-xs font-semibold text-[#801426] group-hover:translate-x-0.5 transition-transform">
+                  <span>{lang === 'ne' ? 'पुरा विवरण पढ्नुहोस्' : 'Read Full Coverage'}</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </div>
               </div>
             </article>
           ))}
@@ -151,71 +142,61 @@ export const NewsScrollSection: React.FC<NewsScrollSectionProps> = ({ lang }) =>
 
       </div>
 
-      {/* News Article Modal Dialog */}
+      {/* Article Detail Modal */}
       {selectedArticle && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-civic-950/75 backdrop-blur-sm animate-fade-in font-sans">
-          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-civic-200 shadow-2xl p-6 sm:p-8 relative">
-            <button
-              onClick={() => setSelectedArticle(null)}
-              className="absolute top-5 right-5 p-2 rounded-full bg-sand-100 text-civic-600 hover:bg-sand-200 hover:text-civic-900 transition-colors"
-              aria-label="Close Modal"
-            >
-              <X className="w-5 h-5" />
-            </button>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0f172a]/75 backdrop-blur-sm animate-fade-in">
+          <div className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden border border-[#e2dcd0] max-h-[90vh] flex flex-col font-sans">
+            <div className="relative h-60 sm:h-72 w-full bg-[#f1f5f9] shrink-0">
+              <img
+                src={selectedArticle.imageUrl}
+                alt={lang === 'ne' ? selectedArticle.titleNe : selectedArticle.titleEn}
+                className="w-full h-full object-cover"
+              />
+              <button
+                onClick={() => setSelectedArticle(null)}
+                className="absolute top-3 right-3 p-2 rounded-full bg-[#0f172a]/70 text-white hover:bg-[#0f172a] transition-colors"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5" />
+              </button>
+              <div className="absolute bottom-3 left-4 bg-[#801426] text-white text-xs px-3 py-1 rounded-full font-bold">
+                {selectedArticle.source}
+              </div>
+            </div>
 
-            <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <span className="px-2.5 py-1 text-xs font-bold rounded bg-crimson-50 text-crimson-800 border border-crimson-200">
-                  {lang === 'ne' ? selectedArticle.categoryNe : selectedArticle.categoryEn}
-                </span>
-                <span className="text-xs text-civic-500 font-medium">
-                  {lang === 'ne' ? selectedArticle.dateNe : selectedArticle.dateEn} • {selectedArticle.source}
+            <div className="p-6 overflow-y-auto space-y-4">
+              <div className="flex items-center gap-3 text-xs text-[#64748b] font-mono">
+                <span>{lang === 'ne' ? selectedArticle.dateNe : selectedArticle.dateEn}</span>
+                <span>•</span>
+                <span className="flex items-center gap-1">
+                  <Clock className="w-3 h-3 text-[#801426]" />
+                  {selectedArticle.readTime}
                 </span>
               </div>
-
-              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-civic-950 leading-tight">
+              <h3 className={`text-xl sm:text-2xl font-bold text-[#0f172a] leading-snug ${lang === 'en' ? 'font-serif' : 'font-nepali'}`}>
                 {lang === 'ne' ? selectedArticle.titleNe : selectedArticle.titleEn}
-              </h2>
-
-              <div className="rounded-xl overflow-hidden h-60 sm:h-72 bg-civic-900">
-                <img
-                  src={selectedArticle.imageUrl}
-                  alt={selectedArticle.titleEn}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              <div className="text-civic-800 text-sm sm:text-base leading-relaxed space-y-3 pt-2">
-                <p className="font-medium text-civic-900 text-base">
-                  {lang === 'ne' ? selectedArticle.summaryNe : selectedArticle.summaryEn}
-                </p>
-                <p>
-                  {lang === 'ne'
-                    ? 'बिर्तामोड नगरपालिका वडा नं. ५ का वडाध्यक्ष रोहित प्रसाईंले स्थानीय जनताको दैनिक काम, प्रशासनिक सेवा र विकास निर्माणमा कुनै सम्झौता नगर्ने स्पष्ट अडान राख्नुभएको छ।'
-                    : 'Birtamod Ward Chairperson Rohit Prasai continues to deliver on transparent administration, community health access, and accountable governance.'}
-                </p>
-              </div>
-
-              <div className="pt-6 border-t border-civic-200 flex flex-wrap items-center justify-between gap-4">
-                <div className="text-xs text-civic-500">
-                  {lang === 'ne' ? 'स्रोत आभार:' : 'Source Credit:'} <strong className="text-civic-800">{selectedArticle.source}</strong>
-                </div>
-                {selectedArticle.sourceUrl && (
+              </h3>
+              <p className="text-sm text-[#334155] leading-relaxed whitespace-pre-line">
+                {lang === 'ne' ? selectedArticle.summaryNe : selectedArticle.summaryEn}
+              </p>
+              {selectedArticle.sourceUrl && (
+                <div className="pt-3 border-t border-[#f1f5f9]">
                   <a
                     href={selectedArticle.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="taste-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-civic-900 text-white text-xs font-medium hover:bg-civic-800"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#801426] hover:underline"
                   >
-                    <span>{lang === 'ne' ? 'स्रोत पोर्टल हेर्नुहोस्' : 'Visit Source'}</span>
+                    <span>{lang === 'ne' ? 'मूल समाचार स्रोत हेर्नुहोस्' : 'View Original News Source'}</span>
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
       )}
+
     </section>
   );
 };

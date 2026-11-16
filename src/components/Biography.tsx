@@ -10,45 +10,45 @@ interface BiographyProps {
 
 export const Biography: React.FC<BiographyProps> = ({ lang }) => {
   return (
-    <section id="biography" className="py-16 md:py-24 bg-white border-b border-civic-200/80 font-sans">
+    <section id="biography" className="py-16 md:py-24 bg-[#faf8f5] border-b border-[#e2dcd0] font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Clean, Non-Colliding Editorial Section Header */}
         <ScrollReveal>
           <div className="mb-12 md:mb-16">
-            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold text-civic-950 tracking-tight leading-[1.3] ${lang === 'en' ? 'font-serif' : 'font-nepali'}`}>
-              {lang === 'ne' ? 'नागरिक सेवामा समर्पित नेतृत्व' : 'Public Leadership & Civic Philosophy'}
+            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f172a] tracking-tight leading-[1.3] ${lang === 'en' ? 'font-serif' : 'font-nepali'}`}>
+              {lang === 'ne' ? 'परिचय तथा नेतृत्व दर्शन' : 'Leadership & Civic Philosophy'}
             </h2>
-            <p className="mt-3 text-base text-civic-600 max-w-2xl font-sans">
-              {lang === 'ne' 
-                ? 'बिर्तामोड–५ को सर्वाङ्गीण विकास, पारदर्शिता र उत्तरदायी स्थानीय सरकार' 
+            <p className="mt-3 text-base text-[#475569] max-w-2xl font-sans">
+              {lang === 'ne'
+                ? 'बिर्तामोड–५ को सर्वाङ्गीण विकास, पारदर्शिता र उत्तरदायी स्थानीय सरकार'
                 : 'Constituent governance, public integrity, and sustainable civic progress in Birtamod'}
             </p>
-            <div className="w-12 h-0.5 bg-crimson-800 mt-4" />
+            <div className="w-12 h-0.5 bg-[#801426] mt-4" />
           </div>
         </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-          
+
           {/* Main Story (Left Column - 7 cols) */}
-          <div className="lg:col-span-7 space-y-6 text-civic-800 leading-relaxed font-sans">
-            
+          <div className="lg:col-span-7 space-y-6 text-[#334155] leading-relaxed font-sans">
+
             <ScrollReveal delay={100}>
-              <p className="text-base sm:text-lg text-civic-900 font-medium leading-relaxed">
+              <p className="text-base sm:text-lg text-[#0f172a] font-medium leading-relaxed">
                 {lang === 'ne' ? bioNarrative.aboutNe : bioNarrative.aboutEn}
               </p>
             </ScrollReveal>
 
-            {/* Polished Editorial Quote */}
+            {/* Polished Editorial Quote in Vintage Burgundy Frame */}
             <ScrollReveal delay={150}>
-              <div className="my-8 p-6 sm:p-8 rounded-xl bg-[#f7f5f0] border border-civic-200/70">
-                <span className="text-3xl sm:text-4xl font-serif text-crimson-800/40 select-none block leading-none mb-2">“</span>
-                <p className="font-serif italic text-lg sm:text-xl text-civic-900 leading-snug">
+              <div className="my-8 p-6 sm:p-8 rounded-xl bg-[#fbf2f4] border border-[#f5d0d6]">
+                <span className="text-3xl sm:text-4xl font-serif text-[#801426]/40 select-none block leading-none mb-2">“</span>
+                <p className="font-serif italic text-lg sm:text-xl text-[#0f172a] leading-snug">
                   {lang === 'ne' ? bioNarrative.philosophyNe : bioNarrative.philosophyEn}
                 </p>
-                <div className="mt-4 pt-3 border-t border-civic-200/50 flex items-center justify-between text-xs font-semibold text-crimson-800 tracking-wide font-sans">
+                <div className="mt-4 pt-3 border-t border-[#f5d0d6] flex items-center justify-between text-xs font-semibold text-[#801426] tracking-wide font-sans">
                   <span>— {lang === 'ne' ? civicProfile.nameNe : civicProfile.nameEn}</span>
-                  <span className="text-civic-500 font-normal">
+                  <span className="text-[#64748b] font-normal">
                     {lang === 'ne' ? 'वडा अध्यक्ष, बिर्तामोड–५' : 'Ward Chairperson, Birtamod-5'}
                   </span>
                 </div>
@@ -56,7 +56,7 @@ export const Biography: React.FC<BiographyProps> = ({ lang }) => {
             </ScrollReveal>
 
             <ScrollReveal delay={200}>
-              <p className="text-sm sm:text-base text-civic-700 leading-relaxed">
+              <p className="text-sm sm:text-base text-[#475569] leading-relaxed">
                 {lang === 'ne' ? bioNarrative.educationNe : bioNarrative.educationEn}
               </p>
             </ScrollReveal>
@@ -64,33 +64,39 @@ export const Biography: React.FC<BiographyProps> = ({ lang }) => {
             {/* Foundations & Experience Badges */}
             <ScrollReveal delay={250}>
               <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-4 rounded-lg bg-sand-50 border border-civic-200/80 flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-md bg-white text-crimson-800 flex items-center justify-center shrink-0 border border-civic-200 shadow-sm">
+                <a
+                  href="#education"
+                  className="p-4 rounded-xl bg-white border border-[#e2dcd0] hover:border-[#801426]/50 transition-all flex items-start gap-3 group shadow-xs"
+                >
+                  <div className="w-9 h-9 rounded-lg bg-[#fbf2f4] text-[#801426] flex items-center justify-center shrink-0 border border-[#f5d0d6] shadow-xs group-hover:bg-[#801426] group-hover:text-white transition-colors">
                     <GraduationCap className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-civic-900">
+                    <div className="text-xs font-bold text-[#0f172a] group-hover:text-[#801426] transition-colors">
                       {lang === 'ne' ? 'सिल्भर माउण्टेन (सन् २००९)' : 'Silver Mountain (2009)'}
                     </div>
-                    <div className="text-xs text-civic-600 mt-0.5">
-                      {lang === 'ne' ? 'होटल म्यानेजमेन्ट स्नातक' : 'Hotel Management Studies'}
+                    <div className="text-xs text-[#64748b] mt-0.5">
+                      {lang === 'ne' ? 'व्यवस्थापन तथा हस्पिटालिटी अध्ययन' : 'Management & Hospitality Studies'}
                     </div>
                   </div>
-                </div>
+                </a>
 
-                <div className="p-4 rounded-lg bg-sand-50 border border-civic-200/80 flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-md bg-white text-crimson-800 flex items-center justify-center shrink-0 border border-civic-200 shadow-sm">
+                <a
+                  href="#education"
+                  className="p-4 rounded-xl bg-white border border-[#e2dcd0] hover:border-[#801426]/50 transition-all flex items-start gap-3 group shadow-xs"
+                >
+                  <div className="w-9 h-9 rounded-lg bg-[#fbf2f4] text-[#801426] flex items-center justify-center shrink-0 border border-[#f5d0d6] shadow-xs group-hover:bg-[#801426] group-hover:text-white transition-colors">
                     <Briefcase className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-civic-900">
-                      {lang === 'ne' ? 'माता पाथिभरा ट्रेडर्स' : 'Mata Pathivara Traders'}
+                    <div className="text-xs font-bold text-[#0f172a] group-hover:text-[#801426] transition-colors">
+                      {lang === 'ne' ? 'माता पाथीभरा ट्रेडर्स' : 'Mata Pathivara Traders'}
                     </div>
-                    <div className="text-xs text-civic-600 mt-0.5">
-                      {lang === 'ne' ? 'प्रोप्राइटर / स्थानीय उद्यमशीलता' : 'Proprietor & Local Enterprise'}
+                    <div className="text-xs text-[#64748b] mt-0.5">
+                      {lang === 'ne' ? 'संस्थापक / स्थानीय उद्यमशीलता' : 'Proprietor & Local Enterprise'}
                     </div>
                   </div>
-                </div>
+                </a>
               </div>
             </ScrollReveal>
 
@@ -99,57 +105,57 @@ export const Biography: React.FC<BiographyProps> = ({ lang }) => {
           {/* Quick Facts Sidebar (Right Column - 5 cols) */}
           <div className="lg:col-span-5 space-y-6">
             <ScrollReveal delay={200} direction="left">
-              <div className="p-6 sm:p-7 rounded-2xl bg-[#faf8f5] border border-civic-200/80 space-y-6 shadow-sm">
-                
-                <h3 className={`text-base font-bold text-civic-950 uppercase tracking-wider ${lang === 'en' ? 'font-serif' : 'font-nepali'}`}>
+              <div className="p-6 sm:p-7 rounded-2xl bg-white border border-[#e2dcd0] space-y-6 shadow-sm">
+
+                <h3 className={`text-base font-bold text-[#0f172a] uppercase tracking-wider ${lang === 'en' ? 'font-serif' : 'font-nepali'}`}>
                   {lang === 'ne' ? 'प्रतिनिधित्व र सार्वजनिक विवरण' : 'Public Profile & Representation'}
                 </h3>
 
                 <div className="space-y-4 text-xs sm:text-sm">
-                  
-                  <div className="flex items-start gap-3 pb-3 border-b border-civic-200/60">
-                    <Award className="w-4 h-4 text-crimson-800 shrink-0 mt-0.5" />
+
+                  <div className="flex items-start gap-3 pb-3 border-b border-[#f1f5f9]">
+                    <Award className="w-4 h-4 text-[#801426] shrink-0 mt-0.5" />
                     <div className="flex-1">
-                      <div className="font-semibold text-civic-900">
+                      <div className="font-semibold text-[#0f172a]">
                         {lang === 'ne' ? 'स्थानीय तह निर्वाचन २०७९' : '2022 Municipal Election'}
                       </div>
-                      <div className="text-civic-600 text-xs mt-0.5">
+                      <div className="text-[#64748b] text-xs mt-0.5">
                         {lang === 'ne' ? 'नेपाली कांग्रेसका तर्फबाट निर्वाचित वडाध्यक्ष' : 'Elected Ward Chair, Nepali Congress'}
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 pb-3 border-b border-civic-200/60">
-                    <CheckCircle className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-3 pb-3 border-b border-[#f1f5f9]">
+                    <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                     <div className="flex-1">
-                      <div className="font-semibold text-civic-900">
+                      <div className="font-semibold text-[#0f172a]">
                         {lang === 'ne' ? 'कार्यालय समयपालन सुधार' : 'Municipal Punctuality Reform'}
                       </div>
-                      <div className="text-civic-600 text-xs mt-0.5">
+                      <div className="text-[#64748b] text-xs mt-0.5">
                         {lang === 'ne' ? 'नगरपालिका प्रांगणबाटै प्रत्यक्ष सेवा प्रवाहको ऐतिहासिक पहल' : 'Direct Courtyard Service Desk initiative'}
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 pb-3 border-b border-civic-200/60">
-                    <CheckCircle className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-3 pb-3 border-b border-[#f1f5f9]">
+                    <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                     <div className="flex-1">
-                      <div className="font-semibold text-civic-900">
+                      <div className="font-semibold text-[#0f172a]">
                         {lang === 'ne' ? 'आवास मार्ग ढल निर्माण' : 'Aawas Marg Stormwater Drainage'}
                       </div>
-                      <div className="text-civic-600 text-xs mt-0.5">
+                      <div className="text-[#64748b] text-xs mt-0.5">
                         {lang === 'ne' ? 'बिर्तामोड–अर्जुनधारा सीमामा संयुक्त अन्तर-पालिका समन्वय' : 'Inter-municipal flood mitigation canal'}
                       </div>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                     <div className="flex-1">
-                      <div className="font-semibold text-civic-900">
+                      <div className="font-semibold text-[#0f172a]">
                         {lang === 'ne' ? 'झापा गोल्डकप खेलकुद संरक्षण' : 'Jhapa Gold Cup Patronage'}
                       </div>
-                      <div className="text-civic-600 text-xs mt-0.5">
+                      <div className="text-[#64748b] text-xs mt-0.5">
                         {lang === 'ne' ? 'डोमालाल रंगशाला स्तरोन्नति तथा खेलाडी सम्मान' : 'Domalal Stadium athletic infrastructure'}
                       </div>
                     </div>

@@ -10,12 +10,12 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ lang, onOpenDesk }) => {
   return (
-    <section className="relative min-h-[calc(100vh-60px)] flex items-center bg-[#faf8f4] pt-20 sm:pt-24 lg:pt-32 pb-12 sm:pb-16 lg:pb-24 border-b border-civic-200/80 overflow-hidden font-sans">
+    <section className="relative min-h-[calc(100vh-60px)] flex items-center bg-[#faf8f5] pt-20 sm:pt-24 lg:pt-32 pb-12 sm:pb-16 lg:pb-24 border-b border-[#e2dcd0] overflow-hidden font-sans">
       
-      {/* Layer 1: Ambient Civic Warmth Radial Light */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(153,27,27,0.06),rgba(250,248,244,0))] pointer-events-none" />
+      {/* Layer 1: Ambient Warm Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(128,20,38,0.06),rgba(250,248,245,0))] pointer-events-none" />
 
-      {/* Layer 2: Subtle Topographic & Civic Lines Backdrop */}
+      {/* Layer 2: Subtle Civic Contour Lines */}
       <svg
         className="absolute inset-0 w-full h-full opacity-[0.035] pointer-events-none"
         xmlns="http://www.w3.org/2000/svg"
@@ -28,8 +28,8 @@ export const Hero: React.FC<HeroProps> = ({ lang, onOpenDesk }) => {
         <path d="M0,740 Q360,660 720,780 T1440,700" fill="none" stroke="#000" strokeWidth="1.5" />
       </svg>
 
-      {/* Layer 3: Soft Golden Light Accent in Top Right */}
-      <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-amber-500/[0.04] blur-3xl pointer-events-none" />
+      {/* Layer 3: Warm Antique Gold Accent */}
+      <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-amber-500/[0.05] blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-16 items-center">
@@ -38,10 +38,10 @@ export const Hero: React.FC<HeroProps> = ({ lang, onOpenDesk }) => {
           <div className="order-1 lg:order-2 lg:col-span-5 flex justify-center lg:justify-end">
             <div className="relative w-full max-w-[210px] xs:max-w-[250px] sm:max-w-xs lg:max-w-md">
               
-              {/* Subtle back decorative glow */}
-              <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-tr from-amber-600/20 via-crimson-800/10 to-transparent blur-md -z-10" />
+              {/* Subtle back decorative glow in vintage burgundy & warm gold */}
+              <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-tr from-amber-500/20 via-[#801426]/15 to-transparent blur-md -z-10" />
 
-              <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-white shadow-xl border border-civic-200/90 taste-image-frame relative">
+              <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-white shadow-xl border border-[#e2dcd0] taste-image-frame relative">
                 <img
                   src="/images/rohit-prasai-portrait.jpg"
                   alt={civicProfile.nameEn}
@@ -50,7 +50,7 @@ export const Hero: React.FC<HeroProps> = ({ lang, onOpenDesk }) => {
                 />
 
                 {/* Mandate Floating Badge on Photo */}
-                <div className="absolute top-2.5 right-2.5 bg-civic-950/85 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-semibold text-white border border-white/10 shadow-sm">
+                <div className="absolute top-2.5 right-2.5 bg-[#0f172a]/85 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-semibold text-white border border-white/10 shadow-sm">
                   {lang === 'ne' ? '२०७९ – २०८४' : '2022 – 2027'}
                 </div>
               </div>
@@ -64,7 +64,7 @@ export const Hero: React.FC<HeroProps> = ({ lang, onOpenDesk }) => {
             <div className="space-y-2 sm:space-y-3">
               
               {/* Name */}
-              <h1 className={`tracking-tight text-civic-950 block ${
+              <h1 className={`tracking-tight text-[#0f172a] block ${
                 lang === 'en'
                   ? 'font-serif font-black text-4xl sm:text-6xl lg:text-7xl xl:text-[76px] leading-[1.08]'
                   : 'font-nepali font-bold text-4xl sm:text-6xl lg:text-7xl leading-[1.22] pb-0.5'
@@ -72,15 +72,15 @@ export const Hero: React.FC<HeroProps> = ({ lang, onOpenDesk }) => {
                 {lang === 'ne' ? civicProfile.nameNe : civicProfile.nameEn}
               </h1>
 
-              {/* Single Cohesive Designation & Municipality line */}
-              <div className="text-lg sm:text-2xl font-semibold text-crimson-800 tracking-tight">
+              {/* Single Cohesive Designation & Municipality line in Vintage Burgundy */}
+              <div className="text-lg sm:text-2xl font-semibold text-[#801426] tracking-tight">
                 {lang === 'ne' 
                   ? `${civicProfile.roleNe} • बिर्तामोड नगरपालिका, वडा नं. ५`
                   : `${civicProfile.roleEn} • Birtamod Municipality, Ward No. 5`}
               </div>
 
               {/* Civic Mandate Subtitle */}
-              <div className="text-xs sm:text-sm font-medium text-civic-500">
+              <div className="text-xs sm:text-sm font-medium text-[#64748b]">
                 {lang === 'ne' 
                   ? 'नेपाली कांग्रेस • स्थानीय तह कार्यकाल २०७९–२०८४' 
                   : 'Nepali Congress • Municipal Term 2022–2027'}
@@ -88,65 +88,65 @@ export const Hero: React.FC<HeroProps> = ({ lang, onOpenDesk }) => {
             </div>
 
             {/* Ethos Statement */}
-            <p className="text-sm sm:text-base lg:text-lg text-civic-700 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal pt-0.5">
+            <p className="text-sm sm:text-base lg:text-lg text-[#334155] leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal pt-0.5">
               {lang === 'ne' ? civicProfile.taglineNe : civicProfile.taglineEn}
             </p>
 
             {/* Civic Commitments: Clean Minimal Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 pt-1 text-left">
-              <div className="p-3 sm:p-4 rounded-xl bg-white/95 border border-civic-200/80 shadow-xs flex items-start gap-2.5 sm:gap-3 backdrop-blur-xs">
+              <div className="p-3 sm:p-4 rounded-xl bg-white border border-[#e2dcd0] shadow-xs flex items-start gap-2.5 sm:gap-3">
                 <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 shrink-0 mt-0.5" />
                 <div>
-                  <div className="text-xs font-bold text-civic-900">
+                  <div className="text-xs font-bold text-[#0f172a]">
                     {lang === 'ne' ? 'समयपालन अडान' : 'Strict Punctuality'}
                   </div>
-                  <div className="text-[11px] text-civic-500 mt-0.5 leading-snug">
+                  <div className="text-[11px] text-[#64748b] mt-0.5 leading-snug">
                     {lang === 'ne' ? 'नागरिक सेवामा शून्य ढिलाइ' : 'Zero bureaucratic delay'}
                   </div>
                 </div>
               </div>
 
-              <div className="p-3 sm:p-4 rounded-xl bg-white/95 border border-civic-200/80 shadow-xs flex items-start gap-2.5 sm:gap-3 backdrop-blur-xs">
-                <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-crimson-800 shrink-0 mt-0.5" />
+              <div className="p-3 sm:p-4 rounded-xl bg-white border border-[#e2dcd0] shadow-xs flex items-start gap-2.5 sm:gap-3">
+                <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-[#801426] shrink-0 mt-0.5" />
                 <div>
-                  <div className="text-xs font-bold text-civic-900">
+                  <div className="text-xs font-bold text-[#0f172a]">
                     {lang === 'ne' ? 'प्रत्यक्ष खुला सेवा' : 'Direct Public Desk'}
                   </div>
-                  <div className="text-[11px] text-civic-500 mt-0.5 leading-snug">
+                  <div className="text-[11px] text-[#64748b] mt-0.5 leading-snug">
                     {lang === 'ne' ? 'नागरिकसँग प्रत्यक्ष संवाद' : 'Direct citizen access'}
                   </div>
                 </div>
               </div>
 
-              <div className="p-3 sm:p-4 rounded-xl bg-white/95 border border-civic-200/80 shadow-xs flex items-start gap-2.5 sm:gap-3 backdrop-blur-xs">
+              <div className="p-3 sm:p-4 rounded-xl bg-white border border-[#e2dcd0] shadow-xs flex items-start gap-2.5 sm:gap-3">
                 <Trophy className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 shrink-0 mt-0.5" />
                 <div>
-                  <div className="text-xs font-bold text-civic-900">
+                  <div className="text-xs font-bold text-[#0f172a]">
                     {lang === 'ne' ? 'खेलकुद र युवा' : 'Sports & Youth'}
                   </div>
-                  <div className="text-[11px] text-civic-500 mt-0.5 leading-snug">
+                  <div className="text-[11px] text-[#64748b] mt-0.5 leading-snug">
                     {lang === 'ne' ? 'झापा गोल्डकप संरक्षण' : 'Gold Cup tournament patron'}
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Action Callouts */}
+            {/* Action Callouts: PROMINENT VINTAGE BURGUNDY BUTTON */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-2.5 sm:gap-3 pt-2">
               <button
                 onClick={onOpenDesk}
-                className="taste-btn inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-crimson-800 text-white font-semibold text-xs sm:text-sm hover:bg-crimson-900 shadow-sm transition-all"
+                className="taste-btn inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#801426] hover:bg-[#680f1e] text-white font-bold text-xs sm:text-sm shadow-md shadow-[#801426]/20 transition-all active:scale-95"
               >
-                <MessageSquare className="w-4 h-4" />
+                <MessageSquare className="w-4 h-4 text-white" />
                 <span>{lang === 'ne' ? 'नागरिक सहायता तथा गुनासो दर्ता' : 'Citizen Assistance Desk'}</span>
               </button>
 
               <a
                 href="#achievements"
-                className="taste-btn inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white border border-civic-300 text-civic-800 font-semibold text-xs sm:text-sm hover:bg-sand-100 shadow-xs transition-all"
+                className="taste-btn inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white border border-[#d6cec0] text-[#0f172a] font-semibold text-xs sm:text-sm hover:bg-[#faf8f5] shadow-xs transition-all"
               >
                 <span>{lang === 'ne' ? 'सार्वजनिक कार्यहरू' : 'Explore Public Work'}</span>
-                <ArrowRight className="w-4 h-4 text-civic-500" />
+                <ArrowRight className="w-4 h-4 text-[#64748b]" />
               </a>
             </div>
 

@@ -34,14 +34,63 @@ export const civicProfile = {
 };
 
 export const bioNarrative = {
-  aboutNe: `रोहित प्रसाईं झापा जिल्लाको प्रमुख आर्थिक तथा सामाजिक केन्द्र बिर्तामोड नगरपालिकाका एक सक्रिय, जनप्रिय तथा स्पष्टवक्ता जनप्रतिनिधि हुनुहुन्छ। विसं २०७९ सालको स्थानीय तह निर्वाचनमा बिर्तामोड वडा नं. ५ को वडाध्यक्ष पदमा निर्वाचित भएपश्चात् उहाँले प्रशासनिक अनुशासन, समयको कडा पालना र विनाझन्झट नागरिक सेवा प्रवाहलाई आफ्नो प्रमुख मानक बनाउनुभएको छ।`,
-  aboutEn: `Rohit Prasai is an energetic civic leader representing Birtamod, the commercial and economic heartbeat of Jhapa. Since his election as Ward Chairperson in the 2022 (2079 BS) local elections, he has established an uncompromising standard for punctuality, public transparency, and citizen-first administration.`,
+  aboutNe: `म रोहित प्रसाईं, झापाको प्रमुख आर्थिक तथा सामाजिक केन्द्र बिर्तामोड नगरपालिका वडा नं. ५ को निर्वाचित वडाध्यक्षका रूपमा नागरिक सेवामा समर्पित छु। विसं २०७९ सालको स्थानीय तह निर्वाचनमा बिर्तामोडवासी आमाबुबा, दाजुभाइ तथा दिदीबहिनीको अमूल्य विश्वासबाट निर्वाचित भएपछि मैले प्रशासनिक अनुशासन, समयको कडा पालना र विनाझन्झट नागरिक सेवा प्रवाहलाई आफ्नो प्रमुख मानक बनाएको छु।`,
+  aboutEn: `I am Rohit Prasai, serving as the elected Ward Chairperson of Birtamod Municipality Ward No. 5, Jhapa. Since taking office in the 2022 (2079 BS) local elections with the trust of my community, I have anchored my public service on administrative accountability, zero-delay citizen services, and people-centered local leadership.`,
   
   philosophyNe: `“जनप्रतिनिधि भनेको कुर्सीमा बसेर आदेश दिने शासक होइन; जनताको काम रोकिँदा नगरपालिकाको आँगनमै बसेर पनि सेवा दिन सक्ने सेवक हुनुपर्छ।”`,
   philosophyEn: `“An elected representative is not seated to command from behind closed doors, but to serve directly — even if that means setting up a desk in the open courtyard when bureaucracy hinders citizens.”`,
 
-  educationNe: `उहाँले सन् २००९ मा सिलभर माउण्टेन स्कुल अफ होटल म्यानेजमेन्टबाट उच्च शिक्षा हासिल गर्नुभएको हो। साथै, उहाँ 'माता पाथीभरा ट्रेडर्स एण्ड सप्लायर्स' का प्रोप्राइटर भई उद्यमशीलता र स्थानीय रोजगारी सिर्जनामा पनि निरन्तर सक्रिय रहँदै आउनुभएको छ।`,
-  educationEn: `He completed his higher professional studies from the Silver Mountain School of Hotel Management in 2009. He also serves as the proprietor of Mata Pathivara Traders and Suppliers, actively driving regional enterprise, employment, and youth mobilization.`,
+  educationNe: `मैले सन् २००९ मा सिलभर माउण्टेन स्कुल अफ होटल म्यानेजमेन्टबाट उच्च शिक्षा हासिल गरेको हुँ। व्यवस्थापकीय दक्षता, संगठनात्मक अनुशासन र आतिथ्य सत्कारको यसै प्राज्ञिक पृष्ठभूमिसँगै 'माता पाथीभरा ट्रेडर्स एण्ड सप्लायर्स' मार्फत स्थानीय उद्यमशीलता र युवा रोजगारी प्रवर्द्धनमा म निरन्तर सक्रिय छु।`,
+  educationEn: `I completed my higher professional studies from the Silver Mountain School of Hotel Management in 2009. This discipline in management and public-facing logistics directly informs my civic governance, while my work as proprietor of Mata Pathivara Traders and Suppliers keeps me deeply connected to local enterprise and youth employment.`,
+};
+
+export const educationProfile = {
+  headlineNe: "शिक्षा तथा प्राज्ञिक पृष्ठभूमि",
+  headlineEn: "Academic Foundation & Enterprise",
+  subtitleNe: "व्यवस्थापकीय तालिम, संगठनात्मक अनुशासन र स्थानीय रोजगारी सिर्जना",
+  subtitleEn: "Professional management discipline, organizational leadership, and local enterprise creation.",
+  academic: {
+    institutionNe: "सिलभर माउण्टेन स्कुल अफ होटल म्यानेजमेन्ट",
+    institutionEn: "Silver Mountain School of Hotel Management",
+    degreeNe: "हस्पिटालिटी तथा व्यवस्थापन अध्ययन (स्नातक स्तर)",
+    degreeEn: "Hospitality & Organizational Management Studies",
+    locationNe: "काठमाडौँ, नेपाल",
+    locationEn: "Kathmandu, Nepal",
+    yearNe: "सन् २००९ (२०६६ वि.सं.)",
+    yearEn: "Class of 2009",
+    descriptionNe: "व्यवस्थापकीय अनुशासन, सार्वजनिक सञ्चार, मानव संसाधन तथा ठूला कार्यक्रमहरूको संगठनात्मक संयोजनको गहन प्राज्ञिक अध्ययन। यसै पृष्ठभूमिले आज डोमालाल रंगशालामा झापा गोल्डकपजस्ता अन्तर्राष्ट्रिय प्रतियोगिताको संयोजन र वडाको दैनिक प्रशासनिक प्रवाहमा मलाई दक्ष बनाएको छ।",
+    descriptionEn: "Rigorous training in organizational discipline, public administration logistics, human resource coordination, and event hospitality. This foundation directly underpins my ability to coordinate massive regional events like the Jhapa Gold Cup and manage daily municipal operations with strict efficiency.",
+  },
+  enterprise: {
+    nameNe: "माता पाथीभरा ट्रेडर्स एण्ड सप्लायर्स",
+    nameEn: "Mata Pathivara Traders and Suppliers",
+    roleNe: "संस्थापक तथा प्रोप्राइटर",
+    roleEn: "Founder & Proprietor",
+    locationNe: "बिर्तामोड, झापा",
+    locationEn: "Birtamod, Jhapa",
+    descriptionNe: "स्थानीय व्यापार, निर्माण सामग्री तथा वाणिज्य आपूर्ति क्षेत्रमा स्थापित उद्यम। युवाहरूलाई स्थानीय तहमै रोजगारी प्रदान गर्दै उद्यमशीलताको माध्यमबाट आत्मनिर्भर बिर्तामोड निर्माणमा सक्रिय सहभागिता।",
+    descriptionEn: "A well-established commercial enterprise in Birtamod driving regional supply logistics, fostering local youth employment, and promoting practical economic self-reliance.",
+  },
+  principles: [
+    {
+      titleNe: "नागरिक सत्कार र संवेदनशीलता",
+      titleEn: "Constituent-First Hospitality",
+      descNe: "कार्यालय आउने हरेक नागरिकलाई सेवाग्राही मात्र नभई सम्मानजनक अतिथिका रूपमा तत्काल सेवा दिने सोच।",
+      descEn: "Treating every visiting citizen not as a bureaucratic case, but as a valued constituent deserving immediate dignity and service.",
+    },
+    {
+      titleNe: "बृहत् कार्यक्रम र योजना व्यवस्थापन",
+      titleEn: "Large-Scale Project Logistics",
+      descNe: "झापा गोल्डकपदेखि नगरस्तरीय पूर्वाधार निर्माणसम्म योजनाबद्ध, पारदर्शी र समयसीमाभित्र काम सम्पन्न गर्ने क्षमता।",
+      descEn: "Executing high-profile tournaments, stadium infrastructure, and drainage projects on time, within budget, and with complete transparency.",
+    },
+    {
+      titleNe: "युवा उद्यम र आर्थिक स्वावलम्बन",
+      titleEn: "Youth Enterprise & Economic Agency",
+      descNe: "राजनीतिलाई पेशा नबनाई आफ्नै व्यवसायबाट आत्मनिर्भर रही स्वच्छ र निष्पक्ष जनप्रतिनिधिको भूमिका निर्वाह।",
+      descEn: "Maintaining personal economic self-reliance through business, ensuring clean, incorruptible, and fearless public leadership.",
+    }
+  ]
 };
 
 export const keyAchievements: AchievementItem[] = [
@@ -103,8 +152,8 @@ export const timelineMilestones: MilestoneItem[] = [
     badgeEn: "Education",
     titleNe: "सिलभर माउण्टेनबाट उच्च शिक्षा सम्पन्न",
     titleEn: "Graduated from Silver Mountain School",
-    descriptionNe: "होटल म्यानेजमेन्ट तथा प्रशासनिक नेतृत्वको औपचारिक अध्ययन पूरा गरी सामाजिक उद्यमशीलतामा प्रवेश।",
-    descriptionEn: "Completed formal studies in hospitality management and organizational leadership, stepping into enterprise and public life."
+    descriptionNe: "होटल म्यानेजमेन्ट तथा संगठनात्मक व्यवस्थापनको औपचारिक अध्ययन पूरा गरी स्थानीय उद्यमशीलता र सामाजिक सेवामा मेरो यात्रा प्रारम्भ।",
+    descriptionEn: "Completed formal studies in hospitality and management at Silver Mountain, beginning my journey in local enterprise and community service."
   },
   {
     yearNe: "२०७९ वैशाख",
