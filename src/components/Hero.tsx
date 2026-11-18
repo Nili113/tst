@@ -1,7 +1,7 @@
 import React from 'react';
 import { civicProfile } from '../data/portfolioData';
 import { Language } from '../types';
-import { CheckCircle2, Shield, Trophy, ArrowRight, MessageSquare } from 'lucide-react';
+import { MessageSquare, ArrowRight, Award } from 'lucide-react';
 
 interface HeroProps {
   lang: Language;
@@ -10,149 +10,101 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ lang, onOpenDesk }) => {
   return (
-    <section className="relative min-h-[calc(100vh-60px)] flex items-center bg-[#faf8f5] pt-20 sm:pt-24 lg:pt-32 pb-12 sm:pb-16 lg:pb-24 border-b border-[#e2dcd0] overflow-hidden font-sans">
-      
-      {/* Layer 1: Ambient Warm Glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(128,20,38,0.06),rgba(250,248,245,0))] pointer-events-none" />
-
-      {/* Layer 2: Subtle Civic Contour Lines */}
-      <svg
-        className="absolute inset-0 w-full h-full opacity-[0.035] pointer-events-none"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 900"
-        preserveAspectRatio="none"
-      >
-        <path d="M0,200 Q360,120 720,240 T1440,160" fill="none" stroke="#000" strokeWidth="1.5" />
-        <path d="M0,380 Q360,300 720,420 T1440,340" fill="none" stroke="#000" strokeWidth="1.5" />
-        <path d="M0,560 Q360,480 720,600 T1440,520" fill="none" stroke="#000" strokeWidth="1.5" />
-        <path d="M0,740 Q360,660 720,780 T1440,700" fill="none" stroke="#000" strokeWidth="1.5" />
-      </svg>
-
-      {/* Layer 3: Warm Antique Gold Accent */}
-      <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-amber-500/[0.05] blur-3xl pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-16 items-center">
+    <section id="home" className="relative bg-white pt-8 sm:pt-12 lg:pt-16 pb-12 sm:pb-16 lg:pb-20 border-b border-slate-100 font-sans overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* 2-Column Balanced Editorial Layout (Matching Pravash Thapa Magar Reference) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* Portrait Column (Photo First on Mobile, Proportional & Above the Fold!) */}
-          <div className="order-1 lg:order-2 lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-[210px] xs:max-w-[250px] sm:max-w-xs lg:max-w-md">
-              
-              {/* Subtle back decorative glow in vintage burgundy & warm gold */}
-              <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-tr from-amber-500/20 via-[#801426]/15 to-transparent blur-md -z-10" />
-
-              <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-white shadow-xl border border-[#e2dcd0] taste-image-frame relative">
-                <img
-                  src="/images/rohit-prasai-portrait.jpg"
-                  alt={civicProfile.nameEn}
-                  className="w-full h-52 xs:h-60 sm:h-72 md:h-80 lg:h-[490px] object-cover object-top"
-                  loading="eager"
-                />
-
-                {/* Mandate Floating Badge on Photo */}
-                <div className="absolute top-2.5 right-2.5 bg-[#0f172a]/85 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-semibold text-white border border-white/10 shadow-sm">
-                  {lang === 'ne' ? '२०७९ – २०८४' : '2022 – 2027'}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Writings Column (Order 2 on Mobile, Order 1 on Desktop) */}
-          <div className="order-2 lg:order-1 lg:col-span-7 space-y-4 sm:space-y-6 text-center lg:text-left">
+          {/* Left Column: Text & CTAs (7 cols on desktop) */}
+          <div className="order-2 lg:order-1 lg:col-span-7 space-y-4 sm:space-y-6 text-left">
             
-            {/* Main Headline — Distinguished Typography */}
-            <div className="space-y-2 sm:space-y-3">
-              
-              {/* Name */}
-              <h1 className={`tracking-tight text-[#0f172a] block ${
-                lang === 'en'
-                  ? 'font-serif font-black text-4xl sm:text-6xl lg:text-7xl xl:text-[76px] leading-[1.08]'
-                  : 'font-nepali font-bold text-4xl sm:text-6xl lg:text-7xl leading-[1.22] pb-0.5'
-              }`}>
+            {/* Top Tracker Line (No letter-spacing in Nepali to prevent text splitting) */}
+            <div className={`text-xs font-mono uppercase font-semibold text-[#801426] ${
+              lang === 'en' ? 'tracking-[0.2em]' : 'tracking-normal'
+            }`}>
+              — {lang === 'ne' ? 'बिर्तामोड, झापा, कोशी प्रदेश, नेपाल' : 'BIRTAMODE, JHAPA, KOSHI PROVINCE, NEPAL'}
+            </div>
+
+            {/* Main Headline */}
+            <div className="space-y-1.5 sm:space-y-2">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0f172a] tracking-tight leading-[1.08]">
                 {lang === 'ne' ? civicProfile.nameNe : civicProfile.nameEn}
               </h1>
 
-              {/* Single Cohesive Designation & Municipality line in Vintage Burgundy */}
-              <div className="text-lg sm:text-2xl font-semibold text-[#801426] tracking-tight">
-                {lang === 'ne' 
-                  ? `${civicProfile.roleNe} • बिर्तामोड नगरपालिका, वडा नं. ५`
-                  : `${civicProfile.roleEn} • Birtamod Municipality, Ward No. 5`}
-              </div>
-
-              {/* Civic Mandate Subtitle */}
-              <div className="text-xs sm:text-sm font-medium text-[#64748b]">
-                {lang === 'ne' 
-                  ? 'नेपाली कांग्रेस • स्थानीय तह कार्यकाल २०७९–२०८४' 
-                  : 'Nepali Congress • Municipal Term 2022–2027'}
+              {/* Refined Subtitle */}
+              <div className="text-base sm:text-xl font-semibold text-[#801426] tracking-normal">
+                {lang === 'ne' ? 'सार्वजनिक परिचय • वडा अध्यक्ष' : 'Public Representative • Ward Chairperson'}
               </div>
             </div>
 
-            {/* Ethos Statement */}
-            <p className="text-sm sm:text-base lg:text-lg text-[#334155] leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal pt-0.5">
-              {lang === 'ne' ? civicProfile.taglineNe : civicProfile.taglineEn}
+            {/* Civic Mandate Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-xs font-medium text-slate-700">
+              <Award className="w-3.5 h-3.5 text-[#801426]" />
+              <span>
+                {lang === 'ne' 
+                  ? 'नेपाली कांग्रेस (वि.सं. २०६२ देखि) • कार्यकाल २०७९–२०८४' 
+                  : 'Nepali Congress (Since 2062 BS) • Mandate 2022–2027'}
+              </span>
+            </div>
+
+            {/* Concise 2-Line Summary (No Wall of Text!) */}
+            <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed max-w-xl font-sans">
+              {lang === 'ne' 
+                ? 'बिर्तामोड नगरपालिका वडा नं. ५ का निर्वाचित वडाध्यक्ष। पारदर्शी सुशासन, समयपालन र नागरिक सेवामा समर्पित।' 
+                : 'Elected Ward Chairperson of Birtamod Municipality Ward No. 5. Committed to transparent governance, strict punctuality, and public service.'}
             </p>
 
-            {/* Civic Commitments: Clean Minimal Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 pt-1 text-left">
-              <div className="p-3 sm:p-4 rounded-xl bg-white border border-[#e2dcd0] shadow-xs flex items-start gap-2.5 sm:gap-3">
-                <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 shrink-0 mt-0.5" />
-                <div>
-                  <div className="text-xs font-bold text-[#0f172a]">
-                    {lang === 'ne' ? 'समयपालन अडान' : 'Strict Punctuality'}
-                  </div>
-                  <div className="text-[11px] text-[#64748b] mt-0.5 leading-snug">
-                    {lang === 'ne' ? 'नागरिक सेवामा शून्य ढिलाइ' : 'Zero bureaucratic delay'}
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-3 sm:p-4 rounded-xl bg-white border border-[#e2dcd0] shadow-xs flex items-start gap-2.5 sm:gap-3">
-                <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-[#801426] shrink-0 mt-0.5" />
-                <div>
-                  <div className="text-xs font-bold text-[#0f172a]">
-                    {lang === 'ne' ? 'प्रत्यक्ष खुला सेवा' : 'Direct Public Desk'}
-                  </div>
-                  <div className="text-[11px] text-[#64748b] mt-0.5 leading-snug">
-                    {lang === 'ne' ? 'नागरिकसँग प्रत्यक्ष संवाद' : 'Direct citizen access'}
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-3 sm:p-4 rounded-xl bg-white border border-[#e2dcd0] shadow-xs flex items-start gap-2.5 sm:gap-3">
-                <Trophy className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 shrink-0 mt-0.5" />
-                <div>
-                  <div className="text-xs font-bold text-[#0f172a]">
-                    {lang === 'ne' ? 'खेलकुद र युवा' : 'Sports & Youth'}
-                  </div>
-                  <div className="text-[11px] text-[#64748b] mt-0.5 leading-snug">
-                    {lang === 'ne' ? 'झापा गोल्डकप संरक्षण' : 'Gold Cup tournament patron'}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Action Callouts: PROMINENT VINTAGE BURGUNDY BUTTON */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-2.5 sm:gap-3 pt-2">
+            {/* Clean Pill Action Buttons */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
               <button
                 onClick={onOpenDesk}
-                className="taste-btn inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#801426] hover:bg-[#680f1e] text-white font-bold text-xs sm:text-sm shadow-md shadow-[#801426]/20 transition-all active:scale-95"
+                className="taste-btn inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full bg-[#420c15] hover:bg-[#30080f] text-white font-semibold text-xs sm:text-sm shadow-md transition-all active:scale-95"
               >
                 <MessageSquare className="w-4 h-4 text-white" />
-                <span>{lang === 'ne' ? 'नागरिक सहायता तथा गुनासो दर्ता' : 'Citizen Assistance Desk'}</span>
+                <span>{lang === 'ne' ? 'नागरिक सहायता डेस्क' : 'Citizen Assistance Desk'}</span>
               </button>
 
               <a
-                href="#achievements"
-                className="taste-btn inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white border border-[#d6cec0] text-[#0f172a] font-semibold text-xs sm:text-sm hover:bg-[#faf8f5] shadow-xs transition-all"
+                href="#works"
+                className="taste-btn inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-slate-800 font-semibold text-xs sm:text-sm shadow-2xs transition-all"
               >
-                <span>{lang === 'ne' ? 'सार्वजनिक कार्यहरू' : 'Explore Public Work'}</span>
-                <ArrowRight className="w-4 h-4 text-[#64748b]" />
+                <span>{lang === 'ne' ? 'कार्यसम्पादन विवरण' : 'Explore Public Works'}</span>
+                <ArrowRight className="w-4 h-4 text-slate-400" />
               </a>
             </div>
 
           </div>
 
+          {/* Right Column: Dark Maroon Container Card with Photo (5 cols on desktop) */}
+          <div className="order-1 lg:order-2 lg:col-span-5 flex justify-center lg:justify-end">
+            <div className="relative w-full max-w-[280px] xs:max-w-[320px] sm:max-w-[350px] lg:max-w-[380px]">
+              
+              {/* Dark Maroon Card Container (Pravash Reference Style - Clean, No Distracting Status Dots) */}
+              <div className="rounded-[28px] sm:rounded-[32px] p-2.5 sm:p-3 bg-[#420c15] border border-[#5c111e] shadow-2xl">
+                
+                {/* Photo Frame */}
+                <div className="relative rounded-[22px] sm:rounded-[26px] overflow-hidden aspect-[4/5] bg-[#33070f] taste-image-frame">
+                  <img
+                    src="/images/rohit-prasai-portrait.jpg"
+                    alt={civicProfile.nameEn}
+                    className="w-full h-full object-cover object-top"
+                    loading="eager"
+                  />
+
+                  {/* Mandate Floating Badge */}
+                  <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-mono font-medium text-white/90 border border-white/10 shadow-xs">
+                    {lang === 'ne' ? '२०७९ – २०८४' : '2022 – 2027'}
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
         </div>
+
       </div>
     </section>
   );

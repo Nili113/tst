@@ -54,7 +54,7 @@ export const CitizenDeskModal: React.FC<CitizenDeskModalProps> = ({ isOpen, onCl
               <CheckCircle2 className="w-10 h-10" />
             </div>
 
-            <h3 className="text-2xl font-serif font-bold text-[#0f172a]">
+            <h3 className="text-2xl font-extrabold text-[#0f172a]">
               {lang === 'ne' ? 'गुनासो सफलतापूर्वक दर्ता भयो!' : 'Grievance Submitted Successfully!'}
             </h3>
 
@@ -87,7 +87,7 @@ export const CitizenDeskModal: React.FC<CitizenDeskModalProps> = ({ isOpen, onCl
                 <FileText className="w-3.5 h-3.5" />
                 <span>{lang === 'ne' ? 'वडा नागरिक डेस्क' : 'Citizen Assistance Desk'}</span>
               </div>
-              <h3 className="text-2xl font-serif font-bold text-[#0f172a]">
+              <h3 className="text-2xl font-extrabold text-[#0f172a]">
                 {lang === 'ne' ? 'नागरिक सेवा तथा गुनासो फारम' : 'Civic Inquiry & Grievance'}
               </h3>
               <p className="text-xs text-[#64748b] mt-1">
@@ -189,7 +189,7 @@ export const CitizenDeskModal: React.FC<CitizenDeskModalProps> = ({ isOpen, onCl
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="taste-btn w-full py-3 px-4 rounded-xl bg-[#801426] hover:bg-[#680f1e] text-white font-bold text-sm shadow-md shadow-[#801426]/20 flex items-center justify-center gap-2 transition-all active:scale-[0.99]"
+                  className="taste-btn w-full py-3 px-4 rounded-xl bg-[#420c15] hover:bg-[#30080f] text-white font-bold text-sm shadow-md flex items-center justify-center gap-2 transition-all active:scale-[0.99]"
                 >
                   <Send className="w-4 h-4 text-white" />
                   <span>{lang === 'ne' ? 'गुनासो दर्ता गर्नुहोस्' : 'Submit Ticket'}</span>

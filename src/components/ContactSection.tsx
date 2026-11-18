@@ -1,7 +1,8 @@
 import React from 'react';
 import { civicProfile } from '../data/portfolioData';
 import { Language } from '../types';
-import { MapPin, Phone, Mail, Clock, MessageSquare, Briefcase, GraduationCap, CheckCircle2, Building2 } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, MessageSquare, ExternalLink } from 'lucide-react';
+import { FacebookIcon, YoutubeIcon } from './BrandIcons';
 import { ScrollReveal } from './ScrollReveal';
 
 interface ContactSectionProps {
@@ -11,194 +12,161 @@ interface ContactSectionProps {
 
 export const ContactSection: React.FC<ContactSectionProps> = ({ lang, onOpenDesk }) => {
   return (
-    <section id="contact" className="py-16 md:py-24 bg-[#faf8f5] border-b border-[#e2dcd0] font-sans">
+    <section id="contact" className="py-16 sm:py-24 bg-white font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        {/* Clean Editorial Section Header */}
+        
+        {/* Section Header */}
         <ScrollReveal>
-          <div className="max-w-3xl mb-12 md:mb-16">
-            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f172a] tracking-tight leading-[1.3] ${lang === 'en' ? 'font-serif' : 'font-nepali'}`}>
-              {lang === 'ne' ? 'प्रत्यक्ष संवाद तथा नागरिक सहायता' : 'Direct Constituent Dialogue & Ward Desk'}
+          <div className="max-w-3xl mb-10 sm:mb-14">
+            <div className={`text-xs font-mono uppercase font-bold text-[#801426] mb-2 ${
+              lang === 'en' ? 'tracking-widest' : 'tracking-normal'
+            }`}>
+              — {lang === 'ne' ? 'प्रमाणित सम्पर्क तथा माध्यमहरू' : 'VERIFIED CHANNELS'}
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0f172a] tracking-tight leading-[1.15]">
+              {lang === 'ne' ? 'सम्पर्क तथा आधिकारिक विवरण' : 'Contact & Links'}
             </h2>
-            <p className="mt-3 text-base text-[#475569] leading-relaxed font-sans">
+            <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed font-sans">
               {lang === 'ne'
-                ? 'वडा कार्यालयको कार्यतालिका, सिफारिस प्रक्रिया, नागरिक गुनासो सुनुवाइ वा प्रत्यक्ष संवादका लागि सम्पर्क गर्नुहोस्।'
-                : 'Official municipal schedule, civic recommendation processing, grievance redressal, and direct constituent support.'}
+                ? 'वडा कार्यालयको आधिकारिक ठेगाना, सिफारिस कार्यतालिका, प्रत्यक्ष नागरिक सहायता र प्रमाणित सामाजिक सम्पर्कहरू।'
+                : 'Only verified public contacts, official ward schedules, and constituent dialogue links are listed.'}
             </p>
-            <div className="w-12 h-0.5 bg-[#801426] mt-4" />
           </div>
         </ScrollReveal>
 
-        {/* 2 Balanced, Equal-Height Grid Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-
-          {/* Card 1: Official Ward Office & Verification (7 cols) */}
-          <div className="lg:col-span-7">
+        {/* 2-Column Perfectly Aligned Editorial Grid (Matching Heights & Harmonized Button Tone) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+          
+          {/* Action Column (Left - 5 cols) */}
+          <div className="lg:col-span-5 h-full">
             <ScrollReveal delay={100} className="h-full">
-              <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#e2dcd0] shadow-sm flex flex-col justify-between space-y-6 h-full">
-
-                <div className="space-y-6">
-                  {/* Header */}
-                  <div className="flex items-center gap-4 pb-4 border-b border-[#f1f5f9]">
-                    <div className="w-12 h-12 rounded-xl bg-[#fbf2f4] text-[#801426] flex items-center justify-center shrink-0 border border-[#f5d0d6]">
-                      <Building2 className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h3 className={`font-bold text-lg sm:text-xl text-[#0f172a] ${lang === 'en' ? 'font-serif' : 'font-nepali'}`}>
-                        {lang === 'ne' ? 'वडा कार्यालय, बिर्तामोड–५' : 'Ward No. 5 Office, Birtamod'}
-                      </h3>
-                      <p className="text-xs text-[#64748b] mt-0.5">
-                        {lang === 'ne' ? 'बिर्तामोड नगरपालिका, झापा जिल्ला, कोशी प्रदेश' : 'Birtamod Municipality, Jhapa, Koshi Province'}
-                      </p>
-                    </div>
+              <div className="p-6 sm:p-8 rounded-2xl bg-slate-50 border border-slate-200 shadow-2xs h-full flex flex-col justify-between space-y-6">
+                
+                {/* Desk Direct Inquiry */}
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="font-bold text-lg sm:text-xl text-[#0f172a] mb-1.5">
+                      {lang === 'ne' ? 'प्रत्यक्ष नागरिक सहायता डेस्क' : 'Direct Constituent Desk'}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                      {lang === 'ne'
+                        ? 'सडक, ढल वा वडाका कुनै पनि सिफारिस समस्या सिधै वडाध्यक्ष रोहित प्रसाईंलाई डिजिटल रूपमा पठाउनुहोस्।'
+                        : 'Submit municipal inquiries, road repair tickets, or recommendation feedback directly to the Ward Chairperson.'}
+                    </p>
                   </div>
 
-                  {/* Schedule & Direct Contact Info Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-                    <div className="p-4 rounded-xl bg-[#faf8f5] border border-[#e2dcd0] space-y-1">
-                      <div className="flex items-center gap-2 text-xs font-bold text-[#0f172a]">
-                        <MapPin className="w-4 h-4 text-[#801426]" />
-                        <span>{lang === 'ne' ? 'कार्यालय ठेगाना' : 'Office Location'}</span>
-                      </div>
-                      <div className="text-xs text-[#475569] pl-6">
-                        {lang === 'ne' ? civicProfile.officeLocationNe : civicProfile.officeLocationEn}
-                      </div>
-                    </div>
-
-                    <div className="p-4 rounded-xl bg-[#faf8f5] border border-[#e2dcd0] space-y-1">
-                      <div className="flex items-center gap-2 text-xs font-bold text-[#0f172a]">
-                        <Clock className="w-4 h-4 text-[#801426]" />
-                        <span>{lang === 'ne' ? 'कार्यालय समय' : 'Office Hours'}</span>
-                      </div>
-                      <div className="text-xs text-[#475569] pl-6 leading-relaxed">
-                        {lang === 'ne' ? civicProfile.officeHoursNe : civicProfile.officeHoursEn}
-                      </div>
-                    </div>
-
-                    <div className="p-4 rounded-xl bg-[#faf8f5] border border-[#e2dcd0] space-y-1">
-                      <div className="flex items-center gap-2 text-xs font-bold text-[#0f172a]">
-                        <Phone className="w-4 h-4 text-[#801426]" />
-                        <span>{lang === 'ne' ? 'वडा फोन नम्बर' : 'Ward Phone'}</span>
-                      </div>
-                      <div className="text-xs text-[#475569] pl-6">
-                        <span className="font-mono font-bold text-sm text-[#0f172a]">{civicProfile.phone}</span>
-                        <div className="text-[11px] text-[#64748b] mt-0.5">
-                          {lang === 'ne' ? 'कार्यालय समयमा प्रत्यक्ष सम्पर्क' : 'Direct line during office hours'}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="p-4 rounded-xl bg-[#faf8f5] border border-[#e2dcd0] space-y-1">
-                      <div className="flex items-center gap-2 text-xs font-bold text-[#0f172a]">
-                        <Mail className="w-4 h-4 text-[#801426]" />
-                        <span>{lang === 'ne' ? 'इमेल सम्पर्क' : 'Official Email'}</span>
-                      </div>
-                      <div className="text-xs text-[#475569] pl-6">
-                        <a href={`mailto:${civicProfile.email}`} className="font-mono text-xs text-[#801426] hover:underline font-semibold">
-                          {civicProfile.email}
-                        </a>
-                        <div className="text-[11px] text-[#64748b] mt-0.5">
-                          {lang === 'ne' ? 'नागरिक सोधपुछ तथा पत्राचार' : 'Citizen inquiries and correspondence'}
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-
-                  {/* Verified Constituent Credentials / Background Badges */}
-                  <div className="pt-2">
-                    <div className="text-[11px] font-bold uppercase tracking-wider text-[#64748b] mb-2">
-                      {lang === 'ne' ? 'प्रतिनिधिको परिचय तथा व्यावसायिक विवरण' : 'Representative Credentials & Enterprise'}
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#334155]">
-                      <a href="#education" className="px-3 py-2 rounded-lg bg-[#faf8f5] border border-[#e2dcd0] flex items-center gap-2 hover:border-[#801426]/50 transition-colors">
-                        <Briefcase className="w-4 h-4 text-[#801426] shrink-0" />
-                        <span>{lang === 'ne' ? civicProfile.businessNe : civicProfile.businessEn}</span>
-                      </a>
-                      <a href="#education" className="px-3 py-2 rounded-lg bg-[#faf8f5] border border-[#e2dcd0] flex items-center gap-2 hover:border-[#801426]/50 transition-colors">
-                        <GraduationCap className="w-4 h-4 text-[#801426] shrink-0" />
-                        <span>{lang === 'ne' ? civicProfile.educationNe : civicProfile.educationEn}</span>
-                      </a>
-                    </div>
-                  </div>
-
+                  <button
+                    onClick={onOpenDesk}
+                    className="taste-btn w-full py-3.5 px-5 rounded-xl bg-[#420c15] hover:bg-[#30080f] text-white font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 transition-all active:scale-[0.99]"
+                  >
+                    <MessageSquare className="w-4 h-4 text-white" />
+                    <span>{lang === 'ne' ? 'नागरिक सहायता फारम खोल्नुहोस्' : 'Open Assistance Form'}</span>
+                  </button>
                 </div>
 
-                {/* Bottom Status Banner */}
-                <div className="pt-4 border-t border-[#f1f5f9] flex items-center justify-between text-xs text-[#64748b]">
-                  <span className="flex items-center gap-1.5 text-emerald-700 font-semibold">
-                    <CheckCircle2 className="w-4 h-4" />
-                    <span>{lang === 'ne' ? 'नागरिक सेवामा शून्य ढिलाइ' : 'Zero administrative delay'}</span>
-                  </span>
-                  <span className="font-mono text-[11px] text-[#94a3b8]">Birtamod-5, Jhapa</span>
+                {/* Social Channels Nested in Clean Balanced Card Foot */}
+                <div className="pt-5 border-t border-slate-200/80 space-y-2.5">
+                  <div className="text-[11px] font-mono uppercase font-bold text-slate-400">
+                    {lang === 'ne' ? 'आधिकारिक डिजिटल सम्पर्क' : 'VERIFIED CHANNELS'}
+                  </div>
+
+                  <a
+                    href={civicProfile.facebookPage}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="taste-btn flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200 hover:border-slate-300 hover:bg-slate-100 transition-all text-xs font-semibold text-[#0f172a]"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <FacebookIcon className="w-4 h-4 text-[#1877F2]" />
+                      <span>{lang === 'ne' ? 'आधिकारिक फेसबुक प्रोफाइल' : 'Official Facebook Profile'}</span>
+                    </div>
+                    <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+                  </a>
+
+                  <a
+                    href={civicProfile.youtubeSearch}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="taste-btn flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200 hover:border-slate-300 hover:bg-slate-100 transition-all text-xs font-semibold text-[#0f172a]"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <YoutubeIcon className="w-4 h-4 text-[#FF0000]" />
+                      <span>{lang === 'ne' ? 'युट्युब भिडियो रेकर्ड' : 'YouTube Video Stream'}</span>
+                    </div>
+                    <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+                  </a>
                 </div>
 
               </div>
             </ScrollReveal>
           </div>
 
-          {/* Card 2: Interactive Citizen Desk & Grievance Registration (5 cols) */}
-          <div className="lg:col-span-5">
-            <ScrollReveal delay={200} className="h-full">
-              <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#e2dcd0] shadow-sm flex flex-col justify-between space-y-6 h-full">
+          {/* Official Details Column (Right - 7 cols) - Matching Height & Visual Weight */}
+          <div className="lg:col-span-7 h-full">
+            <ScrollReveal delay={150} className="h-full">
+              <div className="p-6 sm:p-8 rounded-2xl bg-slate-50 border border-slate-200 shadow-2xs h-full flex flex-col justify-between">
+                
+                <div>
+                  <h3 className="font-bold text-lg sm:text-xl text-[#0f172a] mb-2 pb-3 border-b border-slate-200/80">
+                    {lang === 'ne' ? 'कार्यालय विवरण तथा सेवा तालिका' : 'Office Details & Public Schedule'}
+                  </h3>
 
-                <div className="space-y-5">
+                  <div className="divide-y divide-slate-200/70 text-xs sm:text-sm">
+                    
+                    <div className="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
+                      <div className="flex items-center gap-2 font-mono uppercase text-[11px] font-bold text-slate-400">
+                        <MapPin className="w-4 h-4 text-[#801426]" />
+                        <span>{lang === 'ne' ? 'कार्यालय ठेगाना' : 'LOCATION'}</span>
+                      </div>
+                      <div className="font-medium text-slate-800 text-left sm:text-right">
+                        {lang === 'ne' ? civicProfile.locationNe : civicProfile.locationEn}
+                      </div>
+                    </div>
 
-                  <div className="flex items-center gap-3.5 pb-4 border-b border-[#f1f5f9]">
-                    <div className="w-12 h-12 rounded-xl bg-[#fbf2f4] text-[#801426] flex items-center justify-center shrink-0 border border-[#f5d0d6]">
-                      <MessageSquare className="w-6 h-6" />
+                    <div className="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
+                      <div className="flex items-center gap-2 font-mono uppercase text-[11px] font-bold text-slate-400">
+                        <Clock className="w-4 h-4 text-[#801426]" />
+                        <span>{lang === 'ne' ? 'कार्यालय समय' : 'OFFICE HOURS'}</span>
+                      </div>
+                      <div className="font-medium text-slate-800 text-left sm:text-right">
+                        {lang === 'ne' ? civicProfile.officeHoursNe : civicProfile.officeHoursEn}
+                      </div>
                     </div>
-                    <div>
-                      <h3 className={`font-bold text-lg sm:text-xl text-[#0f172a] ${lang === 'en' ? 'font-serif' : 'font-nepali'}`}>
-                        {lang === 'ne' ? 'नागरिक सेवा तथा गुनासो दर्ता' : 'Citizen Service & Grievance Desk'}
-                      </h3>
-                      <p className="text-xs text-[#64748b] mt-0.5">
-                        {lang === 'ne' ? 'प्रत्यक्ष डिजिटल सुनुवाइ तथा सुझाव फारम' : 'Direct Digital Redressal & Consultation'}
-                      </p>
+
+                    <div className="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
+                      <div className="flex items-center gap-2 font-mono uppercase text-[11px] font-bold text-slate-400">
+                        <Phone className="w-4 h-4 text-[#801426]" />
+                        <span>{lang === 'ne' ? 'वडा कार्यालय फोन' : 'WARD PHONE'}</span>
+                      </div>
+                      <div className="font-mono font-bold text-slate-900 text-left sm:text-right">
+                        {civicProfile.phone}
+                      </div>
                     </div>
+
+                    <div className="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
+                      <div className="flex items-center gap-2 font-mono uppercase text-[11px] font-bold text-slate-400">
+                        <Mail className="w-4 h-4 text-[#801426]" />
+                        <span>{lang === 'ne' ? 'आधिकारिक इमेल' : 'EMAIL'}</span>
+                      </div>
+                      <div className="font-mono font-medium text-[#801426] text-left sm:text-right">
+                        <a href={`mailto:${civicProfile.email}`} className="hover:underline">
+                          {civicProfile.email}
+                        </a>
+                      </div>
+                    </div>
+
                   </div>
-
-                  <p className="text-xs sm:text-sm text-[#334155] leading-relaxed">
-                    {lang === 'ne'
-                      ? 'सडक, ढल, सिफारिस वा वडाभित्रका कुनै पनि समस्याबारे वडाध्यक्ष रोहित प्रसाईंलाई सिधै डिजिटल जानकारी गराउनुहोस्।'
-                      : 'Submit municipal inquiries, road repair requests, or constituent feedback directly to the Ward Chairperson.'}
-                  </p>
-
-                  {/* Service Commitments Box */}
-                  <div className="p-4 rounded-xl bg-[#faf8f5] border border-[#e2dcd0] space-y-3">
-                    <div className="text-xs font-bold text-[#0f172a] uppercase tracking-wider font-sans">
-                      {lang === 'ne' ? 'नागरिक सेवामा हाम्रो प्रतिबद्धता' : 'Our Service Commitments'}
-                    </div>
-                    <div className="space-y-2 text-xs text-[#475569]">
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                        <span>{lang === 'ne' ? 'कागजात सिफारिस सोही कार्यदिनमै प्रमाणीकरण' : 'Same-day verification for standard documents'}</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                        <span>{lang === 'ne' ? 'सार्वजनिक गुनासोमा २४ घण्टाभित्र प्रारम्भिक सुनुवाइ' : 'Initial inquiry response within 24 hours'}</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                        <span>{lang === 'ne' ? 'शून्य घुस, पारदर्शी तथा निष्पक्ष प्रशासनिक सेवा' : 'Zero bribery, transparent & ethical administration'}</span>
-                      </div>
-                    </div>
-                  </div>
-
                 </div>
 
-                {/* Action Button */}
-                <div className="pt-4 border-t border-[#f1f5f9] space-y-3">
-                  <button
-                    onClick={onOpenDesk}
-                    className="taste-btn w-full py-3.5 px-5 rounded-xl bg-[#801426] hover:bg-[#680f1e] text-white font-bold text-sm shadow-md shadow-[#801426]/20 flex items-center justify-center gap-2 transition-all active:scale-[0.99]"
-                  >
-                    <MessageSquare className="w-4 h-4 text-white" />
-                    <span>{lang === 'ne' ? 'नागरिक सेवा फारम खोल्नुहोस्' : 'Open Citizen Assistance Form'}</span>
-                  </button>
-                  <div className="text-center text-[11px] text-[#64748b]">
-                    {lang === 'ne' ? 'वडा कार्यालय समय: आइतबार–शुक्रबार' : 'Ward Office Hours: Sun – Fri'}
+                {/* Emergency Hotlines Footer Banner */}
+                <div className="mt-4 pt-4 border-t border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-white/70 p-3 rounded-xl border border-slate-200/80">
+                  <div className="font-mono uppercase text-[11px] font-bold text-slate-500">
+                    {lang === 'ne' ? 'आपतकालीन सम्पर्क' : 'EMERGENCY NUMBERS'}
+                  </div>
+                  <div className="flex items-center gap-3 text-xs font-mono font-bold">
+                    <span className="text-emerald-700">{lang === 'ne' ? 'प्रहरी: १००' : 'Police: 100'}</span>
+                    <span className="text-slate-300">•</span>
+                    <span className="text-[#801426]">{lang === 'ne' ? 'एम्बुलेन्स: १०२' : 'Ambulance: 102'}</span>
                   </div>
                 </div>
 

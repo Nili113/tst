@@ -39,14 +39,19 @@ export const VideoScrollSection: React.FC<VideoScrollSectionProps> = ({ lang }) 
   };
 
   return (
-    <section id="videos" className="py-16 md:py-24 bg-[#faf8f5] border-b border-[#e2dcd0] overflow-hidden font-sans">
+    <section id="videos" className="py-20 sm:py-28 bg-white border-b border-slate-100 overflow-hidden font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section Header with Navigation Controls */}
         <ScrollReveal>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 md:mb-12">
             <div>
-              <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f172a] tracking-tight leading-[1.3] ${lang === 'en' ? 'font-serif' : 'font-nepali'}`}>
+              <div className={`text-xs font-mono uppercase font-bold text-[#801426] mb-2 ${
+                lang === 'en' ? 'tracking-widest' : 'tracking-normal'
+              }`}>
+                — {lang === 'ne' ? 'स्थलगत भिडियो तथा प्रसारण' : 'FIELD DISPATCHES & VIDEO'}
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0f172a] tracking-tight leading-[1.15]">
                 {lang === 'ne' ? 'स्थलगत भिडियो तथा प्रत्यक्ष प्रसारण' : 'Field Records & Video Stream'}
               </h2>
               <p className="mt-3 text-sm sm:text-base text-[#475569] max-w-xl leading-relaxed font-sans">
@@ -107,6 +112,9 @@ export const VideoScrollSection: React.FC<VideoScrollSectionProps> = ({ lang }) 
                     alt={lang === 'ne' ? video.titleNe : video.titleEn}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     loading="lazy"
+                    onError={(e) => {
+                      e.currentTarget.src = '/images/video-domalal-prep.jpg';
+                    }}
                   />
 
                   {/* Channel / Publisher Pill */}
@@ -127,7 +135,7 @@ export const VideoScrollSection: React.FC<VideoScrollSectionProps> = ({ lang }) 
                     {video.date}
                   </div>
 
-                  <h3 className={`font-bold text-base sm:text-lg text-[#0f172a] group-hover:text-[#801426] transition-colors leading-snug line-clamp-2 ${lang === 'en' ? 'font-serif' : 'font-nepali'}`}>
+                  <h3 className="font-bold text-base sm:text-lg text-[#0f172a] group-hover:text-[#801426] transition-colors leading-snug line-clamp-2">
                     {lang === 'ne' ? video.titleNe : video.titleEn}
                   </h3>
                 </div>

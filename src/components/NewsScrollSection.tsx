@@ -38,14 +38,19 @@ export const NewsScrollSection: React.FC<NewsScrollSectionProps> = ({ lang }) =>
   };
 
   return (
-    <section id="news" className="py-16 md:py-24 bg-[#faf8f5] border-b border-[#e2dcd0] overflow-hidden font-sans">
+    <section id="news" className="py-20 sm:py-28 bg-white border-b border-slate-100 overflow-hidden font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header with Navigation Controls */}
         <ScrollReveal>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 md:mb-12">
             <div>
-              <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f172a] tracking-tight leading-[1.3] ${lang === 'en' ? 'font-serif' : 'font-nepali'}`}>
+              <div className={`text-xs font-mono uppercase font-bold text-[#801426] mb-2 ${
+                lang === 'en' ? 'tracking-widest' : 'tracking-normal'
+              }`}>
+                — {lang === 'ne' ? 'प्रमाणित समाचार तथा कभरेज' : 'VERIFIED NEWS COVERAGE'}
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0f172a] tracking-tight leading-[1.15]">
                 {lang === 'ne' ? 'झापा गोल्डकप तथा जनसरोकारका समाचार' : 'Jhapa Gold Cup & Civic News'}
               </h2>
               <p className="mt-3 text-sm sm:text-base text-[#475569] max-w-xl leading-relaxed font-sans">
@@ -61,11 +66,10 @@ export const NewsScrollSection: React.FC<NewsScrollSectionProps> = ({ lang }) =>
               <button
                 onClick={() => handleScroll('left')}
                 disabled={!canScrollLeft}
-                className={`p-3 rounded-full border transition-all ${
-                  canScrollLeft
-                    ? 'bg-white border-[#d6cec0] text-[#0f172a] hover:bg-[#faf8f5] shadow-sm active:scale-95'
-                    : 'bg-[#f1f5f9] border-[#e2e8f0] text-[#94a3b8] cursor-not-allowed'
-                }`}
+                className={`p-3 rounded-full border transition-all ${canScrollLeft
+                  ? 'bg-white border-[#d6cec0] text-[#0f172a] hover:bg-[#faf8f5] shadow-sm active:scale-95'
+                  : 'bg-[#f1f5f9] border-[#e2e8f0] text-[#94a3b8] cursor-not-allowed'
+                  }`}
                 aria-label="Previous News"
               >
                 <ChevronLeft className="w-5 h-5" />
@@ -73,11 +77,10 @@ export const NewsScrollSection: React.FC<NewsScrollSectionProps> = ({ lang }) =>
               <button
                 onClick={() => handleScroll('right')}
                 disabled={!canScrollRight}
-                className={`p-3 rounded-full border transition-all ${
-                  canScrollRight
-                    ? 'bg-white border-[#d6cec0] text-[#0f172a] hover:bg-[#faf8f5] shadow-sm active:scale-95'
-                    : 'bg-[#f1f5f9] border-[#e2e8f0] text-[#94a3b8] cursor-not-allowed'
-                }`}
+                className={`p-3 rounded-full border transition-all ${canScrollRight
+                  ? 'bg-white border-[#d6cec0] text-[#0f172a] hover:bg-[#faf8f5] shadow-sm active:scale-95'
+                  : 'bg-[#f1f5f9] border-[#e2e8f0] text-[#94a3b8] cursor-not-allowed'
+                  }`}
                 aria-label="Next News"
               >
                 <ChevronRight className="w-5 h-5" />
@@ -106,6 +109,9 @@ export const NewsScrollSection: React.FC<NewsScrollSectionProps> = ({ lang }) =>
                     alt={lang === 'ne' ? article.titleNe : article.titleEn}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     loading="lazy"
+                    onError={(e) => {
+                      e.currentTarget.src = '/images/news-army.jpg';
+                    }}
                   />
                   <div className="absolute top-3 left-3 bg-[#0f172a]/85 backdrop-blur-md px-2.5 py-1 rounded-full text-[11px] font-semibold text-white border border-white/10">
                     {article.source}
@@ -119,7 +125,7 @@ export const NewsScrollSection: React.FC<NewsScrollSectionProps> = ({ lang }) =>
                     <span>{lang === 'ne' ? article.dateNe : article.dateEn}</span>
                   </div>
 
-                  <h3 className={`font-bold text-base sm:text-lg text-[#0f172a] group-hover:text-[#801426] transition-colors leading-snug line-clamp-2 ${lang === 'en' ? 'font-serif' : 'font-nepali'}`}>
+                  <h3 className="font-bold text-base sm:text-lg text-[#0f172a] group-hover:text-[#801426] transition-colors leading-snug line-clamp-2">
                     {lang === 'ne' ? article.titleNe : article.titleEn}
                   </h3>
 
@@ -151,6 +157,9 @@ export const NewsScrollSection: React.FC<NewsScrollSectionProps> = ({ lang }) =>
                 src={selectedArticle.imageUrl}
                 alt={lang === 'ne' ? selectedArticle.titleNe : selectedArticle.titleEn}
                 className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.src = '/images/news-army.jpg';
+                }}
               />
               <button
                 onClick={() => setSelectedArticle(null)}
@@ -173,7 +182,7 @@ export const NewsScrollSection: React.FC<NewsScrollSectionProps> = ({ lang }) =>
                   {selectedArticle.readTime}
                 </span>
               </div>
-              <h3 className={`text-xl sm:text-2xl font-bold text-[#0f172a] leading-snug ${lang === 'en' ? 'font-serif' : 'font-nepali'}`}>
+              <h3 className="text-xl sm:text-2xl font-extrabold text-[#0f172a] leading-snug">
                 {lang === 'ne' ? selectedArticle.titleNe : selectedArticle.titleEn}
               </h3>
               <p className="text-sm text-[#334155] leading-relaxed whitespace-pre-line">

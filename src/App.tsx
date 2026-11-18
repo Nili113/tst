@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Biography } from './components/Biography';
+import { MissionVision } from './components/MissionVision';
 import { Achievements } from './components/Achievements';
 import { EducationSection } from './components/EducationSection';
-import { Timeline } from './components/Timeline';
 import { NewsScrollSection } from './components/NewsScrollSection';
 import { VideoScrollSection } from './components/VideoScrollSection';
 import { ContactSection } from './components/ContactSection';
@@ -22,11 +22,11 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#faf8f5] font-sans text-[#0f172a] selection:bg-[#801426] selection:text-white">
+    <div className="min-h-screen bg-white font-sans text-[#0f172a] selection:bg-[#801426] selection:text-white">
       {/* Subtle Top Scroll Reading Progress Indicator */}
       <ScrollProgressBar />
 
-      {/* Symmetrical Floating Dock in Ivory Cream */}
+      {/* Clean Sticky Navbar (Pravash Reference Style) */}
       <Navbar
         lang={lang}
         onToggleLang={toggleLanguage}
@@ -35,41 +35,39 @@ export function App() {
 
       {/* Main Narrative Sequence */}
       <main>
-        {/* Hero Entrance (Screen 1) */}
+        {/* 1. Hero: Balanced 2-Column with Dark Maroon Photo Card (Pravash Reference Style, Fits 100% Above the Fold!) */}
         <Hero
           lang={lang}
           onOpenDesk={() => setIsDeskOpen(true)}
         />
 
-        {/* Biography & Roots */}
+        {/* 2. Autobiography & Roots */}
         <Biography lang={lang} />
 
-        {/* Key Achievements & Impact Pillars */}
+        {/* 3. Mission & Vision */}
+        <MissionVision lang={lang} />
+
+        {/* 4. Completed Works (Public Record & Impact) */}
         <Achievements lang={lang} />
 
-        {/* Dedicated Education & Enterprise Section */}
+        {/* 5. Education & Memberships (Handwritten Note Content) */}
         <EducationSection lang={lang} />
 
-        {/* Mandate & Leadership Timeline */}
-        <Timeline lang={lang} />
-
-        {/* Horizontal Scroll Pane 1: Featured News & Jhapa Gold Cup (Manual scroll on buttons only) */}
+        {/* 6. Verified News Coverage (Kept intact) */}
         <NewsScrollSection lang={lang} />
 
-        {/* Horizontal Scroll Pane 2: Video Dispatches & Social Redirects (Manual scroll on buttons only) */}
+        {/* 7. Field Dispatches & Video Records (Kept intact) */}
         <VideoScrollSection lang={lang} />
 
-        {/* Ward Office Contact & Inquiry Desk */}
+        {/* 8. Contact & Verified Civic Links (Pravash Reference Style) */}
         <ContactSection
           lang={lang}
           onOpenDesk={() => setIsDeskOpen(true)}
         />
       </main>
 
-      {/* Civic Footer (Media Credits Removed) */}
-      <Footer
-        lang={lang}
-      />
+      {/* 9. Clean Civic Footer */}
+      <Footer lang={lang} />
 
       {/* Interactive Citizen Grievance Modal */}
       <CitizenDeskModal

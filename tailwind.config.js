@@ -77,10 +77,10 @@ export default {
         }
       },
       fontFamily: {
-        serif: ['"Newsreader"', '"Mukta"', 'Georgia', 'serif'],
-        sans: ['"Plus Jakarta Sans"', '"Mukta"', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
-        display: ['"Outfit"', '"Mukta"', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', '"Mukta"', '"Noto Sans Devanagari"', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['"Plus Jakarta Sans"', '"Mukta"', 'sans-serif'],
         nepali: ['"Mukta"', '"Noto Sans Devanagari"', 'sans-serif'],
+        serif: ['"Lora"', 'Georgia', 'serif'],
       },
       animation: {
         'marquee': 'marquee 28s linear infinite',
