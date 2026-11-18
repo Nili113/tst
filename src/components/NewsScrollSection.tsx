@@ -107,7 +107,7 @@ export const NewsScrollSection: React.FC<NewsScrollSectionProps> = ({ lang }) =>
                   <img
                     src={article.imageUrl}
                     alt={lang === 'ne' ? article.titleNe : article.titleEn}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="w-full h-full object-cover"
                     loading="lazy"
                     onError={(e) => {
                       e.currentTarget.src = '/images/news-army.jpg';

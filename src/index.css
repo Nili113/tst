@@ -137,7 +137,7 @@
   }
   .btn .btn-icon { transition: transform 260ms var(--ease-spring); }
   .btn:hover .btn-icon-nudge { transform: translateX(3px); }
-  .btn:hover .btn-icon-tilt { transform: rotate(-10deg) scale(1.08); }
+  .btn:hover .btn-icon-tilt { transform: scale(1.08); }
 
   .btn-primary {
     background: var(--maroon-deep);
@@ -352,13 +352,6 @@
   100% { transform: scale(1); }
 }
 
-/* Gentle depth for the portrait card */
-.tilt {
-  transform: perspective(900px) rotateX(var(--tx, 0deg)) rotateY(var(--ty, 0deg));
-  transition: transform 500ms var(--ease-out);
-  will-change: transform;
-}
-
 /* ───────────────────────── Quote band ───────────────────────── */
 @keyframes quote-mark {
   0%   { opacity: 0; transform: translateY(16px) scale(0.6, 0.6); }
@@ -467,8 +460,6 @@
 .taste-card { transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1); }
 .taste-card:hover { transform: translateY(-2px); }
 .taste-image-frame { overflow: hidden; }
-.taste-image-frame img { transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
-.taste-image-frame:hover img { transform: scale(1.025); }
 .taste-btn { transition: transform 0.12s ease, background-color 0.15s ease, border-color 0.15s ease; }
 .taste-btn:hover { transform: translateY(-1px); }
 .taste-btn:active { transform: translateY(1px) scale(0.99); }
@@ -484,7 +475,6 @@
   }
   .reveal { opacity: 1; transform: none; }
   .quote-mark { opacity: 1; }
-  .tilt { transform: none !important; }
   .hero-art, .hero-words, .hero-glow { transform: none !important; opacity: 1 !important; }
   .qw { opacity: 1 !important; }
   .timeline-fill { transform: none !important; }
@@ -511,7 +501,7 @@
   background: var(--maroon);
   color: #fff;
   border-color: var(--maroon);
-  transform: rotate(-6deg) scale(1.06);
+  transform: scale(1.06);
   box-shadow: 0 10px 22px -10px rgb(128 20 38 / 0.6);
 }
 .work-row[data-active="true"] .work-bar { transform: scaleY(1); }

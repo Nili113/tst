@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { civicProfile } from '../data/portfolioData';
 import { Language } from '../types';
 import { MessageSquare, ArrowRight } from 'lucide-react';
@@ -19,30 +19,11 @@ const YEARS_EN = ['2022', '2023', '2024', '2025', '2026', '2027'];
 
 export const Hero: React.FC<HeroProps> = ({ lang, onOpenDesk }) => {
   const ne = lang === 'ne';
-  const artRef = useRef<HTMLDivElement>(null);
   // 0 while the hero sits at the top, 1 once it has scrolled fully out of view.
   const heroRef = useScrollProgress<HTMLElement>((r) => -r.top / Math.max(r.height, 1), { reducedValue: 0 });
   const nameLines = (ne ? civicProfile.nameNe : civicProfile.nameEn).split(' ');
   const years = ne ? YEARS_NE : YEARS_EN;
   const pct = elapsed * 100;
-
-  // Portrait leans gently toward the pointer: gives the flat photo some volume.
-  const onMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (e.pointerType !== 'mouse' || !artRef.current) return;
-    const r = artRef.current.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width - 0.5;
-    const y = (e.clientY - r.top) / r.height - 0.5;
-    artRef.current.style.setProperty('--ty', `${(x * 6).toFixed(2)}deg`);
-    artRef.current.style.setProperty('--tx', `${(-y * 4).toFixed(2)}deg`);
-    artRef.current.style.setProperty('--px', `${(x * -10).toFixed(1)}px`);
-  };
-  const onLeave = () => {
-    const el = artRef.current;
-    if (!el) return;
-    el.style.setProperty('--ty', '0deg');
-    el.style.setProperty('--tx', '0deg');
-    el.style.setProperty('--px', '0px');
-  };
 
   const onHeroMove = (e: React.PointerEvent<HTMLElement>) => {
     if (e.pointerType !== 'mouse') return;
@@ -106,15 +87,13 @@ export const Hero: React.FC<HeroProps> = ({ lang, onOpenDesk }) => {
           <div className="hero-art order-1 lg:order-2 lg:col-span-5 flex justify-center lg:justify-end">
             <div
               className="portrait-enter relative w-[68%] max-w-[260px] sm:max-w-[330px] lg:w-full lg:max-w-[420px]"
-              onPointerMove={onMove}
-              onPointerLeave={onLeave}
             >
-              <div ref={artRef} className="tilt relative">
+              <div className="relative">
                 {/* Offset outline arch: a second plane behind the photo */}
                 <div
                   aria-hidden="true"
                   className="arch-outline absolute inset-0 rounded-t-full border border-[#f0b8c2]/40 [mask-image:linear-gradient(to_bottom,#000_55%,transparent_92%)]"
-                  style={{ transform: 'translate(calc(14px + var(--px, 0px)), -14px)' }}
+                  style={{ transform: 'translate(14px, -14px)' }}
                 />
                 <div className="relative rounded-t-full overflow-hidden aspect-[3/4] bg-[#33070f] [mask-image:linear-gradient(to_bottom,#000_70%,transparent_99%)]">
                   <img

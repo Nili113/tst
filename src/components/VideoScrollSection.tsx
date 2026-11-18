@@ -110,7 +110,7 @@ export const VideoScrollSection: React.FC<VideoScrollSectionProps> = ({ lang }) 
                   <img
                     src={video.thumbnailUrl}
                     alt={lang === 'ne' ? video.titleNe : video.titleEn}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="w-full h-full object-cover"
                     loading="lazy"
                     onError={(e) => {
                       e.currentTarget.src = '/images/video-domalal-prep.jpg';
