@@ -1,181 +1,154 @@
 import React from 'react';
 import { civicProfile } from '../data/portfolioData';
 import { Language } from '../types';
-import { MapPin, Phone, Mail, Clock, MessageSquare, ExternalLink } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, MessageSquare, ArrowUpRight } from 'lucide-react';
 import { FacebookIcon, YoutubeIcon } from './BrandIcons';
 import { ScrollReveal } from './ScrollReveal';
+import { SectionHeader } from './SectionHeader';
+import { Rich } from '../lib/typo';
 
 interface ContactSectionProps {
   lang: Language;
   onOpenDesk: () => void;
 }
 
+const toAsciiDigits = (s: string) => s.replace(/[०-९]/g, (d) => String('०१२३४५६७८९'.indexOf(d))).replace(/[^\d+]/g, '');
+
 export const ContactSection: React.FC<ContactSectionProps> = ({ lang, onOpenDesk }) => {
+  const ne = lang === 'ne';
+  const hours = (ne ? civicProfile.officeHoursNe : civicProfile.officeHoursEn).split('|').map((s) => s.trim());
+
+  const rows = [
+    { icon: MapPin, label: ne ? 'कार्यालय ठेगाना' : 'Location', value: <>{ne ? civicProfile.locationNe : civicProfile.locationEn}</> },
+    {
+      icon: Clock,
+      label: ne ? 'कार्यालय समय' : 'Office hours',
+      value: (
+        <span className="block space-y-0.5 tabular-nums">
+          {hours.map((h) => (
+            <span key={h} className="block">
+              <Rich text={h} />
+            </span>
+          ))}
+        </span>
+      ),
+    },
+    {
+      icon: Phone,
+      label: ne ? 'वडा कार्यालय फोन' : 'Ward phone',
+      value: (
+        <a href={`tel:${toAsciiDigits(civicProfile.phone)}`} className="font-semibold text-ink hover:text-maroon hover:underline tabular-nums">
+          {civicProfile.phone}
+        </a>
+      ),
+    },
+    {
+      icon: Mail,
+      label: ne ? 'आधिकारिक इमेल' : 'Email',
+      value: (
+        <a href={`mailto:${civicProfile.email}`} className="font-medium text-maroon underline decoration-maroon/30 hover:decoration-maroon break-all">
+          {civicProfile.email}
+        </a>
+      ),
+    },
+  ];
+
+  const channels = [
+    { href: civicProfile.facebookPage, icon: <FacebookIcon className="w-[18px] h-[18px] text-[#1877F2]" />, label: ne ? 'आधिकारिक फेसबुक प्रोफाइल' : 'Official Facebook Profile' },
+    { href: civicProfile.youtubeSearch, icon: <YoutubeIcon className="w-[18px] h-[18px] text-[#FF0000]" />, label: ne ? 'युट्युब भिडियो रेकर्ड' : 'YouTube Video Stream' },
+  ];
+
   return (
-    <section id="contact" className="py-16 sm:py-24 bg-white font-sans">
+    <section id="contact" className="py-16 sm:py-24 bg-white font-sans border-t border-stone-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <ScrollReveal>
-          <div className="max-w-3xl mb-10 sm:mb-14">
-            <div className={`text-xs font-mono uppercase font-bold text-[#801426] mb-2 ${
-              lang === 'en' ? 'tracking-widest' : 'tracking-normal'
-            }`}>
-              — {lang === 'ne' ? 'प्रमाणित सम्पर्क तथा माध्यमहरू' : 'VERIFIED CHANNELS'}
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0f172a] tracking-tight leading-[1.15]">
-              {lang === 'ne' ? 'सम्पर्क तथा आधिकारिक विवरण' : 'Contact & Links'}
-            </h2>
-            <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed font-sans">
-              {lang === 'ne'
-                ? 'वडा कार्यालयको आधिकारिक ठेगाना, सिफारिस कार्यतालिका, प्रत्यक्ष नागरिक सहायता र प्रमाणित सामाजिक सम्पर्कहरू।'
-                : 'Only verified public contacts, official ward schedules, and constituent dialogue links are listed.'}
-            </p>
-          </div>
-        </ScrollReveal>
+        <SectionHeader
+          label={ne ? 'प्रमाणित सम्पर्क तथा माध्यमहरू' : 'Verified channels'}
+          title={ne ? 'सम्पर्क तथा आधिकारिक विवरण' : 'Contact & Links'}
+          lede={
+            ne
+              ? 'वडा कार्यालयको आधिकारिक ठेगाना, सिफारिस कार्यतालिका, प्रत्यक्ष नागरिक सहायता र प्रमाणित सामाजिक सम्पर्कहरू।'
+              : 'Only verified public contacts, official ward schedules, and constituent dialogue links are listed.'
+          }
+        />
 
-        {/* 2-Column Perfectly Aligned Editorial Grid (Matching Heights & Harmonized Button Tone) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-          
-          {/* Action Column (Left - 5 cols) */}
-          <div className="lg:col-span-5 h-full">
-            <ScrollReveal delay={100} className="h-full">
-              <div className="p-6 sm:p-8 rounded-2xl bg-slate-50 border border-slate-200 shadow-2xs h-full flex flex-col justify-between space-y-6">
-                
-                {/* Desk Direct Inquiry */}
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="font-bold text-lg sm:text-xl text-[#0f172a] mb-1.5">
-                      {lang === 'ne' ? 'प्रत्यक्ष नागरिक सहायता डेस्क' : 'Direct Constituent Desk'}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                      {lang === 'ne'
-                        ? 'सडक, ढल वा वडाका कुनै पनि सिफारिस समस्या सिधै वडाध्यक्ष रोहित प्रसाईंलाई डिजिटल रूपमा पठाउनुहोस्।'
-                        : 'Submit municipal inquiries, road repair tickets, or recommendation feedback directly to the Ward Chairperson.'}
-                    </p>
-                  </div>
+          {/* Desk */}
+          <ScrollReveal className="lg:col-span-5" delay={60}>
+            <div className="h-full rounded-3xl bg-ivory-section border border-stone-200/80 p-6 sm:p-8 flex flex-col">
+              <h3 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
+                {ne ? 'प्रत्यक्ष नागरिक सहायता डेस्क' : 'Direct Constituent Desk'}
+              </h3>
+              <p className="mt-2 text-[15px] text-stone-600 leading-[1.7]">
+                {ne
+                  ? 'सडक, ढल वा वडाका कुनै पनि सिफारिस समस्या सिधै वडाध्यक्ष रोहित प्रसाईंलाई डिजिटल रूपमा पठाउनुहोस्।'
+                  : 'Submit municipal inquiries, road repair tickets, or recommendation feedback directly to the Ward Chairperson.'}
+              </p>
+              <button type="button" onClick={onOpenDesk} className="btn btn-primary w-full mt-6 min-h-[52px] rounded-2xl">
+                <MessageSquare className="btn-icon btn-icon-tilt w-4 h-4" aria-hidden="true" />
+                <span className="trim">{ne ? 'नागरिक सहायता फारम खोल्नुहोस्' : 'Open Assistance Form'}</span>
+              </button>
 
-                  <button
-                    onClick={onOpenDesk}
-                    className="taste-btn w-full py-3.5 px-5 rounded-xl bg-[#420c15] hover:bg-[#30080f] text-white font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 transition-all active:scale-[0.99]"
-                  >
-                    <MessageSquare className="w-4 h-4 text-white" />
-                    <span>{lang === 'ne' ? 'नागरिक सहायता फारम खोल्नुहोस्' : 'Open Assistance Form'}</span>
-                  </button>
+              <div className="mt-8 pt-6 border-t border-stone-300/60">
+                <p className="text-[13px] font-semibold text-stone-500 mb-3">
+                  {ne ? 'आधिकारिक डिजिटल सम्पर्क' : 'Verified channels'}
+                </p>
+                <div className="space-y-2">
+                  {channels.map((c) => (
+                    <a
+                      key={c.href}
+                      href={c.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center justify-between gap-3 min-h-[52px] px-4 rounded-2xl bg-white border border-stone-200 hover:border-stone-300 active:scale-[0.985] transition-[transform,border-color,box-shadow] duration-150 hover:shadow-[0_4px_14px_-8px_rgba(28,25,23,0.25)]"
+                    >
+                      <span className="flex items-center gap-3 text-[14.5px] font-semibold text-ink">
+                        {c.icon}
+                        {c.label}
+                      </span>
+                      <ArrowUpRight className="w-4 h-4 text-stone-400 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-maroon" aria-hidden="true" />
+                    </a>
+                  ))}
                 </div>
-
-                {/* Social Channels Nested in Clean Balanced Card Foot */}
-                <div className="pt-5 border-t border-slate-200/80 space-y-2.5">
-                  <div className="text-[11px] font-mono uppercase font-bold text-slate-400">
-                    {lang === 'ne' ? 'आधिकारिक डिजिटल सम्पर्क' : 'VERIFIED CHANNELS'}
-                  </div>
-
-                  <a
-                    href={civicProfile.facebookPage}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="taste-btn flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200 hover:border-slate-300 hover:bg-slate-100 transition-all text-xs font-semibold text-[#0f172a]"
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <FacebookIcon className="w-4 h-4 text-[#1877F2]" />
-                      <span>{lang === 'ne' ? 'आधिकारिक फेसबुक प्रोफाइल' : 'Official Facebook Profile'}</span>
-                    </div>
-                    <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
-                  </a>
-
-                  <a
-                    href={civicProfile.youtubeSearch}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="taste-btn flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200 hover:border-slate-300 hover:bg-slate-100 transition-all text-xs font-semibold text-[#0f172a]"
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <YoutubeIcon className="w-4 h-4 text-[#FF0000]" />
-                      <span>{lang === 'ne' ? 'युट्युब भिडियो रेकर्ड' : 'YouTube Video Stream'}</span>
-                    </div>
-                    <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
-                  </a>
-                </div>
-
               </div>
-            </ScrollReveal>
-          </div>
+            </div>
+          </ScrollReveal>
 
-          {/* Official Details Column (Right - 7 cols) - Matching Height & Visual Weight */}
-          <div className="lg:col-span-7 h-full">
-            <ScrollReveal delay={150} className="h-full">
-              <div className="p-6 sm:p-8 rounded-2xl bg-slate-50 border border-slate-200 shadow-2xs h-full flex flex-col justify-between">
-                
-                <div>
-                  <h3 className="font-bold text-lg sm:text-xl text-[#0f172a] mb-2 pb-3 border-b border-slate-200/80">
-                    {lang === 'ne' ? 'कार्यालय विवरण तथा सेवा तालिका' : 'Office Details & Public Schedule'}
-                  </h3>
+          {/* Office details */}
+          <ScrollReveal className="lg:col-span-7" delay={120}>
+            <div className="h-full rounded-3xl border border-stone-200 p-6 sm:p-8 flex flex-col">
+              <h3 className="text-xl sm:text-2xl font-bold text-ink tracking-tight pb-4 border-b border-stone-200">
+                {ne ? 'कार्यालय विवरण तथा सेवा तालिका' : 'Office Details & Public Schedule'}
+              </h3>
+              <dl className="divide-y divide-stone-200/80">
+                {rows.map(({ icon: Icon, label, value }) => (
+                  <div key={label} className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-x-6 gap-y-1.5 py-4">
+                    <dt className="flex items-center gap-2.5 text-[13.5px] font-medium text-stone-500">
+                      <Icon className="w-4 h-4 text-maroon shrink-0" aria-hidden="true" />
+                      {label}
+                    </dt>
+                    <dd className="text-[15px] text-ink leading-relaxed pl-[26px] sm:pl-0">{value}</dd>
+                  </div>
+                ))}
+              </dl>
 
-                  <div className="divide-y divide-slate-200/70 text-xs sm:text-sm">
-                    
-                    <div className="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
-                      <div className="flex items-center gap-2 font-mono uppercase text-[11px] font-bold text-slate-400">
-                        <MapPin className="w-4 h-4 text-[#801426]" />
-                        <span>{lang === 'ne' ? 'कार्यालय ठेगाना' : 'LOCATION'}</span>
-                      </div>
-                      <div className="font-medium text-slate-800 text-left sm:text-right">
-                        {lang === 'ne' ? civicProfile.locationNe : civicProfile.locationEn}
-                      </div>
-                    </div>
-
-                    <div className="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
-                      <div className="flex items-center gap-2 font-mono uppercase text-[11px] font-bold text-slate-400">
-                        <Clock className="w-4 h-4 text-[#801426]" />
-                        <span>{lang === 'ne' ? 'कार्यालय समय' : 'OFFICE HOURS'}</span>
-                      </div>
-                      <div className="font-medium text-slate-800 text-left sm:text-right">
-                        {lang === 'ne' ? civicProfile.officeHoursNe : civicProfile.officeHoursEn}
-                      </div>
-                    </div>
-
-                    <div className="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
-                      <div className="flex items-center gap-2 font-mono uppercase text-[11px] font-bold text-slate-400">
-                        <Phone className="w-4 h-4 text-[#801426]" />
-                        <span>{lang === 'ne' ? 'वडा कार्यालय फोन' : 'WARD PHONE'}</span>
-                      </div>
-                      <div className="font-mono font-bold text-slate-900 text-left sm:text-right">
-                        {civicProfile.phone}
-                      </div>
-                    </div>
-
-                    <div className="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
-                      <div className="flex items-center gap-2 font-mono uppercase text-[11px] font-bold text-slate-400">
-                        <Mail className="w-4 h-4 text-[#801426]" />
-                        <span>{lang === 'ne' ? 'आधिकारिक इमेल' : 'EMAIL'}</span>
-                      </div>
-                      <div className="font-mono font-medium text-[#801426] text-left sm:text-right">
-                        <a href={`mailto:${civicProfile.email}`} className="hover:underline">
-                          {civicProfile.email}
-                        </a>
-                      </div>
-                    </div>
-
+              <div className="mt-auto pt-5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-2xl bg-stone-50 border border-stone-200/80 px-4 py-3">
+                  <span className="text-[13.5px] font-semibold text-stone-600">
+                    {ne ? 'आपतकालीन सम्पर्क' : 'Emergency numbers'}
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <a href="tel:100" className="inline-flex items-center min-h-[40px] px-3.5 rounded-full bg-white border border-stone-200 text-[13.5px] font-semibold text-ink hover:border-stone-300 active:scale-95 transition-transform tabular-nums">
+                      {ne ? 'प्रहरी: १००' : 'Police: 100'}
+                    </a>
+                    <a href="tel:102" className="inline-flex items-center min-h-[40px] px-3.5 rounded-full bg-white border border-stone-200 text-[13.5px] font-semibold text-maroon hover:border-stone-300 active:scale-95 transition-transform tabular-nums">
+                      {ne ? 'एम्बुलेन्स: १०२' : 'Ambulance: 102'}
+                    </a>
                   </div>
                 </div>
-
-                {/* Emergency Hotlines Footer Banner */}
-                <div className="mt-4 pt-4 border-t border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-white/70 p-3 rounded-xl border border-slate-200/80">
-                  <div className="font-mono uppercase text-[11px] font-bold text-slate-500">
-                    {lang === 'ne' ? 'आपतकालीन सम्पर्क' : 'EMERGENCY NUMBERS'}
-                  </div>
-                  <div className="flex items-center gap-3 text-xs font-mono font-bold">
-                    <span className="text-emerald-700">{lang === 'ne' ? 'प्रहरी: १००' : 'Police: 100'}</span>
-                    <span className="text-slate-300">•</span>
-                    <span className="text-[#801426]">{lang === 'ne' ? 'एम्बुलेन्स: १०२' : 'Ambulance: 102'}</span>
-                  </div>
-                </div>
-
               </div>
-            </ScrollReveal>
-          </div>
-
+            </div>
+          </ScrollReveal>
         </div>
-
       </div>
     </section>
   );

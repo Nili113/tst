@@ -3,74 +3,58 @@ import { missionVisionData } from '../data/portfolioData';
 import { Language } from '../types';
 import { Compass, Target } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
+import { SectionHeader } from './SectionHeader';
+import { Rich } from '../lib/typo';
 
 interface MissionVisionProps {
   lang: Language;
 }
 
 export const MissionVision: React.FC<MissionVisionProps> = ({ lang }) => {
+  const ne = lang === 'ne';
+  const items = [
+    {
+      icon: Compass,
+      title: ne ? missionVisionData.vision.titleNe : missionVisionData.vision.titleEn,
+      text: ne ? missionVisionData.vision.textNe : missionVisionData.vision.textEn,
+      tag: ne ? 'दीर्घकालीन संकल्प • नमुना बिर्तामोड–५' : 'Long-term horizon • Model Birtamod-5',
+    },
+    {
+      icon: Target,
+      title: ne ? missionVisionData.mission.titleNe : missionVisionData.mission.titleEn,
+      text: ne ? missionVisionData.mission.textNe : missionVisionData.mission.textEn,
+      tag: ne ? 'दैनिक अभ्यास • शून्य ढिलाइ' : 'Operational practice • Zero bureaucratic delay',
+    },
+  ];
+
   return (
-    <section id="mission" className="py-16 sm:py-24 bg-white border-b border-slate-100 font-sans">
+    <section id="mission" className="py-16 sm:py-24 bg-ivory-section font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          label={ne ? 'मार्गदर्शन तथा संकल्प' : 'Guiding principles'}
+          title={ne ? missionVisionData.headlineNe : missionVisionData.headlineEn}
+        />
 
-        {/* Section Header */}
-        <ScrollReveal>
-          <div className="max-w-3xl mb-10 sm:mb-14">
-            <div className={`text-xs font-mono uppercase font-semibold text-[#801426] mb-2 ${lang === 'en' ? 'tracking-[0.2em]' : 'tracking-normal'
-              }`}>
-              — {lang === 'ne' ? 'मार्गदर्शन तथा संकल्प' : 'GUIDING PRINCIPLES'}
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0f172a] tracking-tight leading-[1.15]">
-              {lang === 'ne' ? missionVisionData.headlineNe : missionVisionData.headlineEn}
-            </h2>
-          </div>
-        </ScrollReveal>
-
-        {/* 2 Clean Cards: Vision & Mission (Concise & Focused) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-
-          {/* Vision Card */}
-          <ScrollReveal delay={100} className="h-full">
-            <div className="taste-card h-full p-6 sm:p-8 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-xs flex flex-col justify-between hover:border-[#801426]/30 transition-all">
-              <div>
-                <div className="w-10 h-10 rounded-xl bg-[#fbf2f4] border border-[#f5d0d6] flex items-center justify-center text-[#801426] mb-5">
-                  <Compass className="w-5 h-5" />
-                </div>
-                <h3 className="text-xl font-bold text-[#0f172a] mb-2.5">
-                  {lang === 'ne' ? missionVisionData.vision.titleNe : missionVisionData.vision.titleEn}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
-                  {lang === 'ne' ? missionVisionData.vision.textNe : missionVisionData.vision.textEn}
-                </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 border-t border-stone-300/70">
+          {items.map(({ icon: Icon, title, text, tag }, i) => (
+            <ScrollReveal
+              key={title}
+              delay={i * 90}
+              className={`pt-8 sm:pt-10 pb-2 md:pb-4 ${i === 0 ? 'md:pr-12 lg:pr-16' : 'md:pl-12 lg:pl-16 md:border-l border-stone-300/70 mt-6 md:mt-0 border-t md:border-t-0'}`}
+            >
+              <div className="flex items-center gap-3">
+                <span className="w-10 h-10 rounded-full bg-white border border-stone-200 text-maroon grid place-items-center shadow-[0_1px_2px_rgba(28,25,23,0.05)]">
+                  <Icon className="w-[18px] h-[18px]" aria-hidden="true" />
+                </span>
+                <h3 className="text-2xl sm:text-[28px] font-bold text-ink tracking-tight">{title}</h3>
               </div>
-              <div className="mt-5 pt-4 border-t border-slate-200/60 text-xs font-mono font-semibold text-[#801426]">
-                {lang === 'ne' ? 'दीर्घकालीन संकल्प • नमुना बिर्तामोड–५' : 'Long-Term Horizon • Model Birtamod-5'}
-              </div>
-            </div>
-          </ScrollReveal>
-
-          {/* Mission Card */}
-          <ScrollReveal delay={200} className="h-full">
-            <div className="taste-card h-full p-6 sm:p-8 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-xs flex flex-col justify-between hover:border-[#801426]/30 transition-all">
-              <div>
-                <div className="w-10 h-10 rounded-xl bg-[#fbf2f4] border border-[#f5d0d6] flex items-center justify-center text-[#801426] mb-5">
-                  <Target className="w-5 h-5" />
-                </div>
-                <h3 className="text-xl font-bold text-[#0f172a] mb-2.5">
-                  {lang === 'ne' ? missionVisionData.mission.titleNe : missionVisionData.mission.titleEn}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
-                  {lang === 'ne' ? missionVisionData.mission.textNe : missionVisionData.mission.textEn}
-                </p>
-              </div>
-              <div className="mt-5 pt-4 border-t border-slate-200/60 text-xs font-mono font-semibold text-[#801426]">
-                {lang === 'ne' ? 'दैनिक अभ्यास • शून्य ढिलाइ' : 'Operational Practice • Zero Bureaucratic Delay'}
-              </div>
-            </div>
-          </ScrollReveal>
-
+              <p className="mt-5 text-base sm:text-[17px] text-stone-700 leading-[1.75] max-w-[60ch]">
+                <Rich text={text} />
+              </p>
+              <p className="mt-6 text-[13px] font-semibold text-maroon">{tag}</p>
+            </ScrollReveal>
+          ))}
         </div>
-
       </div>
     </section>
   );

@@ -1,111 +1,84 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { completedWorksData } from '../data/portfolioData';
 import { Language } from '../types';
-import { ShieldCheck, Milestone, Trophy, HeartHandshake } from 'lucide-react';
+import { ShieldCheck, Milestone, Trophy, HeartHandshake, BadgeCheck, LucideIcon } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
+import { SectionHeader } from './SectionHeader';
+import { Rich } from '../lib/typo';
 
 interface AchievementsProps {
   lang: Language;
 }
 
+const ICONS: Record<string, LucideIcon> = { ShieldCheck, Milestone, Trophy, HeartHandshake };
+
 export const Achievements: React.FC<AchievementsProps> = ({ lang }) => {
-  const getIconConfig = (name: string) => {
-    switch (name) {
-      case 'ShieldCheck':
-        return {
-          icon: <ShieldCheck className="w-5 h-5 text-[#801426] transition-transform duration-200 group-hover:scale-110" />,
-          containerClass: 'bg-[#fbf2f4] border-[#f5d0d6] text-[#801426]',
-        };
-      case 'Milestone':
-        return {
-          icon: <Milestone className="w-5 h-5 text-[#801426] transition-transform duration-200 group-hover:scale-110" />,
-          containerClass: 'bg-[#fbf2f4] border-[#f5d0d6] text-[#801426]',
-        };
-      case 'Trophy':
-        return {
-          icon: <Trophy className="w-5 h-5 text-amber-600 transition-transform duration-200 group-hover:scale-110" />,
-          containerClass: 'bg-amber-50 border-amber-200 text-amber-600',
-        };
-      case 'HeartHandshake':
-        return {
-          icon: <HeartHandshake className="w-5 h-5 text-emerald-600 transition-transform duration-200 group-hover:scale-110" />,
-          containerClass: 'bg-emerald-50 border-emerald-200 text-emerald-600',
-        };
-      default:
-        return {
-          icon: <ShieldCheck className="w-5 h-5 text-[#801426] transition-transform duration-200 group-hover:scale-110" />,
-          containerClass: 'bg-[#fbf2f4] border-[#f5d0d6] text-[#801426]',
-        };
-    }
-  };
+  const ne = lang === 'ne';
+  const listRef = useRef<HTMLOListElement>(null);
+
+  // Highlight the record crossing the middle of the viewport: one thing at a time.
+  useEffect(() => {
+    const rows = listRef.current?.querySelectorAll<HTMLElement>('[data-row]');
+    if (!rows?.length) return;
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => ((e.target as HTMLElement).dataset.active = String(e.isIntersecting))),
+      { rootMargin: '-42% 0px -42% 0px' }
+    );
+    rows.forEach((r) => io.observe(r));
+    return () => io.disconnect();
+  }, []);
 
   return (
-    <section id="works" className="py-20 sm:py-28 bg-white border-b border-slate-100 font-sans">
+    <section id="works" className="py-16 sm:py-24 bg-white font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <ScrollReveal>
-          <div className="max-w-3xl mb-12 sm:mb-16">
-            <div className={`text-xs font-mono uppercase font-bold text-[#801426] mb-2 ${
-              lang === 'en' ? 'tracking-widest' : 'tracking-normal'
-            }`}>
-              — {lang === 'ne' ? 'कार्यसम्पादन तथा परिणाम' : 'PUBLIC RECORD & IMPACT'}
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0f172a] tracking-tight leading-[1.15]">
-              {lang === 'ne' ? 'हालसम्म सम्पन्न भएका मुख्य कामहरू' : 'Key Works Done Till Now'}
-            </h2>
-            <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed font-sans">
-              {lang === 'ne'
-                ? 'कार्यालय समयको अनुशासनदेखि अन्तर-पालिका पूर्वाधार, रक्तदान अभियान र प्रतिष्ठित झापा गोल्डकप फुटबलको संरक्षकत्वसम्मका मुख्य पहलहरू।'
-                : 'From pioneering municipal punctuality to inter-ward drainage, community blood drives, and football tournament patronage.'}
-            </p>
-          </div>
-        </ScrollReveal>
+        <SectionHeader
+          label={ne ? 'कार्यसम्पादन तथा परिणाम' : 'Public record & impact'}
+          title={ne ? 'हालसम्म सम्पन्न भएका मुख्य कामहरू' : 'Key Works Done Till Now'}
+          lede={
+            ne
+              ? 'कार्यालय समयको अनुशासनदेखि अन्तर-पालिका पूर्वाधार, रक्तदान अभियान र प्रतिष्ठित झापा गोल्डकप फुटबलको संरक्षकत्वसम्मका मुख्य पहलहरू।'
+              : 'From pioneering municipal punctuality to inter-ward drainage, community blood drives, and football tournament patronage.'
+          }
+        />
 
-        {/* 4 Impact Pillars Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 font-sans">
+        {/* A public record reads best as a ledger, not a grid of identical cards */}
+        <ol ref={listRef} className="border-t border-stone-200">
           {completedWorksData.map((item, idx) => {
-            const iconConfig = getIconConfig(item.iconName);
+            const Icon = ICONS[item.iconName] ?? ShieldCheck;
             return (
-              <ScrollReveal key={item.id} delay={idx * 80}>
-                <div
-                  className="taste-card bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs flex flex-col justify-between group hover:border-[#801426]/40 hover:bg-white hover:shadow-sm transition-all duration-300 h-full"
-                >
-                  <div>
-                    <div className="flex items-center justify-between gap-4 mb-5">
-                      <div className={`w-11 h-11 rounded-xl ${iconConfig.containerClass} border flex items-center justify-center transition-all duration-200 shadow-2xs`}>
-                        {iconConfig.icon}
-                      </div>
-                      <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-600">
-                        {lang === 'ne' ? item.subtitleNe : item.subtitleEn}
-                      </span>
-                    </div>
+              <ScrollReveal as="li" key={item.id} delay={idx * 60} className="border-b border-stone-200">
+                <article data-row data-active="false" className="work-row relative grid grid-cols-[auto_1fr] md:grid-cols-[auto_1fr_minmax(200px,260px)] gap-x-5 sm:gap-x-8 gap-y-4 py-8 sm:py-10">
+                  <span aria-hidden="true" className="work-bar absolute left-[-16px] sm:left-[-24px] top-8 bottom-8 w-[3px] rounded-full bg-maroon" />
+                  <span className="work-icon w-12 h-12 rounded-2xl grid place-items-center border">
+                    <Icon className="w-5 h-5" aria-hidden="true" />
+                  </span>
 
-                    <h3 className="font-bold text-lg sm:text-xl text-[#0f172a] mb-3 group-hover:text-[#801426] transition-colors leading-snug">
-                      {lang === 'ne' ? item.titleNe : item.titleEn}
+                  <div className="min-w-0">
+                    <p className="text-[13px] font-semibold text-maroon">
+                      {ne ? item.subtitleNe : item.subtitleEn}
+                    </p>
+                    <h3 className="work-title mt-1.5 text-xl sm:text-2xl font-bold text-ink leading-snug tracking-tight">
+                      {ne ? item.titleNe : item.titleEn}
                     </h3>
-
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                      {lang === 'ne' ? item.descriptionNe : item.descriptionEn}
+                    <p className="mt-3 text-[15px] sm:text-base text-stone-600 leading-[1.75] max-w-[62ch]">
+                      <Rich text={ne ? item.descriptionNe : item.descriptionEn} />
                     </p>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-slate-200/80 flex items-center justify-between">
-                    <span className="text-xs font-mono font-semibold text-[#801426] bg-[#fbf2f4] px-2.5 py-0.5 rounded-full border border-[#f5d0d6]">
-                      {lang === 'ne' ? item.metricsNe : item.metricsEn}
-                    </span>
-                    <span className={`text-[11px] font-bold uppercase text-slate-400 group-hover:text-[#801426] group-hover:translate-x-0.5 transition-all ${
-                      lang === 'en' ? 'tracking-wider' : 'tracking-normal'
-                    }`}>
-                      {lang === 'ne' ? 'प्रमाणित अभिलेख →' : 'Verified Record →'}
-                    </span>
+                  <div className="col-start-2 md:col-start-3 md:pl-8 md:border-l border-stone-200 md:self-stretch flex flex-col justify-center">
+                    <p className="text-lg sm:text-xl font-bold text-ink leading-snug tabular-nums">
+                      {ne ? item.metricsNe : item.metricsEn}
+                    </p>
+                    <p className="mt-2 inline-flex items-center gap-1.5 text-[13px] font-medium text-stone-500">
+                      <BadgeCheck className="w-4 h-4 text-maroon" aria-hidden="true" />
+                      {ne ? 'प्रमाणित अभिलेख' : 'Verified record'}
+                    </p>
                   </div>
-                </div>
+                </article>
               </ScrollReveal>
             );
           })}
-        </div>
-
+        </ol>
       </div>
     </section>
   );

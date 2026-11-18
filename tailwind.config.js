@@ -7,6 +7,10 @@ export default {
   theme: {
     extend: {
       colors: {
+        ink: '#1c1917',
+        paper: '#ffffff',
+        rule: '#e7e0d6',
+        maroon: { DEFAULT: '#801426', deep: '#420c15', tint: '#fbf2f4', soft: '#e9c9cf' },
         burgundy: {
           50: '#fbf2f4',
           100: '#f6e3e7',
@@ -80,7 +84,7 @@ export default {
         sans: ['"Plus Jakarta Sans"', '"Mukta"', '"Noto Sans Devanagari"', 'system-ui', '-apple-system', 'sans-serif'],
         display: ['"Plus Jakarta Sans"', '"Mukta"', 'sans-serif'],
         nepali: ['"Mukta"', '"Noto Sans Devanagari"', 'sans-serif'],
-        serif: ['"Lora"', 'Georgia', 'serif'],
+        serif: ['"Lora"', '"Noto Serif Devanagari"', 'Georgia', 'serif'],
       },
       animation: {
         'marquee': 'marquee 28s linear infinite',

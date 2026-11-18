@@ -5,94 +5,88 @@ interface ScrollRevealProps {
   className?: string;
   delay?: number;
   direction?: 'up' | 'down' | 'left' | 'right';
+  as?: 'div' | 'section' | 'li' | 'article';
 }
+
+const OFFSETS: Record<NonNullable<ScrollRevealProps['direction']>, [string, string]> = {
+  up: ['0px', '22px'],
+  down: ['0px', '-22px'],
+  left: ['22px', '0px'],
+  right: ['-22px', '0px'],
+};
 
 export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   children,
   className = '',
   delay = 0,
   direction = 'up',
+  as = 'div',
 }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    // Check if user prefers reduced motion
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
       setIsVisible(true);
       return;
     }
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.unobserve(entry.target);
+          observer.disconnect();
         }
       },
-      {
-        threshold: 0.08,
-        rootMargin: '0px 0px -25px 0px',
-      }
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
     );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
+    observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
-  const getTransform = () => {
-    if (isVisible) return 'translate-x-0 translate-y-0 opacity-100';
-    switch (direction) {
-      case 'up':
-        return 'translate-y-5 opacity-0';
-      case 'down':
-        return '-translate-y-5 opacity-0';
-      case 'left':
-        return 'translate-x-5 opacity-0';
-      case 'right':
-        return '-translate-x-5 opacity-0';
-      default:
-        return 'translate-y-5 opacity-0';
-    }
-  };
+  const [rx, ry] = OFFSETS[direction];
+  const Tag = as as React.ElementType;
 
   return (
-    <div
+    <Tag
       ref={ref}
-      style={{ transitionDelay: `${delay}ms` }}
-      className={`transition-all duration-700 ease-out will-change-transform ${getTransform()} ${className}`}
+      data-visible={isVisible}
+      style={{ '--d': `${delay}ms`, '--rx': rx, '--ry': ry } as React.CSSProperties}
+      className={`reveal ${className}`}
     >
       {children}
-    </div>
+    </Tag>
   );
 };
 
 export const ScrollProgressBar: React.FC = () => {
-  const [progress, setProgress] = useState(0);
+  const barRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalScroll > 0) {
-        const currentProgress = window.scrollY / totalScroll;
-        setProgress(Math.min(Math.max(currentProgress, 0), 1));
-      }
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      const p = total > 0 ? Math.min(Math.max(window.scrollY / total, 0), 1) : 0;
+      if (barRef.current) barRef.current.style.transform = `scaleX(${p})`;
     };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      cancelAnimationFrame(frame);
+    };
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 right-0 h-[2.5px] bg-[#e2dcd0]/50 z-[60] pointer-events-none">
-      <div
-        className="h-full bg-gradient-to-r from-[#801426] via-[#d97706] to-[#801426] transition-all duration-75 ease-out origin-left"
-        style={{ transform: `scaleX(${progress})`, transformOrigin: '0% 50%' }}
-      />
+    <div className="fixed top-0 left-0 right-0 h-[2px] z-[60] pointer-events-none" aria-hidden="true">
+      <div ref={barRef} className="h-full bg-maroon origin-left" style={{ transform: 'scaleX(0)' }} />
     </div>
   );
 };

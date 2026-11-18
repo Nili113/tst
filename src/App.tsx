@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Biography } from './components/Biography';
@@ -14,21 +14,38 @@ import { ScrollProgressBar } from './components/ScrollReveal';
 import { Language } from './types';
 
 export function App() {
-  const [lang, setLang] = useState<Language>('ne');
+  const [lang, setLang] = useState<Language>(() => {
+    try {
+      return localStorage.getItem('lang') === 'en' ? 'en' : 'ne';
+    } catch {
+      return 'ne';
+    }
+  });
   const [isDeskOpen, setIsDeskOpen] = useState(false);
+
+  // Keep <html lang> in sync: drives hyphenation, Devanagari leading and screen readers.
+  useEffect(() => {
+    document.documentElement.lang = lang;
+    try {
+      localStorage.setItem('lang', lang);
+    } catch {
+      /* storage unavailable */
+    }
+  }, [lang]);
 
   const toggleLanguage = () => {
     setLang((prev) => (prev === 'ne' ? 'en' : 'ne'));
   };
 
   return (
-    <div className="min-h-screen bg-white font-sans text-[#0f172a] selection:bg-[#801426] selection:text-white">
+    <div className="min-h-screen bg-white font-sans text-ink">
       {/* Subtle Top Scroll Reading Progress Indicator */}
       <ScrollProgressBar />
 
       {/* Clean Sticky Navbar (Pravash Reference Style) */}
       <Navbar
         lang={lang}
+        onSetLang={setLang}
         onToggleLang={toggleLanguage}
         onOpenDesk={() => setIsDeskOpen(true)}
       />
