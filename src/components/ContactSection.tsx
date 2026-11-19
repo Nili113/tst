@@ -1,47 +1,21 @@
 import React from 'react';
 import { civicProfile } from '../data/portfolioData';
 import { Language } from '../types';
-import { MapPin, Phone, Mail, Clock, MessageSquare, ArrowUpRight } from 'lucide-react';
+import { MapPin, Mail, MessageSquare, ArrowUpRight } from 'lucide-react';
 import { FacebookIcon, YoutubeIcon } from './BrandIcons';
 import { ScrollReveal } from './ScrollReveal';
 import { SectionHeader } from './SectionHeader';
-import { Rich } from '../lib/typo';
 
 interface ContactSectionProps {
   lang: Language;
   onOpenDesk: () => void;
 }
 
-const toAsciiDigits = (s: string) => s.replace(/[०-९]/g, (d) => String('०१२३४५६७८९'.indexOf(d))).replace(/[^\d+]/g, '');
-
 export const ContactSection: React.FC<ContactSectionProps> = ({ lang, onOpenDesk }) => {
   const ne = lang === 'ne';
-  const hours = (ne ? civicProfile.officeHoursNe : civicProfile.officeHoursEn).split('|').map((s) => s.trim());
 
   const rows = [
     { icon: MapPin, label: ne ? 'कार्यालय ठेगाना' : 'Location', value: <>{ne ? civicProfile.locationNe : civicProfile.locationEn}</> },
-    {
-      icon: Clock,
-      label: ne ? 'कार्यालय समय' : 'Office hours',
-      value: (
-        <span className="block space-y-0.5 tabular-nums">
-          {hours.map((h) => (
-            <span key={h} className="block">
-              <Rich text={h} />
-            </span>
-          ))}
-        </span>
-      ),
-    },
-    {
-      icon: Phone,
-      label: ne ? 'वडा कार्यालय फोन' : 'Ward phone',
-      value: (
-        <a href={`tel:${toAsciiDigits(civicProfile.phone)}`} className="font-semibold text-ink hover:text-maroon hover:underline tabular-nums">
-          {civicProfile.phone}
-        </a>
-      ),
-    },
     {
       icon: Mail,
       label: ne ? 'आधिकारिक इमेल' : 'Email',
@@ -66,8 +40,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ lang, onOpenDesk
           title={ne ? 'सम्पर्क तथा आधिकारिक विवरण' : 'Contact & Links'}
           lede={
             ne
-              ? 'वडा कार्यालयको आधिकारिक ठेगाना, सिफारिस कार्यतालिका, प्रत्यक्ष नागरिक सहायता र प्रमाणित सामाजिक सम्पर्कहरू।'
-              : 'Only verified public contacts, official ward schedules, and constituent dialogue links are listed.'
+              ? 'वडा कार्यालयको आधिकारिक ठेगाना, प्रत्यक्ष नागरिक सहायता र प्रमाणित सामाजिक सम्पर्कहरू।'
+              : 'Only verified public contacts and constituent dialogue links are listed.'
           }
         />
 
@@ -117,7 +91,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ lang, onOpenDesk
           <ScrollReveal className="lg:col-span-7" delay={120}>
             <div className="h-full rounded-3xl border border-stone-200 p-6 sm:p-8 flex flex-col">
               <h3 className="text-xl sm:text-2xl font-bold text-ink tracking-tight pb-4 border-b border-stone-200">
-                {ne ? 'कार्यालय विवरण तथा सेवा तालिका' : 'Office Details & Public Schedule'}
+                {ne ? 'कार्यालय विवरण' : 'Office Details'}
               </h3>
               <dl className="divide-y divide-stone-200/80">
                 {rows.map(({ icon: Icon, label, value }) => (
@@ -131,7 +105,32 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ lang, onOpenDesk
                 ))}
               </dl>
 
-              <div className="mt-auto pt-5">
+              {/* Map fills the space the schedule used to take */}
+              <div className="map-frame group relative mt-2 flex-1 min-h-[260px] rounded-2xl overflow-hidden border border-stone-200 bg-stone-100">
+                <iframe
+                  title={ne ? 'वडा कार्यालयको नक्सा' : 'Map of the ward office'}
+                  src={civicProfile.mapEmbed}
+                  className="absolute inset-0 w-full h-full border-0"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
+                <div aria-hidden="true" className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/5 rounded-2xl" />
+                <a
+                  href={civicProfile.mapLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute left-3 bottom-3 inline-flex items-center gap-2 min-h-[40px] pl-2 pr-3.5 rounded-full bg-white/95 backdrop-blur border border-stone-200 shadow-[0_6px_18px_-8px_rgba(28,25,23,0.35)] text-[13px] font-semibold text-ink hover:text-maroon active:scale-95 transition-[transform,color] duration-150"
+                >
+                  <span className="grid place-items-center w-7 h-7 rounded-full bg-maroon text-white">
+                    <MapPin className="w-3.5 h-3.5" aria-hidden="true" />
+                  </span>
+                  {ne ? 'गुगल म्यापमा खोल्नुहोस्' : 'Open in Google Maps'}
+                  <ArrowUpRight className="w-3.5 h-3.5 text-stone-400" aria-hidden="true" />
+                </a>
+              </div>
+
+              <div className="pt-5">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-2xl bg-stone-50 border border-stone-200/80 px-4 py-3">
                   <span className="text-[13.5px] font-semibold text-stone-600">
                     {ne ? 'आपतकालीन सम्पर्क' : 'Emergency numbers'}

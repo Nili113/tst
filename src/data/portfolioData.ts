@@ -28,6 +28,9 @@ export const civicProfile = {
   email: "contact@rohitprasai.com.np",
   facebookPage: "https://www.facebook.com/rohit.prasai.5",
   youtubeSearch: "https://www.youtube.com/results?search_query=Rohit+Prasai+Birtamode",
+  // Map search for the ward office. Swap in the exact pinned location (Google Maps → Share → Embed a map) if you have it.
+  mapEmbed: "https://maps.google.com/maps?q=Birtamod%20Municipality%20Ward%20No.%205%20Office%2C%20Birtamod%2C%20Jhapa%2C%20Nepal&z=15&output=embed",
+  mapLink: "https://www.google.com/maps/search/?api=1&query=Birtamod%20Municipality%20Ward%20No.%205%20Office%2C%20Birtamod%2C%20Jhapa%2C%20Nepal",
 };
 
 // Autobiography and narrative (Notes: Kankai Schooling, Global College +2, Silver Mountain BHM, Australia Diploma, Congress since 2062)
@@ -199,6 +202,7 @@ export const educationMembershipsData = {
 };
 
 // Works that has been done till now (Key Milestones)
+// Carousel photos for these works are listed in ./workPhotos.ts
 export const completedWorksData: AchievementItem[] = [
   {
     id: "courtyard-service",
