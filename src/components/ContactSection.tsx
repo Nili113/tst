@@ -2,8 +2,10 @@ import React from 'react';
 import { civicProfile } from '../data/portfolioData';
 import { Language } from '../types';
 import { MapPin, Mail, MessageSquare, ArrowUpRight } from 'lucide-react';
-import { FacebookIcon, YoutubeIcon } from './BrandIcons';
+import { FacebookIcon } from './BrandIcons';
 import { ScrollReveal } from './ScrollReveal';
+import { WardMap } from './WardMap';
+import { WardLocator } from './WardLocator';
 import { SectionHeader } from './SectionHeader';
 
 interface ContactSectionProps {
@@ -20,7 +22,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ lang, onOpenDesk
       icon: Mail,
       label: ne ? 'आधिकारिक इमेल' : 'Email',
       value: (
-        <a href={`mailto:${civicProfile.email}`} className="font-medium text-maroon underline decoration-maroon/30 hover:decoration-maroon break-all">
+        <a href={`mailto:${civicProfile.email}`} className="inline-block py-2 -my-2 font-medium text-maroon underline decoration-maroon/30 hover:decoration-maroon break-all">
           {civicProfile.email}
         </a>
       ),
@@ -29,7 +31,6 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ lang, onOpenDesk
 
   const channels = [
     { href: civicProfile.facebookPage, icon: <FacebookIcon className="w-[18px] h-[18px] text-[#1877F2]" />, label: ne ? 'आधिकारिक फेसबुक प्रोफाइल' : 'Official Facebook Profile' },
-    { href: civicProfile.youtubeSearch, icon: <YoutubeIcon className="w-[18px] h-[18px] text-[#FF0000]" />, label: ne ? 'युट्युब भिडियो रेकर्ड' : 'YouTube Video Stream' },
   ];
 
   return (
@@ -54,8 +55,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ lang, onOpenDesk
               </h3>
               <p className="mt-2 text-[15px] text-stone-600 leading-[1.7]">
                 {ne
-                  ? 'सडक, ढल वा वडाका कुनै पनि सिफारिस समस्या सिधै वडाध्यक्ष रोहित प्रसाईंलाई डिजिटल रूपमा पठाउनुहोस्।'
-                  : 'Submit municipal inquiries, road repair tickets, or recommendation feedback directly to the Ward Chairperson.'}
+                  ? 'सडक, ढल वा वडाका कुनै पनि सिफारिस समस्या सिधै मलाई डिजिटल रूपमा पठाउनुहोस्।'
+                  : 'Send me municipal inquiries, road repair requests or recommendation feedback directly.'}
               </p>
               <button type="button" onClick={onOpenDesk} className="btn btn-primary w-full mt-6 min-h-[52px] rounded-2xl">
                 <MessageSquare className="btn-icon btn-icon-tilt w-4 h-4" aria-hidden="true" />
@@ -84,6 +85,16 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ lang, onOpenDesk
                   ))}
                 </div>
               </div>
+
+              {/* Where Ward 5 sits, sitting at the foot of the card so both columns end together */}
+              <div className="mt-auto pt-8">
+                <div className="pt-6 border-t border-stone-300/60">
+                  <p className="text-[13px] font-semibold text-stone-500 mb-4">{ne ? 'नक्सामा हाम्रो वडा' : 'Our ward on the map'}</p>
+                  <div className="rounded-2xl bg-white border border-stone-200 px-3 sm:px-4 pt-4 pb-3 shadow-[0_1px_2px_rgba(28,25,23,0.04)]">
+                    <WardLocator ne={ne} />
+                  </div>
+                </div>
+              </div>
             </div>
           </ScrollReveal>
 
@@ -105,27 +116,19 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ lang, onOpenDesk
                 ))}
               </dl>
 
-              {/* Map fills the space the schedule used to take */}
-              <div className="map-frame group relative mt-2 flex-1 min-h-[260px] rounded-2xl overflow-hidden border border-stone-200 bg-stone-100">
-                <iframe
-                  title={ne ? 'वडा कार्यालयको नक्सा' : 'Map of the ward office'}
-                  src={civicProfile.mapEmbed}
-                  className="absolute inset-0 w-full h-full border-0"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  allowFullScreen
-                />
+              <div className="map-frame group relative mt-4 flex-1 min-h-[300px] rounded-2xl overflow-hidden border border-stone-200 bg-stone-100">
+                <WardMap label={ne ? 'वडा नं. ५' : 'Ward No. 5'} />
                 <div aria-hidden="true" className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/5 rounded-2xl" />
                 <a
                   href={civicProfile.mapLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="absolute left-3 bottom-3 inline-flex items-center gap-2 min-h-[40px] pl-2 pr-3.5 rounded-full bg-white/95 backdrop-blur border border-stone-200 shadow-[0_6px_18px_-8px_rgba(28,25,23,0.35)] text-[13px] font-semibold text-ink hover:text-maroon active:scale-95 transition-[transform,color] duration-150"
+                  className="absolute z-[500] left-3 bottom-3 inline-flex items-center gap-2 min-h-[40px] pl-2 pr-3.5 rounded-full bg-white/95 backdrop-blur border border-stone-200 shadow-[0_6px_18px_-8px_rgba(28,25,23,0.35)] text-[13px] font-semibold text-ink hover:text-maroon active:scale-95 transition-[transform,color] duration-150"
                 >
                   <span className="grid place-items-center w-7 h-7 rounded-full bg-maroon text-white">
                     <MapPin className="w-3.5 h-3.5" aria-hidden="true" />
                   </span>
-                  {ne ? 'गुगल म्यापमा खोल्नुहोस्' : 'Open in Google Maps'}
+                  {ne ? 'ठूलो नक्सामा हेर्नुहोस्' : 'Open full map'}
                   <ArrowUpRight className="w-3.5 h-3.5 text-stone-400" aria-hidden="true" />
                 </a>
               </div>

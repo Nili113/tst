@@ -21,7 +21,7 @@ export const Hero: React.FC<HeroProps> = ({ lang, onOpenDesk }) => {
   const ne = lang === 'ne';
   // 0 while the hero sits at the top, 1 once it has scrolled fully out of view.
   const heroRef = useScrollProgress<HTMLElement>((r) => -r.top / Math.max(r.height, 1), { reducedValue: 0 });
-  const nameLines = (ne ? civicProfile.nameNe : civicProfile.nameEn).split(' ');
+  const name = ne ? civicProfile.nameNe : civicProfile.nameEn;
   const years = ne ? YEARS_NE : YEARS_EN;
   const pct = elapsed * 100;
 
@@ -30,13 +30,15 @@ export const Hero: React.FC<HeroProps> = ({ lang, onOpenDesk }) => {
     const r = e.currentTarget.getBoundingClientRect();
     e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`);
     e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`);
+    e.currentTarget.style.setProperty('--mx-n', ((e.clientX - r.left) / r.width).toFixed(3));
+    e.currentTarget.style.setProperty('--my-n', ((e.clientY - r.top) / r.height).toFixed(3));
   };
 
   return (
     <section ref={heroRef} onPointerMove={onHeroMove} id="home" className="hero relative isolate overflow-hidden bg-maroon-deep text-white font-sans">
       {/* Atmosphere: warm glow behind the portrait, faint dot grain */}
       <div aria-hidden="true" className="hero-glow absolute inset-0 -z-10">
-        <div className="absolute -right-[10%] top-[-20%] w-[70vw] max-w-[900px] aspect-square rounded-full bg-[radial-gradient(closest-side,rgba(179,72,90,0.55),rgba(128,20,38,0.25)_55%,transparent)]" />
+        <div className="absolute -right-[10%] top-[-20%] w-[70vw] max-w-[900px] aspect-square rounded-full bg-[radial-gradient(closest-side,rgba(179,72,90,0.55),rgba(155,35,53,0.25)_55%,transparent)]" />
         <div className="absolute -left-[20%] bottom-[-40%] w-[60vw] max-w-[700px] aspect-square rounded-full bg-[radial-gradient(closest-side,rgba(0,0,0,0.35),transparent)]" />
         <div className="absolute inset-0 opacity-[0.06] bg-[radial-gradient(circle_at_1px_1px,#fff_1px,transparent_0)] [background-size:22px_22px]" />
       </div>
@@ -50,28 +52,26 @@ export const Hero: React.FC<HeroProps> = ({ lang, onOpenDesk }) => {
               {ne ? 'बिर्तामोड, झापा, कोशी प्रदेश, नेपाल' : 'Birtamod, Jhapa, Koshi Province, Nepal'}
             </p>
 
-            <h1 className="hero-name mt-5" aria-label={ne ? civicProfile.nameNe : civicProfile.nameEn}>
-              {nameLines.map((line, i) => (
-                <span key={line + i} className="name-mask" aria-hidden="true">
-                  <span style={{ animationDelay: `${120 + i * 110}ms` }}>{line}</span>
-                </span>
-              ))}
+            <h1 className="hero-name mt-6" aria-label={name}>
+              <span className="name-mask" aria-hidden="true">
+                <span style={{ animationDelay: '120ms' }}>{name}</span>
+              </span>
             </h1>
 
-            <p className="enter mt-5 text-lg sm:text-2xl font-semibold text-[#f0b8c2]" style={{ '--i': 3 } as React.CSSProperties}>
-              {ne ? 'सार्वजनिक परिचय • वडा अध्यक्ष' : 'Public Representative • Ward Chairperson'}
+            <p className="enter mt-6 text-lg sm:text-[22px] font-semibold tracking-[-0.01em] text-[#f6c9d1]" style={{ '--i': 3 } as React.CSSProperties}>
+              {ne ? 'जनप्रतिनिधि • नेपाली कांग्रेस' : 'Public Representative • Nepali Congress'}
             </p>
 
             <p
-              className="enter mt-4 max-w-xl text-[15.5px] sm:text-lg leading-[1.75] text-white/75"
+              className="enter mt-3 max-w-[34rem] text-[15.5px] sm:text-[17px] leading-[1.7] text-white/75"
               style={{ '--i': 4 } as React.CSSProperties}
             >
               {ne
-                ? 'बिर्तामोड नगरपालिका वडा नं. ५ का निर्वाचित वडाध्यक्ष। पारदर्शी सुशासन, समयपालन र नागरिक सेवामा समर्पित।'
-                : 'Elected Ward Chairperson of Birtamod Municipality Ward No. 5. Committed to transparent governance, strict punctuality, and public service.'}
+                ? 'पारदर्शी सुशासन, समयपालन र नागरिक सेवामा समर्पित, बिर्तामोडका जनताको साथमा।'
+                : 'Committed to transparent governance, strict punctuality and public service, standing with the people of Birtamod.'}
             </p>
 
-            <div className="enter flex flex-col sm:flex-row gap-3 mt-8" style={{ '--i': 5 } as React.CSSProperties}>
+            <div className="enter flex flex-col sm:flex-row gap-3 mt-9" style={{ '--i': 5 } as React.CSSProperties}>
               <button type="button" onClick={onOpenDesk} className="btn btn-light px-7 min-h-[52px]">
                 <MessageSquare className="btn-icon btn-icon-tilt w-[18px] h-[18px]" aria-hidden="true" />
                 <span className="trim">{ne ? 'नागरिक सहायता डेस्क' : 'Citizen Assistance Desk'}</span>
@@ -95,9 +95,9 @@ export const Hero: React.FC<HeroProps> = ({ lang, onOpenDesk }) => {
                   className="arch-outline absolute inset-0 rounded-t-full border border-[#f0b8c2]/40 [mask-image:linear-gradient(to_bottom,#000_55%,transparent_92%)]"
                   style={{ transform: 'translate(14px, -14px)' }}
                 />
-                <div className="relative rounded-t-full overflow-hidden aspect-[3/4] bg-[#33070f] [mask-image:linear-gradient(to_bottom,#000_70%,transparent_99%)]">
+                <div className="relative rounded-t-full overflow-hidden aspect-[3/4] bg-[#4a1019] [mask-image:linear-gradient(to_bottom,#000_70%,transparent_99%)]">
                   <img
-                    src="/images/rohit-prasai-portrait.jpg"
+                    src="/images/gallery/portraits/portrait-namaste.jpg"
                     alt={civicProfile.nameEn}
                     className="w-full h-full object-cover object-top scale-[1.02]"
                     loading="eager"

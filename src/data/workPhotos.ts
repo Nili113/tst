@@ -1,54 +1,38 @@
 /**
  * Photos for the "Key Works Done Till Now" carousel.
  *
- * HOW TO ADD PHOTOS
- * - Add as many entries as you like under a work; they show in this order.
- * - Each entry is either a plain path/URL string, or an object with a caption:
- *     '/images/works/my-photo.jpg'                      ← file placed in public/images/works/
- *     'https://example.com/photo.jpg'                   ← any direct image URL
- *     { src: '/images/works/x.jpg', captionEn: '…', captionNe: '…' }
- * - Anything that fails to load is skipped automatically, so a bad link never breaks the slide.
- * - A work with no photos shows its animated artwork full-size instead.
- *
- * SAMPLE PHOTOS
- * Entries built with sample() use free stock photos from src/constants/samplePhotos.ts.
- * They are PLACEHOLDERS, not real photos of these projects. Replace them with real ones.
- *
- * Tip: Facebook image links expire after a while. Download the photo and put it in
- * public/images/works/ rather than pasting a facebook.com / fbcdn.net link.
+ * - Each entry is a path under public/ or an object with a caption.
+ * - Only real photos of the work. A work with an empty list shows its illustration instead
+ *   (never both, and never stock photos).
+ * - Facebook image links expire: download the photo into public/images/ rather than linking it.
  */
-
-import {
-  SAMPLE_CAPTION_EN,
-  SAMPLE_CAPTION_NE,
-  SAMPLE_DRAINAGE_CANAL_NEPAL,
-  SAMPLE_DRAINAGE_CONCRETE_CHANNEL,
-  SAMPLE_FOOTBALL_PITCH_CROWD,
-  SAMPLE_FOOTBALL_MATCH_DUSK,
-  SAMPLE_BLOOD_DONATION_DRAW,
-  SAMPLE_BLOOD_DONATION_COLLECTION,
-} from '../constants/samplePhotos';
 
 export type WorkPhoto = string | { src: string; captionEn?: string; captionNe?: string };
 
-/** Marks a placeholder stock photo, so the viewer labels it "Sample photo". */
-const sample = (src: string): WorkPhoto => ({ src, captionEn: SAMPLE_CAPTION_EN, captionNe: SAMPLE_CAPTION_NE });
-
 export const workPhotos: Record<string, WorkPhoto[]> = {
-  // Courtyard Citizen Desk & Municipal Punctuality Drive (real photos)
   'courtyard-service': [
-    '/images/works/citizen-desk-garland.jpg',
-    '/images/works/citizen-desk-greeting.jpg',
-    '/images/works/citizen-desk-door-to-door.jpg',
-    '/images/works/citizen-desk-blessing.jpg',
+    '/images/gallery/community/community-01.jpg',
+    '/images/gallery/community/community-10.jpg',
+    '/images/gallery/community/community-09.jpg',
+    '/images/gallery/community/community-08.jpg',
   ],
 
-  // Aawas Marg Integrated Stormwater Drainage Canal (SAMPLE photos: replace)
-  'aawas-drainage': [sample(SAMPLE_DRAINAGE_CANAL_NEPAL), sample(SAMPLE_DRAINAGE_CONCRETE_CHANNEL)],
+  // Domalal Rajbanshi Stadium after upgrades, ready for Jhapa Gold Cup 2080 (Khabarkheti), then the press meet (Mechi Aawaj)
+  'jhapa-gold-cup': [
+    { src: '/images/works/domalal-stadium-ready.jpg', captionEn: 'Domalal Rajbanshi Stadium, upgraded and ready for Jhapa Gold Cup 2080 · Photo: Khabarkheti', captionNe: 'जीर्णोद्धारपछि झापा गोल्डकप २०८० का लागि तयार डोमालाल राजवंशी रंगशाला · तस्बिर: खबरखेती' },
+    { src: '/images/works/domalal-stadium-dugout.jpg', captionEn: 'New team dugouts at Domalal Stadium · Photo: Khabarkheti', captionNe: 'डोमालाल रंगशालाका नयाँ डगआउट · तस्बिर: खबरखेती' },
+    { src: '/images/works/domalal-stadium-ground.jpg', captionEn: 'The prepared ground ahead of the tournament · Photo: Khabarkheti', captionNe: 'प्रतियोगिताअघि तयार पारिएको मैदान · तस्बिर: खबरखेती' },
+    { src: '/images/works/goldcup-domalal-press-meet.jpg', captionEn: 'Jhapa Gold Cup press meet at Domalal Stadium, new stands rising behind · Photo: Mechi Aawaj', captionNe: 'डोमालाल रंगशालामा झापा गोल्डकप पत्रकार सम्मेलन, पछाडि बन्दै गरेको प्यारापिट · तस्बिर: मेची आवाज' },
+  ],
 
-  // Jhapa Gold Cup Patronage & Domalal Stadium Upgrades (SAMPLE photos: replace)
-  'jhapa-gold-cup': [sample(SAMPLE_FOOTBALL_PITCH_CROWD), sample(SAMPLE_FOOTBALL_MATCH_DUSK)],
+  // Joint Birtamod-5 / Arjundhara-11 site inspection of the flood-prone border (Drishya Online, Asar 2080)
+  'aawas-drainage': [
+    { src: '/images/works/drainage-monitoring-walk.jpg', captionEn: 'Both municipalities walk the flood-prone Aawas Marg corridor · Photo: Nirman Lahar', captionNe: 'दुवै पालिकाद्वारा आवास मार्गको डुबान क्षेत्र अनुगमन · तस्बिर: निर्माणलहर' },
+    { src: '/images/works/drainage-inspection-1.jpg', captionEn: 'Inspecting the flood-prone Birtamod–Arjundhara border · Photo: Drishya Online', captionNe: 'बिर्तामोड–अर्जुनधारा सिमानाको डुबान क्षेत्र अनुगमन · तस्बिर: दृश्य अनलाइन' },
+    { src: '/images/works/drainage-inspection-2.jpg', captionEn: 'Joint committee on site with both municipalities · Photo: Drishya Online', captionNe: 'दुवै पालिकाको संयुक्त समिति स्थलगत अनुगमनमा · तस्बिर: दृश्य अनलाइन' },
+  ],
 
-  // Community Blood Donation Drives & Civic Welfare (SAMPLE photos: replace)
-  'blood-donation': [sample(SAMPLE_BLOOD_DONATION_DRAW), sample(SAMPLE_BLOOD_DONATION_COLLECTION)],
+  'blood-donation': [
+    { src: '/images/works/blood-donation-2.jpg', captionEn: 'A regular donor: giving blood for an emergency patient at B&C Hospital, Birtamod', captionNe: 'बी एन्ड सी अस्पताल, बिर्तामोडमा बिरामीका लागि आपत्कालीन रक्तदान' },
+  ],
 };

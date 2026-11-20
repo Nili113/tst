@@ -138,7 +138,7 @@ export const PlanetBall: React.FC<PlanetBallProps> = ({ active = true, period = 
         </radialGradient>
         <radialGradient id="pb-body" cx="38%" cy="32%" r="75%">
           <stop offset="0" stopColor="#7a1a2c" stopOpacity="0.85" />
-          <stop offset="1" stopColor="#2a060c" stopOpacity="0.9" />
+          <stop offset="1" stopColor="#3d0d16" stopOpacity="0.9" />
         </radialGradient>
       </defs>
       <circle cx={C} cy={C} r={R + 28} fill="url(#pb-glow)" />

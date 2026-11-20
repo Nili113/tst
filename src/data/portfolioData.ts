@@ -1,4 +1,4 @@
-import { NewsItem, VideoItem, MilestoneItem, AchievementItem } from '../types';
+import { MilestoneItem, AchievementItem } from '../types';
 
 export const civicProfile = {
   nameNe: "रोहित प्रसाईं",
@@ -27,10 +27,8 @@ export const civicProfile = {
   phone: "०२३–५४००००",
   email: "contact@rohitprasai.com.np",
   facebookPage: "https://www.facebook.com/rohit.prasai.5",
-  youtubeSearch: "https://www.youtube.com/results?search_query=Rohit+Prasai+Birtamode",
-  // Map search for the ward office. Swap in the exact pinned location (Google Maps → Share → Embed a map) if you have it.
-  mapEmbed: "https://maps.google.com/maps?q=Birtamod%20Municipality%20Ward%20No.%205%20Office%2C%20Birtamod%2C%20Jhapa%2C%20Nepal&z=15&output=embed",
-  mapLink: "https://www.google.com/maps/search/?api=1&query=Birtamod%20Municipality%20Ward%20No.%205%20Office%2C%20Birtamod%2C%20Jhapa%2C%20Nepal",
+  // The ward boundary on OpenStreetMap (also drawn in the Contact map, see wardBoundary.ts)
+  mapLink: "https://www.openstreetmap.org/relation/16023480",
 };
 
 // Autobiography and narrative (Notes: Kankai Schooling, Global College +2, Silver Mountain BHM, Australia Diploma, Congress since 2062)
@@ -349,130 +347,5 @@ export const timelineMilestones: MilestoneItem[] = [
     titleEn: "Blood Donation Drives & Chamber of Commerce Partnering",
     descriptionNe: "रगतको अभाव परिपूर्ति गर्न बिर्तामोड उद्योग वाणिज्य संघ तथा महिला उद्यमी समूहसँग समन्वय गरी बृहत् रक्तदान कार्यक्रम।",
     descriptionEn: "Spearheaded lifesaving community blood donation initiatives and consumer market inspections across Birtamod."
-  }
-];
-
-export const featuredNewsList: NewsItem[] = [
-  {
-    id: "news-1",
-    titleNe: "आर्मी झापा गोल्डकपको सेमिफाइनलमा: खेलाडी प्रोत्साहन र रंगशाला पूर्वाधार",
-    titleEn: "Nepal Army Advances to Jhapa Gold Cup Semifinals at Domalal Stadium",
-    summaryNe: "बिर्तामोडको डोमालाल रंगशालामा सञ्चालित झापा गोल्डकपमा नेपाल आर्मी क्लबले उत्कृष्ट प्रदर्शन गर्दै सेमिफाइनल यात्रा तय गरेको छ। वडाध्यक्ष रोहित प्रसाईंले रंगशाला पूर्वाधार र खेलाडी व्यवस्थापनमा सहजीकरण गरेका छन्।",
-    summaryEn: "Nepal Army Club entered the semifinals with an outstanding team performance at Domalal Rajbanshi Stadium in Birtamod. Ward Chair Rohit Prasai facilitated stadium management and athlete hospitality.",
-    categoryNe: "झापा गोल्डकप",
-    categoryEn: "Sports & Youth",
-    dateNe: "२०८० फागुन २२",
-    dateEn: "March 05, 2024",
-    source: "साझा अनलाइन",
-    sourceUrl: "https://www.facebook.com/rohit.prasai.5",
-    imageUrl: "/images/news-army.jpg",
-    readTime: "३ मिनेट"
-  },
-  {
-    id: "news-2",
-    titleNe: "कठिन जितबाट आर्मी झापा गोल्डकपको सेमिफाइनलमा प्रवेश",
-    titleEn: "Hard-Fought Victory Propels Army into Semifinal Stage",
-    summaryNe: "रोमाञ्चक प्रतिस्पर्धाका बीच विभागीय टोली नेपाल आर्मीले झापा गोल्डकपको सेमिफाइनलमा स्थान सुरक्षित गर्‍यो। स्थानीय दर्शकहरूको भव्य उपस्थिति र मर्यादित खेल व्यवस्थापनमा वडास्तरीय समन्वय प्रभावकारी रह्यो।",
-    summaryEn: "A nail-biting match secured Nepal Army Club's place in the semifinals of Jhapa Gold Cup at Domalal Stadium, with robust local civic security and athletic arrangements.",
-    categoryNe: "खेलकुद",
-    categoryEn: "Athletics",
-    dateNe: "२०८० फागुन २२",
-    dateEn: "March 05, 2024",
-    source: "झापा लाइभ",
-    sourceUrl: "https://www.facebook.com/rohit.prasai.5",
-    imageUrl: "/images/news-army-match.jpg",
-    readTime: "२ मिनेट"
-  },
-  {
-    id: "news-3",
-    titleNe: "झापा गोल्डकपमा नेपाल पुलिस क्लब विजयी",
-    titleEn: "Nepal Police Club Triumphs in Thrilling Gold Cup Encounter",
-    summaryNe: "प्रतिष्ठित झापा गोल्डकप अन्तर्राष्ट्रिय आमन्त्रण फुटबल प्रतियोगितामा नेपाल पुलिस क्लबले जित निकाल्दै अघिल्लो चरण तय गरेको छ। डोमालाल रंगशालामा दर्शकहरूको उल्लेख्य उपस्थिति रहेको थियो।",
-    summaryEn: "Nepal Police Club secured victory in an electrifying fixture at Domalal Stadium, demonstrating the high caliber of competition fostered by Jhapa Gold Cup organizers and civic patrons.",
-    categoryNe: "झापा गोल्डकप",
-    categoryEn: "Football",
-    dateNe: "२०८० फागुन २१",
-    dateEn: "March 04, 2024",
-    source: "मेचीखबर",
-    sourceUrl: "https://www.facebook.com/rohit.prasai.5",
-    imageUrl: "/images/news-police.jpg",
-    readTime: "३ मिनेट"
-  },
-  {
-    id: "news-4",
-    titleNe: "बिर्तामोड–५ आवास मार्ग ढल निर्माणमा अन्तर-पालिका संयुक्त अनुगमन",
-    titleEn: "Joint Municipal Inspection Conducted for Aawas Marg Drainage Works",
-    summaryNe: "बिर्तामोड नगरपालिका वडा नं. ५ र अर्जुनधारा नगरपालिकाको सीमामा निर्माणाधीन एकीकृत ढल निकास आयोजनाको निर्माण गुणस्तर र समयसीमाबारे वडाध्यक्ष रोहित प्रसाईंद्वारा स्थलगत अनुगमन।",
-    summaryEn: "Ward 5 Chairperson Rohit Prasai led a field engineering inspection of the ongoing Aawas Marg drainage initiative, enforcing structural durability and monsoon readiness.",
-    categoryNe: "पूर्वाधार विकास",
-    categoryEn: "Civic Infrastructure",
-    dateNe: "२०८० मंसिर १५",
-    dateEn: "December 01, 2023",
-    source: "कन्काई सन्देश",
-    sourceUrl: "https://www.facebook.com/rohit.prasai.5",
-    imageUrl: "/images/news-drainage.jpg",
-    readTime: "४ मिनेट"
-  },
-  {
-    id: "news-5",
-    titleNe: "बिर्तामोड उद्योग वाणिज्य संघ र महिला उद्यमीद्वारा बृहत् रक्तदान",
-    titleEn: "Large-Scale Blood Donation Campaign Organized in Birtamod",
-    summaryNe: "रगतको अभावलाई मध्यनजर गर्दै बिर्तामोड उद्योग वाणिज्य संघ तथा महिला उद्यमी समूहसँगको सहकार्यमा वडाध्यक्ष रोहित प्रसाईंको विशेष उपस्थितिमा रक्तदान सम्पन्न। सयौं पिन्ट रगत संकलन।",
-    summaryEn: "In response to urgent local medical requirements, a major community blood drive was coordinated in Birtamod with active participation from Chamber of Commerce partners.",
-    categoryNe: "सामाजिक कार्य",
-    categoryEn: "Public Welfare",
-    dateNe: "२०८० माघ १०",
-    dateEn: "January 24, 2024",
-    source: "पूर्वाञ्चल पोस्ट",
-    sourceUrl: "https://www.facebook.com/rohit.prasai.5",
-    imageUrl: "/images/news-blood.jpg",
-    readTime: "२ मिनेट"
-  }
-];
-
-export const featuredVideosList: VideoItem[] = [
-  {
-    id: "video-1",
-    titleNe: "डोमालाल रंगशालामा झापा गोल्डकपको भव्य तयारी: बाँसको प्यारापिट निर्माण तथा रंगशाला स्तरोन्नति",
-    titleEn: "Grand Preparations at Domalal Stadium for Jhapa Gold Cup: Bamboo Parapets & Staging",
-    publisher: "साझा अनलाइन",
-    duration: "०८:२४",
-    date: "२०८० फागुन १८",
-    thumbnailUrl: "/images/video-domalal-prep.jpg",
-    youtubeId: "yH8g9PqM3oU",
-    externalUrl: "https://www.facebook.com/rohit.prasai.5"
-  },
-  {
-    id: "video-2",
-    titleNe: "वडाध्यक्ष रोहित प्रसाईं तथा आयोजक टोलीद्वारा रंगशाला पूर्वाधार, सुरक्षा तथा खेल तालिका अनुगमन",
-    titleEn: "Ward Chair Rohit Prasai and Organizing Committee Inspect Stadium Readiness and Safety",
-    publisher: "झापा गोल्डकप मिडिया",
-    duration: "१२:१५",
-    date: "२०८० फागुन २०",
-    thumbnailUrl: "/images/video-rohit-inspect.jpg",
-    youtubeId: "kX8pQ2n4r6g",
-    externalUrl: "https://www.facebook.com/rohit.prasai.5"
-  },
-  {
-    id: "video-3",
-    titleNe: "झापा गोल्डकप मुख्य प्रायोजक सहकार्य घोषणा तथा आधिकारिक सम्झौता हस्ताक्षर समारोह",
-    titleEn: "Jhapa Gold Cup Title Sponsorship Announcement and Official Signing Ceremony",
-    publisher: "झापा गोल्डकप लाइभ",
-    duration: "०९:४०",
-    date: "२०८० फागुन २१",
-    thumbnailUrl: "/images/video-sponsor-sign.jpg",
-    youtubeId: "aB3c4D5e6F7",
-    externalUrl: "https://www.facebook.com/rohit.prasai.5"
-  },
-  {
-    id: "video-4",
-    titleNe: "समयपालन र सेवाग्राही हकका लागि नगरपालिका प्रांगणबाटै वडाध्यक्ष रोहित प्रसाईंको प्रत्यक्ष सेवा प्रवाह",
-    titleEn: "Ward Chair Rohit Prasai Conducts Direct Open-Air Service in Municipal Courtyard for Punctuality",
-    publisher: "नागरिक सवाल",
-    duration: "१५:३०",
-    date: "२०८० असार २८",
-    thumbnailUrl: "/images/video-courtyard-protest.jpg",
-    youtubeId: "zX9w8v7u6t5",
-    externalUrl: "https://www.facebook.com/rohit.prasai.5"
   }
 ];

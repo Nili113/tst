@@ -3,10 +3,12 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Biography } from './components/Biography';
 import { MissionVision } from './components/MissionVision';
-import { Achievements } from './components/Achievements';
+import { WorksStory } from './components/WorksStory';
 import { EducationSection } from './components/EducationSection';
 import { NewsScrollSection } from './components/NewsScrollSection';
 import { VideoScrollSection } from './components/VideoScrollSection';
+import { GalleryPage, galleryViewFromPath } from './pages/GalleryPage';
+import { usePath } from './lib/router';
 import { ContactSection } from './components/ContactSection';
 import { CitizenDeskModal } from './components/CitizenDeskModal';
 import { Footer } from './components/Footer';
@@ -33,6 +35,9 @@ export function App() {
     }
   }, [lang]);
 
+  const path = usePath();
+  const isGallery = path.startsWith('/gallery');
+
   const toggleLanguage = () => {
     setLang((prev) => (prev === 'ne' ? 'en' : 'ne'));
   };
@@ -48,9 +53,12 @@ export function App() {
         onSetLang={setLang}
         onToggleLang={toggleLanguage}
         onOpenDesk={() => setIsDeskOpen(true)}
+        page={isGallery ? 'gallery' : 'home'}
       />
 
-      {/* Main Narrative Sequence */}
+      {isGallery ? (
+        <GalleryPage lang={lang} view={galleryViewFromPath(path)} />
+      ) : (
       <main>
         {/* 1. Hero: Balanced 2-Column with Dark Maroon Photo Card (Pravash Reference Style, Fits 100% Above the Fold!) */}
         <Hero
@@ -65,7 +73,7 @@ export function App() {
         <MissionVision lang={lang} />
 
         {/* 4. Completed Works (Public Record & Impact) */}
-        <Achievements lang={lang} />
+        <WorksStory lang={lang} />
 
         {/* 5. Education & Memberships (Handwritten Note Content) */}
         <EducationSection lang={lang} />
@@ -82,6 +90,7 @@ export function App() {
           onOpenDesk={() => setIsDeskOpen(true)}
         />
       </main>
+      )}
 
       {/* 9. Clean Civic Footer */}
       <Footer lang={lang} />

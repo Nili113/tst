@@ -16,6 +16,9 @@ import '@fontsource/lora/500-italic.css'
 import '@fontsource/lora/400-italic.css'
 import '@fontsource/noto-serif-devanagari/500.css'
 import './index.css'
+import { initSmoothScroll } from './lib/smoothScroll'
+
+initSmoothScroll()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

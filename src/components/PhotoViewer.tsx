@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { lockScroll } from '../lib/smoothScroll';
 import { createPortal } from 'react-dom';
 import { ArrowLeft, ArrowRight, X } from 'lucide-react';
 
@@ -31,12 +32,14 @@ export const PhotoViewer: React.FC<PhotoViewerProps> = ({ photos, start, title, 
     const gap = window.innerWidth - document.documentElement.clientWidth;
     const prev = { o: document.body.style.overflow, p: document.body.style.paddingRight };
     document.body.style.overflow = 'hidden';
+    lockScroll(true);
     if (gap > 0) document.body.style.paddingRight = `${gap}px`;
     const raf = requestAnimationFrame(() => setShown(true));
     dialogRef.current?.focus();
     return () => {
       cancelAnimationFrame(raf);
       document.body.style.overflow = prev.o;
+      lockScroll(false);
       document.body.style.paddingRight = prev.p;
       returnTo?.focus?.();
     };

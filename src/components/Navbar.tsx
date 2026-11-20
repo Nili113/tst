@@ -1,12 +1,15 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { civicProfile } from '../data/portfolioData';
 import { Language } from '../types';
+import { ChevronDown, Image as ImageIcon, PlayCircle, Users, UserRound } from 'lucide-react';
+import { linkClick } from '../lib/router';
 
 interface NavbarProps {
   lang: Language;
   onToggleLang: () => void;
   onSetLang?: (lang: Language) => void;
   onOpenDesk?: () => void;
+  page?: 'home' | 'gallery';
 }
 
 const navLinks = [
@@ -19,6 +22,78 @@ const navLinks = [
   { href: '#videos', labelNe: 'भिडियो', labelEn: 'Videos' },
   { href: '#contact', labelNe: 'सम्पर्क', labelEn: 'Contact' },
 ];
+
+const galleryLinks = [
+  { href: '/gallery/community', labelNe: 'समुदाय', labelEn: 'Community', icon: Users, group: 'images' },
+  { href: '/gallery/portraits', labelNe: 'व्यक्तिगत तस्बिर', labelEn: 'Portraits', icon: UserRound, group: 'images' },
+  { href: '/gallery/videos', labelNe: 'भिडियो', labelEn: 'Videos', icon: PlayCircle, group: 'videos' },
+] as const;
+
+/** "Gallery" nav item: the label goes to /gallery; hover or focus opens Images ▸ Community / Portraits, and Videos. */
+const GalleryNav: React.FC<{ lang: Language; dark: boolean; active: boolean }> = ({ lang, dark, active }) => {
+  const ne = lang === 'ne';
+  const [open, setOpen] = useState(false);
+  const closeTimer = useRef<number>();
+  const show = () => {
+    window.clearTimeout(closeTimer.current);
+    setOpen(true);
+  };
+  const hide = () => {
+    closeTimer.current = window.setTimeout(() => setOpen(false), 120);
+  };
+  const go = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    setOpen(false);
+    linkClick(e);
+  };
+  const label = ne ? 'ग्यालरी' : 'Gallery';
+  return (
+    <div
+      className="relative"
+      onPointerEnter={(e) => e.pointerType === 'mouse' && show()}
+      onPointerLeave={hide}
+      onFocus={show}
+      onBlur={(e) => !e.currentTarget.contains(e.relatedTarget as Node) && setOpen(false)}
+      onKeyDown={(e) => e.key === 'Escape' && setOpen(false)}
+    >
+      <a
+        href="/gallery"
+        onClick={go}
+        aria-haspopup="true"
+        aria-expanded={open}
+        aria-current={active ? 'page' : undefined}
+        className={`flex items-center gap-1 px-2 xl:px-2.5 py-2.5 text-[13.5px] transition-colors duration-150 ${
+          dark ? 'text-white/75 hover:text-white' : active ? 'text-ink' : 'text-stone-600 hover:text-ink'
+        }`}
+      >
+        <span className="reserve" data-text={label}>
+          <span className={active ? 'font-semibold' : 'font-medium'}>{label}</span>
+        </span>
+        <ChevronDown className={`w-3.5 h-3.5 opacity-60 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} aria-hidden="true" />
+      </a>
+      <div data-open={open} className="nav-drop absolute left-1/2 top-full z-50 pt-2 w-[240px]">
+        <div className="rounded-2xl border border-stone-200 bg-white p-1.5 text-ink shadow-[0_18px_40px_-16px_rgba(28,25,23,0.3)]">
+          <p className="flex items-center gap-2 px-3 pt-2 pb-1 text-[11.5px] font-semibold text-stone-400">
+            <ImageIcon className="w-3.5 h-3.5" aria-hidden="true" />
+            {ne ? 'तस्बिरहरू' : 'Images'}
+          </p>
+          {galleryLinks.map((g) => (
+            <React.Fragment key={g.href}>
+              {g.group === 'videos' && <div className="my-1 h-px bg-stone-100" />}
+              <a
+                href={g.href}
+                onClick={go}
+                className={`flex items-center gap-3 min-h-[42px] rounded-xl pr-3 text-[14px] text-stone-700 hover:bg-stone-50 hover:text-ink transition-colors ${g.group === 'images' ? 'pl-5' : 'pl-3'}`}
+              >
+                <g.icon className="w-4 h-4 text-maroon" aria-hidden="true" />
+                {ne ? g.labelNe : g.labelEn}
+              </a>
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 /** Two-option language switch with a sliding thumb. Selected label is bold without shifting layout. */
 const LangSwitch: React.FC<{ lang: Language; onSet: (l: Language) => void; compact?: boolean; dark?: boolean }> = ({
@@ -68,7 +143,10 @@ const LangSwitch: React.FC<{ lang: Language; onSet: (l: Language) => void; compa
   );
 };
 
-export const Navbar: React.FC<NavbarProps> = ({ lang, onToggleLang, onSetLang }) => {
+export const Navbar: React.FC<NavbarProps> = ({ lang, onToggleLang, onSetLang, page = 'home' }) => {
+  const home = page === 'home';
+  // From another page, section links go back to the home page and its anchor.
+  const toHref = (h: string) => (home ? h : h === '#home' ? '/' : '/' + h);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [active, setActive] = useState('#home');
   const [scrolled, setScrolled] = useState(false);
@@ -95,6 +173,7 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onToggleLang, onSetLang })
       { rootMargin: '-45% 0px -50% 0px' }
     );
     sections.forEach((s) => observer.observe(s));
+    if (!home) setActive('/gallery');
     const hero = document.getElementById('home');
     const onScroll = () => {
       setScrolled(window.scrollY > 8);
@@ -106,7 +185,7 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onToggleLang, onSetLang })
       observer.disconnect();
       window.removeEventListener('scroll', onScroll);
     };
-  }, []);
+  }, [home]);
 
   // Slide the underline between links (pose to pose; the browser fills the frames).
   useLayoutEffect(() => {
@@ -122,7 +201,7 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onToggleLang, onSetLang })
     window.addEventListener('resize', place);
     document.fonts?.ready.then(place);
     return () => window.removeEventListener('resize', place);
-  }, [active, lang]);
+  }, [active, lang, home]);
 
   useEffect(() => {
     if (!mobileMenuOpen) return;
@@ -146,7 +225,7 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onToggleLang, onSetLang })
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14 sm:h-16">
-          <a href="#home" className="group flex items-center gap-3 -ml-1 px-1 py-2 rounded-md">
+          <a href={toHref('#home')} onClick={linkClick} className="group flex items-center gap-3 -ml-1 px-1 py-2 rounded-md">
             <span className={`font-extrabold text-base sm:text-[17px] tracking-tight transition-colors ${dark ? 'group-hover:text-[#f0b8c2]' : 'group-hover:text-maroon'}`}>
               {lang === 'ne' ? civicProfile.nameNe : civicProfile.nameEn}
             </span>
@@ -160,9 +239,10 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onToggleLang, onSetLang })
               const label = lang === 'ne' ? link.labelNe : link.labelEn;
               const isActive = active === link.href && link.href !== '#home';
               return (
+                <React.Fragment key={link.href}>
                 <a
-                  key={link.href}
-                  href={link.href}
+                  href={toHref(link.href)}
+                  onClick={linkClick}
                   aria-current={isActive ? 'location' : undefined}
                   className={`px-2 xl:px-2.5 py-2.5 text-[13.5px] transition-colors duration-150 ${
                     dark ? 'text-white/75 hover:text-white' : isActive ? 'text-ink' : 'text-stone-600 hover:text-ink'
@@ -172,6 +252,8 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onToggleLang, onSetLang })
                     <span className={isActive ? 'font-semibold' : 'font-medium'}>{label}</span>
                   </span>
                 </a>
+                {link.href === '#videos' && <GalleryNav lang={lang} dark={dark} active={!home} />}
+                </React.Fragment>
               );
             })}
             <span
@@ -213,9 +295,12 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onToggleLang, onSetLang })
               return (
                 <a
                   key={link.href}
-                  href={link.href}
+                  href={toHref(link.href)}
                   tabIndex={mobileMenuOpen ? 0 : -1}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => {
+                    setMobileMenuOpen(false);
+                    linkClick(e);
+                  }}
                   style={{ '--i': i } as React.CSSProperties}
                   className={`menu-item flex items-center min-h-[48px] px-3 rounded-xl text-[15px] font-medium transition-colors ${
                     isActive ? 'bg-maroon-tint text-maroon' : 'text-stone-700 hover:bg-stone-50 active:bg-stone-100'
@@ -225,6 +310,25 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onToggleLang, onSetLang })
                 </a>
               );
             })}
+            <p className="col-span-2 mt-2 px-3 pt-3 border-t border-stone-100 text-[12px] font-semibold text-stone-400">
+              {lang === 'ne' ? 'ग्यालरी' : 'Gallery'}
+            </p>
+            {galleryLinks.map((g, i) => (
+              <a
+                key={g.href}
+                href={g.href}
+                tabIndex={mobileMenuOpen ? 0 : -1}
+                onClick={(e) => {
+                  setMobileMenuOpen(false);
+                  linkClick(e);
+                }}
+                style={{ '--i': navLinks.length + i } as React.CSSProperties}
+                className="menu-item flex items-center gap-2.5 min-h-[48px] px-3 rounded-xl text-[15px] font-medium text-stone-700 hover:bg-stone-50 active:bg-stone-100"
+              >
+                <g.icon className="w-4 h-4 text-maroon" aria-hidden="true" />
+                {lang === 'ne' ? g.labelNe : g.labelEn}
+              </a>
+            ))}
           </nav>
         </div>
       </div>

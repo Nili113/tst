@@ -40,7 +40,7 @@ export const MissionVision: React.FC<MissionVisionProps> = ({ lang }) => {
             <ScrollReveal
               key={title}
               delay={i * 90}
-              className={`pt-8 sm:pt-10 pb-2 md:pb-4 ${i === 0 ? 'md:pr-12 lg:pr-16' : 'md:pl-12 lg:pl-16 md:border-l border-stone-300/70 mt-6 md:mt-0 border-t md:border-t-0'}`}
+              className={`flex flex-col pt-8 sm:pt-10 pb-2 md:pb-4 ${i === 0 ? 'md:pr-12 lg:pr-16' : 'md:pl-12 lg:pl-16 md:border-l border-stone-300/70 mt-6 md:mt-0 border-t md:border-t-0'}`}
             >
               <div className="flex items-center gap-3">
                 <span className="w-10 h-10 rounded-full bg-white border border-stone-200 text-maroon grid place-items-center shadow-[0_1px_2px_rgba(28,25,23,0.05)]">
@@ -51,7 +51,8 @@ export const MissionVision: React.FC<MissionVisionProps> = ({ lang }) => {
               <p className="mt-5 text-base sm:text-[17px] text-stone-700 leading-[1.75] max-w-[60ch]">
                 <Rich text={text} />
               </p>
-              <p className="mt-6 text-[13px] font-semibold text-maroon">{tag}</p>
+              {/* Pinned to the bottom so both columns' tags share one line, whatever the text length */}
+              <p className="mt-auto pt-6 text-[13px] font-semibold text-maroon">{tag}</p>
             </ScrollReveal>
           ))}
         </div>

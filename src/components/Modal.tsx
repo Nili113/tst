@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { lockScroll } from '../lib/smoothScroll';
 
 type State = 'closed' | 'opening' | 'open' | 'closing';
 
@@ -36,6 +37,7 @@ export const Modal: React.FC<ModalProps> = ({ open, onClose, labelledBy, classNa
     const gap = window.innerWidth - document.documentElement.clientWidth;
     const prev = { overflow: document.body.style.overflow, pr: document.body.style.paddingRight };
     document.body.style.overflow = 'hidden';
+    lockScroll(true);
     if (gap > 0) document.body.style.paddingRight = `${gap}px`;
     const focusT = window.setTimeout(() => {
       const first = panelRef.current?.querySelector<HTMLElement>('[data-autofocus], input, select, textarea');
@@ -44,6 +46,7 @@ export const Modal: React.FC<ModalProps> = ({ open, onClose, labelledBy, classNa
     return () => {
       window.clearTimeout(focusT);
       document.body.style.overflow = prev.overflow;
+      lockScroll(false);
       document.body.style.paddingRight = prev.pr;
       returnFocus.current?.focus?.({ preventScroll: true });
     };

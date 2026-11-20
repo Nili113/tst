@@ -10,7 +10,7 @@ export default {
         ink: '#1c1917',
         paper: '#ffffff',
         rule: '#e7e0d6',
-        maroon: { DEFAULT: '#801426', deep: '#420c15', tint: '#fbf2f4', soft: '#e9c9cf' },
+        maroon: { DEFAULT: '#9b2335', deep: '#6e1b2b', tint: '#fbf2f4', soft: '#e9c9cf' },
         burgundy: {
           50: '#fbf2f4',
           100: '#f6e3e7',

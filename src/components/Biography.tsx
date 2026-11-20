@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { autobiographyData, civicProfile } from '../data/portfolioData';
 import { Language } from '../types';
-import { Vote, Flag, Users, Trophy } from 'lucide-react';
+import { Vote, Flag, Users, Trophy, GraduationCap, Plane, Store, Waves, School } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
 import { SectionHeader } from './SectionHeader';
 import { Rich, unquote } from '../lib/typo';
@@ -14,8 +14,24 @@ interface BiographyProps {
 export const Biography: React.FC<BiographyProps> = ({ lang }) => {
   const ne = lang === 'ne';
   // Band top travels from 90% to 20% of the viewport → words light up in reading order.
-  const quoteRef = useScrollProgress<HTMLElement>((r, vh) => (vh * 0.9 - r.top) / (vh * 0.7));
+  // Latches: words light up as the band scrolls in and stay lit when scrolling back up.
+  const quoteMax = useRef(0);
+  const quoteRef = useScrollProgress<HTMLElement>((r, vh) => (quoteMax.current = Math.max(quoteMax.current, (vh * 0.9 - r.top) / (vh * 0.7))));
   const quoteWords = unquote(ne ? autobiographyData.philosophyNe : autobiographyData.philosophyEn).split(/\s+/);
+
+  // The line through the journey lights each stop as the strip scrolls through the viewport.
+  const journeyMax = useRef(0);
+  const journeyRef = useScrollProgress<HTMLOListElement>((r, vh) => (journeyMax.current = Math.max(journeyMax.current, (vh * 0.85 - r.top) / (r.height + vh * 0.35))));
+  const journey = [
+    { icon: School, year: '', title: ne ? 'कन्काई बोर्डिङ' : 'Kankai Boarding', detail: ne ? 'विद्यालय शिक्षा, झापा' : 'Schooling in Jhapa' },
+    { icon: GraduationCap, year: '', title: ne ? 'ग्लोबल कलेज' : 'Global College', detail: ne ? '+२ व्यवस्थापन, काठमाडौँ' : '+2 Management, Kathmandu' },
+    { icon: Flag, year: ne ? '२०६२' : '2005', title: ne ? 'नेपाली कांग्रेस' : 'Nepali Congress', detail: ne ? 'क्रियाशील सदस्यता' : 'Active member since 2062 BS' },
+    { icon: GraduationCap, year: ne ? '२०६६' : '2009', title: ne ? 'सिलभर माउण्टेन' : 'Silver Mountain', detail: ne ? 'होटल म्यानेजमेन्ट स्नातक' : 'Bachelor in Hotel Management' },
+    { icon: Plane, year: '', title: ne ? 'अष्ट्रेलिया' : 'Australia', detail: ne ? 'व्यवस्थापकीय डिप्लोमा' : 'Professional diploma' },
+    { icon: Store, year: '', title: ne ? 'माता पाथीभरा ट्रेडर्स' : 'Mata Pathivara Traders', detail: ne ? 'संस्थापक, स्थानीय उद्यम' : 'Founder, local enterprise' },
+    { icon: Vote, year: ne ? '२०७९' : '2022', title: ne ? 'वडाध्यक्षमा निर्वाचित' : 'Elected Ward Chair', detail: ne ? 'बिर्तामोड–५' : 'Birtamod-5' },
+    { icon: Waves, year: ne ? '२०८०' : '2023', title: ne ? 'आवास मार्ग ढल समिति' : 'Aawas Marg drain committee', detail: ne ? 'बिर्तामोड–अर्जुनधारा' : 'Birtamod–Arjundhara' },
+  ];
 
   const facts = [
     {
@@ -48,7 +64,7 @@ export const Biography: React.FC<BiographyProps> = ({ lang }) => {
           title={ne ? autobiographyData.headlineNe : autobiographyData.headlineEn}
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-stretch">
           <div className="lg:col-span-7 space-y-5 max-w-[68ch]">
             <ScrollReveal delay={60}>
               <p className="text-lg sm:text-xl text-ink leading-[1.65]">
@@ -83,18 +99,13 @@ export const Biography: React.FC<BiographyProps> = ({ lang }) => {
                 />
               </p>
             </ScrollReveal>
-          </div>
-
-          <ScrollReveal className="lg:col-span-5" delay={120}>
-            <aside aria-labelledby="key-facts" className="rounded-2xl border border-stone-200 bg-[#fcfbf9] p-6 sm:p-7">
-              <h3 id="key-facts" className="text-[15px] font-bold text-ink">
-                {ne ? 'मुख्य विवरण' : 'Key facts'}
-              </h3>
-              <dl className="mt-4 divide-y divide-stone-200/80">
+            {/* Key facts sit under the story, so both columns end together */}
+            <ScrollReveal delay={180}>
+              <dl aria-label={ne ? 'मुख्य विवरण' : 'Key facts'} className="!mt-9 grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {facts.map(({ icon: Icon, title, detail }) => (
-                  <div key={title} className="flex items-start gap-3.5 py-3.5 first:pt-1 last:pb-0">
-                    <span className="mt-0.5 w-8 h-8 shrink-0 rounded-lg bg-maroon-tint text-maroon grid place-items-center">
-                      <Icon className="w-4 h-4" aria-hidden="true" />
+                  <div key={title} className="flex items-start gap-3.5 rounded-2xl border border-stone-200 bg-[#fcfbf9] p-4">
+                    <span className="w-9 h-9 shrink-0 rounded-xl bg-maroon-tint text-maroon grid place-items-center">
+                      <Icon className="w-[18px] h-[18px]" aria-hidden="true" />
                     </span>
                     <div>
                       <dt className="text-[15px] font-semibold text-ink leading-snug">{title}</dt>
@@ -105,26 +116,69 @@ export const Biography: React.FC<BiographyProps> = ({ lang }) => {
                   </div>
                 ))}
               </dl>
-            </aside>
+            </ScrollReveal>
+          </div>
+
+          <ScrollReveal className="lg:col-span-5 lg:h-full" delay={120}>
+            <figure className="relative h-full min-h-[420px] overflow-hidden rounded-3xl bg-stone-200 shadow-[0_30px_60px_-40px_rgba(28,25,23,0.6)]">
+              <img
+                src="/images/gallery/portraits/portrait-waving.jpg"
+                alt={ne ? civicProfile.nameNe : civicProfile.nameEn}
+                className="absolute inset-0 w-full h-full object-cover object-[50%_20%]"
+                loading="lazy"
+              />
+              <span className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <figcaption className="absolute left-6 bottom-5 text-white">
+                <span className="block text-[20px] font-bold leading-tight">{ne ? civicProfile.nameNe : civicProfile.nameEn}</span>
+                <span className="block text-[13.5px] text-white/80">{ne ? 'बिर्तामोड–५, झापा' : 'Birtamod-5, Jhapa'}</span>
+              </figcaption>
+            </figure>
           </ScrollReveal>
         </div>
+
+        {/* Journey: schooling to office; each stop lights up as the reader reaches it */}
+        <ScrollReveal className="mt-16 sm:mt-20">
+          <h3 className="text-[15px] font-bold text-ink">{ne ? 'यात्रा' : 'The journey so far'}</h3>
+          <ol ref={journeyRef} className="journey relative mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-7 lg:gap-y-10">
+            {journey.map(({ icon: Icon, year, title, detail }, i) => (
+              <li key={title} className="journey-item relative flex gap-3.5" style={{ '--at': (i / journey.length).toFixed(3) } as React.CSSProperties}>
+                <span className="journey-dot relative z-10 mt-0.5 grid place-items-center w-10 h-10 shrink-0 rounded-full border">
+                  <Icon className="w-[18px] h-[18px]" aria-hidden="true" />
+                </span>
+                <div className="min-w-0">
+                  {year && <p className="text-[12px] font-bold tabular-nums text-maroon">{year}</p>}
+                  <p className="text-[15px] font-semibold text-ink leading-snug">{title}</p>
+                  <p className="mt-0.5 text-[13.5px] text-stone-500 leading-snug">{detail}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </ScrollReveal>
       </div>
 
       {/* The one bold moment: the courtyard philosophy, full bleed */}
       <ScrollReveal className="mt-16 sm:mt-24">
-        <figure ref={quoteRef} className="quote-band relative bg-maroon-deep text-white overflow-hidden">
+        <figure ref={quoteRef} className="quote-band relative isolate bg-maroon-deep text-white overflow-hidden">
+          {/* The courtyard itself, toned into the band: where this philosophy was put into practice */}
+          <div aria-hidden="true" className="quote-photo absolute inset-y-0 right-0 w-full lg:w-[62%] -z-10 overflow-hidden">
+            <img src="/images/gallery/community/community-01.jpg" alt="" className="absolute inset-x-0 -top-[10%] w-full h-[120%] object-cover" loading="lazy" />
+            <div className="absolute inset-0 bg-gradient-to-r from-maroon-deep via-maroon-deep/80 to-maroon-deep/25" />
+            <div className="absolute inset-0 bg-gradient-to-t from-maroon-deep/85 via-transparent to-maroon-deep/45" />
+          </div>
           <div
             aria-hidden="true"
             className="absolute inset-0 opacity-[0.07] bg-[radial-gradient(circle_at_1px_1px,#fff_1px,transparent_0)] [background-size:22px_22px]"
           />
           <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-            <span
-              aria-hidden="true"
-              className="quote-mark block font-serif text-[88px] sm:text-[120px] leading-[0.7] text-[#d98a97] select-none"
-            >
-              “
-            </span>
-            <blockquote className="mt-4 sm:mt-6">
+            <div aria-hidden="true" className="flex items-center gap-5">
+              <span className="quote-mark grid place-items-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/[0.07] ring-1 ring-white/20 backdrop-blur-sm">
+                <svg viewBox="0 0 32 32" className="w-6 h-6 sm:w-7 sm:h-7 text-[#f6c9d1]" fill="currentColor">
+                  <path d="M13 8.5c-4.6 1.4-7.5 5-7.5 10.3V24h7.2v-7.2H9c.1-3 1.6-5.1 4.6-6.3L13 8.5zm13.5 0c-4.6 1.4-7.5 5-7.5 10.3V24h7.2v-7.2h-3.7c.1-3 1.6-5.1 4.6-6.3l-.6-2z" />
+                </svg>
+              </span>
+              <span className="quote-rule h-px flex-1 max-w-[180px] bg-gradient-to-r from-white/40 to-transparent" />
+            </div>
+            <blockquote className="mt-8 sm:mt-10">
               <p
                 className={`font-serif text-white text-[clamp(1.375rem,1rem+1.6vw,2.25rem)] ${
                   ne ? 'leading-[1.7] font-medium' : 'italic leading-[1.45]'
@@ -143,7 +197,7 @@ export const Biography: React.FC<BiographyProps> = ({ lang }) => {
               <span className="h-px w-8 bg-white/40" aria-hidden="true" />
               <span>
                 <span className="font-semibold text-white">{ne ? civicProfile.nameNe : civicProfile.nameEn}</span>
-                <span className="ml-2">{ne ? 'वडा अध्यक्ष, बिर्तामोड–५' : 'Ward Chairperson, Birtamod-5'}</span>
+                <span className="ml-2">{ne ? 'नगरपालिकाको आँगनबाट, बिर्तामोड–५' : 'From the municipal courtyard, Birtamod-5'}</span>
               </span>
             </figcaption>
           </div>
