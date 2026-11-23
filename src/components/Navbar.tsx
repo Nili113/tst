@@ -16,7 +16,7 @@ const navLinks = [
   { href: '#home', labelNe: 'गृहपृष्ठ', labelEn: 'Home' },
   { href: '#about', labelNe: 'परिचय', labelEn: 'About' },
   { href: '#mission', labelNe: 'ध्येय / दृष्टिकोण', labelEn: 'Mission & Vision' },
-  { href: '#works', labelNe: 'कार्यसम्पादन', labelEn: 'Works' },
+  { href: '#works', labelNe: 'परियोजनाहरू', labelEn: 'Projects' },
   { href: '#education', labelNe: 'शिक्षा र आबद्धता', labelEn: 'Education' },
   { href: '#news', labelNe: 'समाचार', labelEn: 'News' },
   { href: '#videos', labelNe: 'भिडियो', labelEn: 'Videos' },
@@ -150,7 +150,6 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onToggleLang, onSetLang, p
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [active, setActive] = useState('#home');
   const [scrolled, setScrolled] = useState(false);
-  const [onHero, setOnHero] = useState(true);
   const [indicator, setIndicator] = useState({ x: 0, w: 0, visible: false });
   const navRef = useRef<HTMLElement>(null);
 
@@ -174,10 +173,8 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onToggleLang, onSetLang, p
     );
     sections.forEach((s) => observer.observe(s));
     if (!home) setActive('/gallery');
-    const hero = document.getElementById('home');
     const onScroll = () => {
       setScrolled(window.scrollY > 8);
-      setOnHero(!!hero && hero.getBoundingClientRect().bottom > 64);
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -210,14 +207,14 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onToggleLang, onSetLang, p
     return () => window.removeEventListener('keydown', onKey);
   }, [mobileMenuOpen]);
 
-  const dark = onHero && !mobileMenuOpen;
+  const dark = false;
 
   return (
     <header
       data-dark={dark}
       className={`sticky top-0 z-50 font-sans transition-[background-color,box-shadow,border-color,color] duration-300 border-b ${
         dark
-          ? 'bg-maroon-deep text-white border-white/10'
+          ? 'bg-[#0b6e1c] text-white border-white/10'
           : scrolled || mobileMenuOpen
           ? 'bg-white/90 backdrop-blur-md text-ink border-stone-200/70 shadow-[0_1px_12px_-6px_rgba(28,25,23,0.12)]'
           : 'bg-white text-ink border-transparent'
@@ -226,7 +223,7 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onToggleLang, onSetLang, p
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14 sm:h-16">
           <a href={toHref('#home')} onClick={linkClick} className="group flex items-center gap-3 -ml-1 px-1 py-2 rounded-md">
-            <span className={`font-extrabold text-base sm:text-[17px] tracking-tight transition-colors ${dark ? 'group-hover:text-[#f0b8c2]' : 'group-hover:text-maroon'}`}>
+            <span className={`font-extrabold text-base sm:text-[17px] tracking-tight transition-colors ${dark ? 'group-hover:text-[#bfe8c8]' : 'group-hover:text-maroon'}`}>
               {lang === 'ne' ? civicProfile.nameNe : civicProfile.nameEn}
             </span>
             <span className={`hidden sm:inline-block text-xs font-medium border-l pl-3 transition-colors duration-300 ${dark ? 'text-white/60 border-white/20' : 'text-stone-500 border-stone-200'}`}>

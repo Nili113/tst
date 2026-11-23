@@ -158,21 +158,25 @@ export const Biography: React.FC<BiographyProps> = ({ lang }) => {
 
       {/* The one bold moment: the courtyard philosophy, full bleed */}
       <ScrollReveal className="mt-16 sm:mt-24">
-        <figure ref={quoteRef} className="quote-band relative isolate bg-maroon-deep text-white overflow-hidden">
-          {/* The courtyard itself, toned into the band: where this philosophy was put into practice */}
-          <div aria-hidden="true" className="quote-photo absolute inset-y-0 right-0 w-full lg:w-[62%] -z-10 overflow-hidden">
-            <img src="/images/gallery/community/community-01.jpg" alt="" className="absolute inset-x-0 -top-[10%] w-full h-[120%] object-cover" loading="lazy" />
-            <div className="absolute inset-0 bg-gradient-to-r from-maroon-deep via-maroon-deep/80 to-maroon-deep/25" />
-            <div className="absolute inset-0 bg-gradient-to-t from-maroon-deep/85 via-transparent to-maroon-deep/45" />
+        <figure ref={quoteRef} className="quote-band relative isolate bg-[#0b6e1c] text-white overflow-hidden">
+          {/* Subtle tree-green radial glow and faint dot grain */}
+          <div aria-hidden="true" className="absolute inset-0 -z-10">
+            <div className="absolute -right-[10%] -top-[40%] w-[65vw] max-w-[820px] aspect-square rounded-full bg-[radial-gradient(closest-side,rgba(20,152,42,0.5),rgba(11,126,28,0.22)_55%,transparent)]" />
+            <div className="absolute -left-[15%] -bottom-[50%] w-[55vw] max-w-[650px] aspect-square rounded-full bg-[radial-gradient(closest-side,rgba(0,0,0,0.3),transparent)]" />
+            <div className="absolute inset-0 opacity-[0.07] bg-[radial-gradient(circle_at_1px_1px,#fff_1px,transparent_0)] [background-size:22px_22px]" />
           </div>
-          <div
+          {/* Faded tree watermark from uploaded tree_b5763aee.jpeg */}
+          <img
+            src="/assets/aistudio/tree_b5763aee.jpeg"
+            alt=""
             aria-hidden="true"
-            className="absolute inset-0 opacity-[0.07] bg-[radial-gradient(circle_at_1px_1px,#fff_1px,transparent_0)] [background-size:22px_22px]"
+            loading="lazy"
+            className="pointer-events-none select-none absolute inset-0 -z-10 w-full h-full object-cover object-center opacity-[0.18] mix-blend-screen [filter:brightness(1.06)_contrast(1.25)_invert(1)_hue-rotate(180deg)] [mask-image:radial-gradient(ellipse_78%_82%_at_50%_50%,#000_40%,transparent_88%)]"
           />
-          <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+          <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
             <div aria-hidden="true" className="flex items-center gap-5">
               <span className="quote-mark grid place-items-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/[0.07] ring-1 ring-white/20 backdrop-blur-sm">
-                <svg viewBox="0 0 32 32" className="w-6 h-6 sm:w-7 sm:h-7 text-[#f6c9d1]" fill="currentColor">
+                <svg viewBox="0 0 32 32" className="w-6 h-6 sm:w-7 sm:h-7 text-[#c8f0d0]" fill="currentColor">
                   <path d="M13 8.5c-4.6 1.4-7.5 5-7.5 10.3V24h7.2v-7.2H9c.1-3 1.6-5.1 4.6-6.3L13 8.5zm13.5 0c-4.6 1.4-7.5 5-7.5 10.3V24h7.2v-7.2h-3.7c.1-3 1.6-5.1 4.6-6.3l-.6-2z" />
                 </svg>
               </span>

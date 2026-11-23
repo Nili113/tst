@@ -16,7 +16,7 @@ const links = [
   { href: '#home', ne: 'गृहपृष्ठ', en: 'Home' },
   { href: '#about', ne: 'परिचय', en: 'About' },
   { href: '#mission', ne: 'ध्येय', en: 'Mission' },
-  { href: '#works', ne: 'कार्यसम्पादन', en: 'Works' },
+  { href: '#works', ne: 'परियोजनाहरू', en: 'Projects' },
   { href: '#education', ne: 'शिक्षा', en: 'Education' },
   { href: '#news', ne: 'समाचार', en: 'News' },
   { href: '#videos', ne: 'भिडियो', en: 'Videos' },
@@ -57,22 +57,22 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
   ];
 
   return (
-    <footer ref={ref} className="site-footer bg-white font-sans max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pb-3 sm:pb-6">
-      <div className="footer-card relative isolate overflow-hidden rounded-[24px] sm:rounded-[32px] bg-maroon-deep text-white shadow-[0_30px_60px_-36px_rgba(110,27,43,0.7)]">
-        {/* Same atmosphere as the hero: warm glow and faint dot grain */}
+    <footer ref={ref} className="site-footer w-full bg-[#0b6e1c] font-sans">
+      <div className="footer-card relative isolate overflow-hidden bg-[#0b6e1c] text-white">
+        {/* Same atmosphere: tree-green glow and faint dot grain */}
         <div aria-hidden="true" className="absolute inset-0 -z-10">
-          <div className="absolute -right-[10%] -top-[60%] w-[70%] max-w-[900px] aspect-square rounded-full bg-[radial-gradient(closest-side,rgba(179,72,90,0.55),rgba(155,35,53,0.22)_55%,transparent)]" />
-          <div className="absolute -left-[15%] -bottom-[50%] w-[60%] max-w-[700px] aspect-square rounded-full bg-[radial-gradient(closest-side,rgba(0,0,0,0.35),transparent)]" />
+          <div className="absolute -right-[10%] -top-[60%] w-[70%] max-w-[900px] aspect-square rounded-full bg-[radial-gradient(closest-side,rgba(20,152,42,0.55),rgba(11,126,28,0.22)_55%,transparent)]" />
+          <div className="absolute -left-[15%] -bottom-[50%] w-[60%] max-w-[700px] aspect-square rounded-full bg-[radial-gradient(closest-side,rgba(0,0,0,0.32),transparent)]" />
           <div className="absolute inset-0 opacity-[0.06] bg-[radial-gradient(circle_at_1px_1px,#fff_1px,transparent_0)] [background-size:22px_22px]" />
         </div>
 
-        <div className="px-6 sm:px-10 lg:px-14">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* ── Columns ── */}
           <div className="grid grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-10 pt-12 sm:pt-14 pb-6 lg:pb-2">
             <div className="ft-in col-span-2 lg:col-span-5" style={{ '--i': 1 } as React.CSSProperties}>
               <div className="flex items-center gap-3">
                 <span className="font-extrabold text-xl tracking-tight">{ne ? civicProfile.nameNe : civicProfile.nameEn}</span>
-                <span className="text-xs font-medium text-[#f0b8c2] border-l border-white/25 pl-3">{ne ? 'वडा अध्यक्ष' : 'Ward Chair'}</span>
+                <span className="text-xs font-medium text-[#bfe8c8] border-l border-white/25 pl-3">{ne ? 'वडा अध्यक्ष' : 'Ward Chair'}</span>
               </div>
               <div className="mt-5 flex items-center gap-2.5">
                 {socials.map((s) => (
@@ -91,7 +91,7 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
             </div>
 
             <nav aria-label="Footer" className="ft-in col-span-2 sm:col-span-1 lg:col-span-4" style={{ '--i': 2 } as React.CSSProperties}>
-              <p className="text-[12.5px] font-semibold text-[#f6c9d1] mb-3">{ne ? 'द्रुत लिङ्कहरू' : 'Quick links'}</p>
+              <p className="text-[12.5px] font-semibold text-[#c8f0d0] mb-3">{ne ? 'द्रुत लिङ्कहरू' : 'Quick links'}</p>
               <ul className="grid grid-cols-2 gap-x-8 gap-y-0.5">
                 {links.map((l) => (
                   <li key={l.href}>
@@ -100,7 +100,7 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
                       onClick={linkClick}
                       className="group inline-flex items-center py-1.5 text-[14px] font-medium text-white/70 hover:text-white transition-colors"
                     >
-                      <span aria-hidden="true" className="h-px w-0 bg-[#f6c9d1] transition-[width,margin] duration-300 group-hover:w-3 group-hover:mr-2" />
+                      <span aria-hidden="true" className="h-px w-0 bg-[#c8f0d0] transition-[width,margin] duration-300 group-hover:w-3 group-hover:mr-2" />
                       {ne ? l.ne : l.en}
                     </a>
                   </li>
@@ -109,14 +109,14 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
             </nav>
 
             <div className="ft-in col-span-2 sm:col-span-1 lg:col-span-3" style={{ '--i': 3 } as React.CSSProperties}>
-              <p className="text-[12.5px] font-semibold text-[#f6c9d1] mb-3">{ne ? 'सम्पर्क' : 'Contact'}</p>
+              <p className="text-[12.5px] font-semibold text-[#c8f0d0] mb-3">{ne ? 'सम्पर्क' : 'Contact'}</p>
               <ul className="space-y-3 text-[14px] text-white/70">
                 <li className="flex gap-2.5">
-                  <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-[#f6c9d1]" aria-hidden="true" />
+                  <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-[#c8f0d0]" aria-hidden="true" />
                   <span>{ne ? 'वडा नं. ५, बिर्तामोड, झापा' : 'Ward No. 5, Birtamod, Jhapa'}</span>
                 </li>
                 <li className="flex gap-2.5">
-                  <Mail className="w-4 h-4 mt-0.5 shrink-0 text-[#f6c9d1]" aria-hidden="true" />
+                  <Mail className="w-4 h-4 mt-0.5 shrink-0 text-[#c8f0d0]" aria-hidden="true" />
                   <a href={`mailto:${civicProfile.email}`} className="break-all hover:text-white transition-colors">{civicProfile.email}</a>
                 </li>
               </ul>
@@ -124,14 +124,14 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
           </div>
         </div>
 
-        {/* ── Signature: his name, oversized and outlined, rising out of the card's bottom edge ── */}
+        {/* ── Signature: his name, oversized and outlined, rising out of the bottom edge ── */}
         <div aria-hidden="true" className="ft-sign pointer-events-none select-none px-4 sm:px-8 -mb-[0.22em] text-center font-extrabold leading-none whitespace-nowrap">
           {ne ? civicProfile.nameNe : civicProfile.nameEn}
         </div>
 
         {/* ── Bottom bar ── */}
         <div className="relative border-t border-white/10 bg-black/15 backdrop-blur-sm">
-          <div className="px-6 sm:px-10 lg:px-14 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[12.5px] text-white/55">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[12.5px] text-white/55">
             <p className="tabular-nums">
               {ne ? `© ${toNe(bs)} ${civicProfile.nameNe} · बिर्तामोड–५, झापा` : `© ${ad} ${civicProfile.nameEn} · Birtamod-5, Jhapa`}
             </p>
@@ -141,7 +141,7 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
               className="group inline-flex items-center gap-2 self-start sm:self-auto min-h-[36px] text-white/70 hover:text-white transition-colors"
             >
               {ne ? 'माथि जानुहोस्' : 'Back to top'}
-              <span className="grid place-items-center w-8 h-8 rounded-full border border-white/25 transition-[transform,background-color,border-color] duration-300 group-hover:-translate-y-0.5 group-hover:bg-white group-hover:border-white group-hover:text-maroon-deep">
+              <span className="grid place-items-center w-8 h-8 rounded-full border border-white/25 transition-[transform,background-color,border-color] duration-300 group-hover:-translate-y-0.5 group-hover:bg-white group-hover:border-white group-hover:text-[#0b6e1c]">
                 <ArrowUp className="w-3.5 h-3.5" aria-hidden="true" />
               </span>
             </button>
